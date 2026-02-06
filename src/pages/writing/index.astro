@@ -1,8 +1,8 @@
 ---
-import BaseLayout from '../components/layout/BaseLayout.astro';
+import BaseLayout from '../../components/layout/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-import { externalArticles } from '../data/externalArticles';
-import { forthcomingArticles } from '../data/forthcomingArticles';
+import { externalArticles } from '../../data/externalArticles';
+import { forthcomingArticles } from '../../data/forthcomingArticles';
 
 const posts = (await getCollection('writing')).sort(
   (a, b) => new Date(b.data.pubDate ?? 0).getTime() - new Date(a.data.pubDate ?? 0).getTime()

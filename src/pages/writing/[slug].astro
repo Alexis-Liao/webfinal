@@ -1,8 +1,8 @@
 ---
-import BaseLayout from '../components/layout/BaseLayout.astro';
+import BaseLayout from '../../components/layout/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-import { externalArticles } from '../data/externalArticles';
-import { forthcomingArticles } from '../data/forthcomingArticles';
+import { externalArticles } from '../../data/externalArticles';
+import { forthcomingArticles } from '../../data/forthcomingArticles';
 import WritingLayout from '../../layouts/WritingLayout.astro';
 
 export async function getStaticPaths() {
@@ -33,33 +33,29 @@ type Props =
 
 const props = Astro.props as Props;
 const mdPosts = await getCollection('writing');
+const contentPost = props.type === 'content' ? mdPosts.find((p) => p.id === props.postId) : null;
+const contentRender = contentPost ? await contentPost.render() : null;
+const Content = contentRender?.Content ?? null;
 ---
 
-{props.type === 'content' && (() => {
-  const post = mdPosts.find((p) => p.id === props.postId);
-  if (!post) return (
-    <BaseLayout title="Not found" mycelium="none">
-      <div class="container reading">
-        <p>Article not found.</p>
-      </div>
-    </BaseLayout>
-  );
-
-  const { Content } = await post.render();
-
-  return (
-    <WritingLayout
-      title={post.data.title}
-      description={post.data.description}
-      pubDate={post.data.pubDate ? new Date(post.data.pubDate) : undefined}
-    >
-      <Content />
-      <p class="back-link">
-        <a href="/writing">← Back to Writing</a>
-      </p>
-    </WritingLayout>
-  );
-})()}
+{props.type === 'content' && (contentPost && Content ? (
+  <WritingLayout
+    title={contentPost.data.title}
+    description={contentPost.data.description}
+    pubDate={contentPost.data.pubDate ? new Date(contentPost.data.pubDate) : undefined}
+  >
+    <Content />
+    <p class="back-link">
+      <a href="/writing">← Back to Writing</a>
+    </p>
+  </WritingLayout>
+) : (
+  <BaseLayout title="Not found" mycelium="none">
+    <div class="container reading">
+      <p>Article not found.</p>
+    </div>
+  </BaseLayout>
+))}
 
 {props.type === 'external' && (() => {
   const article = externalArticles.find((a) => a.slug === props.slug);
