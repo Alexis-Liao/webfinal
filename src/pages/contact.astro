@@ -4,7 +4,7 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
 
 <BaseLayout
   title="Contact — Alexis Liao"
-  description="Email, WeChat public account 河与树, Instagram."
+  description="Email, WeChat public account 河与树, Instagram, 小红书."
   mycelium="none"
 >
   <div class="container contact-page">
@@ -13,7 +13,8 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
       <ul class="contact-links">
         <li><span class="contact-label">Email：</span><a href="mailto:alexisprotopia@gmail.com">alexisprotopia@gmail.com</a></li>
         <li><span class="contact-label">微信公众号：</span><a href="https://mp.weixin.qq.com/s/sO-pa_9-Ccq2rV4cnp8H8A" target="_blank" rel="noopener noreferrer">河与树</a></li>
-        <li><span class="contact-label">Ins：</span><a href="https://instagram.com/alexisprotopia" target="_blank" rel="noopener noreferrer">alexisprotopia</a></li>
+        <li><span class="contact-label">Instagram：</span><a href="https://instagram.com/alexisprotopia" target="_blank" rel="noopener noreferrer">alexisprotopia</a></li>
+        <li><span class="contact-label">小红书：</span><a href="https://www.xiaohongshu.com/search_result?keyword=Alexis智立" target="_blank" rel="noopener noreferrer">@Alexis智立</a></li>
       </ul>
     </section>
   </div>
@@ -21,13 +22,18 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
 
 <style>
   .contact-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
     padding-top: 1rem;
+    padding-bottom: 3rem;
   }
   .contact-content {
-    padding: 2rem 0 4rem;
+    padding: 0;
     line-height: 1.75;
     max-width: 28rem;
-    margin-left: auto;
     text-align: right;
   }
   .contact-content h1 {

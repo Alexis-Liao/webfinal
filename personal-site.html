@@ -168,11 +168,13 @@
     .post-entry--forthcoming .post-status { font-size: 0.8125rem; color: var(--color-text-soft); margin-top: 0.15rem; }
     .project-group-title { font-size: 1.1rem; font-weight: 700; color: var(--color-logo-green); text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 1rem; }
     .protopia-intro-zh,
-    .protopia-intro-en { max-width: 48rem; margin: 0 0 0.75rem; color: var(--color-text-muted); line-height: 1.7; }
-    .protopia-intro-en { font-size: 0.95rem; color: var(--color-text-soft); }
+    .protopia-intro-en { max-width: 48rem; margin: 0 0 0.75rem; color: var(--color-text-muted); line-height: 1.7; font-size: 0.95rem; }
+    .protopia-intro-en { color: var(--color-text-soft); }
     .sub-project { margin: 2.5rem 0 2rem; text-align: right; }
-    .sub-project .sub-project-title { font-size: 1.05rem; font-weight: 500; color: var(--color-text); margin: 0 0 0.75rem auto; max-width: 36rem; text-align: right; }
-    .sub-project .sub-title-en { display: block; font-size: 0.93rem; font-weight: 400; color: var(--color-text-soft); line-height: 1.7; }
+    .sub-project .sub-project-title { font-weight: 500; color: var(--color-text); margin: 0 0 0.75rem auto; max-width: 36rem; text-align: right; }
+    .sub-project .sub-title-zh,
+    .sub-project .sub-title-en { font-size: 0.93rem; line-height: 1.7; }
+    .sub-project .sub-title-en { display: block; font-weight: 400; color: var(--color-text-soft); }
     .sub-project .sub-project-img { width: 100%; max-width: 100%; height: auto; border-radius: 4px; display: block; }
     .project-node h3 { font-size: 1.1rem; margin: 0 0 0.35rem; color: var(--color-logo-green); }
     .meta { font-size: 0.875rem; color: var(--color-text-muted); margin: 0 0 0.25rem; }
@@ -211,11 +213,18 @@
     }
     .contact-links a:hover { color: var(--color-accent-hover); text-decoration: underline; text-decoration-color: rgba(61,107,94,0.4); }
     #contact {
+      min-height: calc(100vh - 3rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-end;
       padding-top: 3rem;
-      padding-bottom: 4rem;
+      padding-bottom: 3rem;
+      padding-right: 0.75rem;
       line-height: 1.75;
       text-align: right;
     }
+    #contact .contact-content { max-width: 28rem; }
     #contact .contact-lead { color: var(--color-text-muted); margin-bottom: 2rem; font-size: 0.9375rem; }
     #contact h1 { margin-bottom: 0.5rem; }
     strong, b { color: var(--color-logo-green); font-weight: 600; }
@@ -426,12 +435,15 @@
       </ul>
     </section>
     <section id="contact">
-      <h1>Contact</h1>
-      <ul class="contact-links">
+      <div class="contact-content">
+        <h1>Contact</h1>
+        <ul class="contact-links">
         <li><span class="contact-label">Email：</span><a href="mailto:alexisprotopia@gmail.com">alexisprotopia@gmail.com</a></li>
         <li><span class="contact-label">微信公众号：</span><a href="https://mp.weixin.qq.com/s/sO-pa_9-Ccq2rV4cnp8H8A" target="_blank" rel="noopener">河与树</a></li>
-        <li><span class="contact-label">Ins：</span><a href="https://instagram.com/alexisprotopia" target="_blank" rel="noopener">alexisprotopia</a></li>
-      </ul>
+        <li><span class="contact-label">Instagram：</span><a href="https://instagram.com/alexisprotopia" target="_blank" rel="noopener">alexisprotopia</a></li>
+        <li><span class="contact-label">小红书：</span><a href="https://www.xiaohongshu.com/search_result?keyword=Alexis智立" target="_blank" rel="noopener">@Alexis智立</a></li>
+        </ul>
+      </div>
     </section>
   </main>
 </body>
