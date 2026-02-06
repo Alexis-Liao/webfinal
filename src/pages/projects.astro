@@ -85,7 +85,7 @@ import { projects } from '../data/projects';
   .project-group-title {
     font-size: 1.1rem;
     font-weight: 700;
-    color: var(--color-logo-green);
+    color: var(--color-text);
     text-transform: uppercase;
     letter-spacing: 0.04em;
     margin: 0 0 1rem;
@@ -123,11 +123,18 @@ import { projects } from '../data/projects';
     color: var(--color-text-soft);
   }
   .sub-project .sub-project-img {
-    width: 100%;
+    margin-left: 48rem;
+    width: calc(100% - 48rem);
     max-width: 100%;
     height: auto;
     border-radius: 4px;
     display: block;
+  }
+  @media (max-width: 900px) {
+    .sub-project .sub-project-img {
+      margin-left: 0;
+      width: 100%;
+    }
   }
   .project-list {
     list-style: none;
@@ -149,7 +156,7 @@ import { projects } from '../data/projects';
     margin-bottom: 0.35rem;
   }
   .project-node h2 a {
-    color: var(--color-logo-green);
+    color: var(--color-text);
   }
   .project-node h2 a:hover {
     color: var(--color-accent);

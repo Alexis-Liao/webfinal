@@ -4,14 +4,14 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
 
 <BaseLayout
   title="Activities — Alexis Liao"
-  description="Representative cases of curated activities: study tours, exhibitions, salons."
+  description="Selected activities: study tours, exhibitions, salons."
   mycelium="subtle"
 >
   <div class="container">
     <header class="activities-header">
       <h1>Activities</h1>
-      <p class="activities-intro activities-intro-zh">代表性活动选例</p>
-      <p class="activities-intro activities-intro-en">Representative Cases of Curated Activities</p>
+      <p class="activities-intro activities-intro-zh">部分活动</p>
+      <p class="activities-intro activities-intro-en">Selected Activities</p>
     </header>
 
     <h2 class="activities-category">游学 · Study Tours</h2>
@@ -96,12 +96,9 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
   .activities-category {
     font-size: 1.1rem;
     font-weight: 700;
-    color: var(--color-logo-green);
+    color: var(--color-text);
     letter-spacing: 0.04em;
     margin: 2rem 0 0.75rem;
-  }
-  .activities-category:first-of-type {
-    margin-top: 0;
   }
   .activity-list {
     list-style: none;

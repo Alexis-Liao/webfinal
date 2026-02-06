@@ -88,7 +88,7 @@
       font-size: clamp(1.75rem, 4vw, 2.25rem);
       font-weight: 600;
       letter-spacing: -0.02em;
-      color: var(--color-logo-green);
+      color: var(--color-text);
       text-shadow: 0 0.15rem 0.45rem rgba(0, 0, 0, 0.03);
       margin: 0 0 0.5rem;
       line-height: 1.2;
@@ -109,7 +109,7 @@
     .focus-block { max-width: 36em; line-height: 1.75; color: var(--color-text-muted); font-size: 0.9375rem; }
     .focus-block .focus-para { margin: 0 0 0.85rem; }
     .focus-block .focus-para:last-child { margin-bottom: 0; }
-    .focus-block .term { font-weight: 500; color: var(--color-logo-green); }
+    .focus-block .term { font-weight: 500; color: var(--color-text); }
     .about-reading { max-width: 48rem; }
     .about-reading p { margin: 0 0 0.75rem; color: var(--color-text-muted); line-height: 1.7; font-size: 0.95rem; }
     .about-reading p:last-child { margin-bottom: 0; }
@@ -118,8 +118,7 @@
     .about-reading [lang="en"] p { color: var(--color-text-soft); }
     .activities-intro { color: var(--color-text-muted); line-height: 1.7; max-width: 48rem; margin: 0 0 0.25rem; }
     .activities-intro-en { font-size: 0.95rem; color: var(--color-text-soft); }
-    .activities-category { font-size: 1.1rem; font-weight: 700; color: var(--color-logo-green); letter-spacing: 0.04em; margin: 2rem 0 0.75rem; }
-    .activities-category:first-of-type { margin-top: 0; }
+    .activities-category { font-size: 1.1rem; font-weight: 700; color: var(--color-text); letter-spacing: 0.04em; margin: 2rem 0 0.75rem; }
     .activity-list { list-style: none; padding: 0; margin: 0 0 1.5rem; }
     .activity-item { padding: 0; border-bottom: 1px solid var(--color-mist); }
     .activity-item:last-child { border-bottom: none; }
@@ -140,20 +139,19 @@
     a:hover { text-decoration: underline; }
     .post-list, .project-list { list-style: none; padding: 0; margin: 0; }
     .post-list li, .project-list li {
-      padding: 1rem 0;
+      padding: 1.25rem 0;
       border-bottom: 1px solid var(--color-mist);
     }
-    .post-item--with-image { padding-bottom: 2rem; }
     .post-external-row { display: flex; align-items: flex-start; gap: 1.75rem; }
-    .post-image-wrap { flex-shrink: 0; max-width: 260px; margin-left: auto; }
-    .post-image { width: 100%; height: auto; border-radius: 4px; display: block; }
+    .post-image-wrap { flex-shrink: 0; width: 260px; height: 175px; margin-left: auto; border-radius: 4px; overflow: hidden; }
+    .post-image { width: 100%; height: 100%; object-fit: cover; display: block; }
     @media (max-width: 768px) {
       .post-external-row { flex-direction: column; gap: 1rem; }
-      .post-image-wrap { max-width: 100%; margin-left: 0; }
+      .post-image-wrap { width: 100%; max-width: 100%; height: 200px; margin-left: 0; }
       .post-list li { padding: 1.25rem 0; }
     }
     .post-list .post-link {
-      color: var(--color-logo-green);
+      color: var(--color-text);
       text-decoration: none;
       font-weight: 600;
       transition: color 0.2s ease;
@@ -162,11 +160,11 @@
     .post-entry--external, .post-entry--forthcoming { display: flex; flex-direction: column; gap: 0.2rem; }
     .post-entry--external .post-status { font-size: 0.8125rem; color: var(--color-text-soft); margin-top: 0.15rem; }
     .post-entry--external .post-title-zh,
-    .post-entry--forthcoming .post-title-zh { color: var(--color-logo-green); font-weight: 600; }
+    .post-entry--forthcoming .post-title-zh { color: var(--color-text); font-weight: 600; }
     .post-entry--external .post-title-en,
     .post-entry--forthcoming .post-title-en { font-size: 0.9375rem; color: var(--color-text-muted); }
     .post-entry--forthcoming .post-status { font-size: 0.8125rem; color: var(--color-text-soft); margin-top: 0.15rem; }
-    .project-group-title { font-size: 1.1rem; font-weight: 700; color: var(--color-logo-green); text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 1rem; }
+    .project-group-title { font-size: 1.1rem; font-weight: 700; color: var(--color-text); text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 1rem; }
     .protopia-intro-zh,
     .protopia-intro-en { max-width: 48rem; margin: 0 0 0.75rem; color: var(--color-text-muted); line-height: 1.7; font-size: 0.95rem; }
     .protopia-intro-en { color: var(--color-text-soft); }
@@ -175,8 +173,11 @@
     .sub-project .sub-title-zh,
     .sub-project .sub-title-en { font-size: 0.93rem; line-height: 1.7; }
     .sub-project .sub-title-en { display: block; font-weight: 400; color: var(--color-text-soft); }
-    .sub-project .sub-project-img { width: 100%; max-width: 100%; height: auto; border-radius: 4px; display: block; }
-    .project-node h3 { font-size: 1.1rem; margin: 0 0 0.35rem; color: var(--color-logo-green); }
+    .sub-project .sub-project-img { margin-left: 48rem; width: calc(100% - 48rem); max-width: 100%; height: auto; border-radius: 4px; display: block; }
+    @media (max-width: 900px) {
+      .sub-project .sub-project-img { margin-left: 0; width: 100%; }
+    }
+    .project-node h3 { font-size: 1.1rem; margin: 0 0 0.35rem; color: var(--color-text); }
     .meta { font-size: 0.875rem; color: var(--color-text-muted); margin: 0 0 0.25rem; }
     .project-node .description-en { margin-top: 0.35rem; }
     /* Justified text: content blocks */
@@ -197,6 +198,9 @@
         text-justify: auto;
         hyphens: none;
       }
+      #about .about-reading p { text-align: justify; }
+      #about .about-reading [lang="zh"] p { text-justify: inter-character; }
+      #about .about-reading [lang="en"] p { text-justify: inter-word; hyphens: auto; -webkit-hyphens: auto; }
     }
     .contact-links { list-style: none; padding: 0; margin: 0; }
     .contact-links li { margin-bottom: 0.35rem; }
@@ -227,7 +231,7 @@
     #contact .contact-content { max-width: 28rem; }
     #contact .contact-lead { color: var(--color-text-muted); margin-bottom: 2rem; font-size: 0.9375rem; }
     #contact h1 { margin-bottom: 0.5rem; }
-    strong, b { color: var(--color-logo-green); font-weight: 600; }
+    strong, b { color: var(--color-text); font-weight: 600; }
     /* Home section fills viewport height on all devices */
     #home {
       min-height: calc(100vh - 3rem);
@@ -329,6 +333,24 @@
           </div>
         </li>
         <li>
+          <div class="post-entry post-entry--external">
+            <a href="706-coliving-report-2024.pdf" class="post-link post-link--external" target="_blank" rel="noopener">
+              <span class="post-title-zh">2024共居生活洞察报告</span><br />
+              <span class="post-title-en">2024 China Coliving Research Report</span>
+            </a>
+            <span class="post-status">706青年空间，2024</span>
+          </div>
+        </li>
+        <li>
+          <div class="post-entry post-entry--external">
+            <a href="706-coliving-report-2025.pdf" class="post-link post-link--external" target="_blank" rel="noopener">
+              <span class="post-title-zh">2025共居生活洞察报告</span><br />
+              <span class="post-title-en">2025 China Coliving research report</span>
+            </a>
+            <span class="post-status">706青年空间，2025</span>
+          </div>
+        </li>
+        <li>
           <div class="post-entry post-entry--forthcoming">
             <span class="post-title-zh">集体与个体，在共居中寻找自我主体性</span>
             <span class="post-title-en">Collective and Individual: Searching for Subjectivity within Co-living</span>
@@ -374,8 +396,8 @@
     </section>
     <section id="activities">
       <h1>Activities</h1>
-      <p class="activities-intro activities-intro-zh">代表性活动选例</p>
-      <p class="activities-intro activities-intro-en">Representative Cases of Curated Activities</p>
+      <p class="activities-intro activities-intro-zh">部分活动</p>
+      <p class="activities-intro activities-intro-en">Selected Activities</p>
       <h2 class="activities-category">游学 · Study Tours</h2>
       <ul class="activity-list">
         <li class="activity-item">

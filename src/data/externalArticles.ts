@@ -29,4 +29,18 @@ export const externalArticles: ExternalArticle[] = [
     sourceLine: '生活力场，2025',
     image: '/malaysia-map.png',
   },
+  {
+    slug: '706-coliving-report-2024',
+    title: '2024共居生活洞察报告',
+    titleEn: '2024 China Coliving Research Report',
+    url: '/706-coliving-report-2024.pdf',
+    sourceLine: '706青年空间，2024',
+  },
+  {
+    slug: '706-coliving-report-2025',
+    title: '2025共居生活洞察报告',
+    titleEn: '2025 China Coliving research report',
+    url: '/706-coliving-report-2025.pdf',
+    sourceLine: '706青年空间，2025',
+  },
 ];

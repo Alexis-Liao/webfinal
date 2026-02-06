@@ -92,7 +92,7 @@ h3 {
 }
 p { margin: 0 0 1em; }
 p:last-child { margin-bottom: 0; }
-strong, b { color: var(--color-logo-green); font-weight: 600; }
+strong, b { color: var(--color-text); font-weight: 600; }
 
 /* Reading-optimized (Writing pages) */
 .reading {
@@ -142,7 +142,7 @@ strong, b { color: var(--color-logo-green); font-weight: 600; }
   hyphens: auto;
   -webkit-hyphens: auto;
 }
-/* Mobile: revert to left-align for readability */
+/* Mobile: revert to left-align for readability (About 保持与电脑端一致：两端对齐) */
 @media (max-width: 768px) {
   .content-justify,
   .reading p,
@@ -160,6 +160,17 @@ strong, b { color: var(--color-logo-green); font-weight: 600; }
     text-align: left;
     text-justify: auto;
     hyphens: none;
+  }
+  .about-reading p {
+    text-align: justify;
+  }
+  .about-reading [lang="zh"] p {
+    text-justify: inter-character;
+  }
+  .about-reading [lang="en"] p {
+    text-justify: inter-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
   }
 }
 
