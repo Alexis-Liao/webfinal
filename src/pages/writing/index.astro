@@ -36,7 +36,12 @@ const posts = (await getCollection('writing')).sort(
             </a>
             {article.image && (
               <div class="post-image-wrap">
-                <img src={article.image} alt={article.title} class="post-image" />
+                <img
+                  src={article.image}
+                  alt={article.title}
+                  class="post-image"
+                  style={article.imagePosition ? { objectPosition: article.imagePosition } : undefined}
+                />
               </div>
             )}
           </div>
@@ -119,6 +124,7 @@ const posts = (await getCollection('writing')).sort(
   }
   .post-link:hover {
     color: var(--color-accent);
+    text-decoration: underline;
   }
   .post-link--external,
   .post-link--forthcoming {
@@ -128,7 +134,7 @@ const posts = (await getCollection('writing')).sort(
   .post-link--external:hover,
   .post-link--forthcoming:hover {
     color: var(--color-accent-hover);
-    text-decoration: none;
+    text-decoration: underline;
   }
   .post-entry--external,
   .post-entry--forthcoming {

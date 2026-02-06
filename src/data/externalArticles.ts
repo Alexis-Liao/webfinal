@@ -9,6 +9,8 @@ export interface ExternalArticle {
   url: string;
   sourceLine?: string;
   image?: string;
+  /** CSS object-position for image (e.g. 'top' to show upper part) */
+  imagePosition?: string;
 }
 
 export const externalArticles: ExternalArticle[] = [
@@ -35,6 +37,8 @@ export const externalArticles: ExternalArticle[] = [
     titleEn: '2024 China Coliving Research Report',
     url: '/706-coliving-report-2024.pdf',
     sourceLine: '706青年空间，2024',
+    image: '/coliving-report-2024.png',
+    imagePosition: 'top',
   },
   {
     slug: '706-coliving-report-2025',
@@ -42,5 +46,7 @@ export const externalArticles: ExternalArticle[] = [
     titleEn: '2025 China Coliving research report',
     url: '/706-coliving-report-2025.pdf',
     sourceLine: '706青年空间，2025',
+    image: '/coliving-report-2025.png',
+    imagePosition: 'top',
   },
 ];

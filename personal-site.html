@@ -69,7 +69,7 @@
       text-decoration: none;
       font-size: 0.9375rem;
     }
-    nav a:hover, nav a.active { color: var(--color-accent); }
+    nav a:hover, nav a.active { color: var(--color-accent); text-decoration: underline; }
     nav .home { font-weight: 600; color: var(--color-text); font-size: 1rem; }
     main {
       position: relative;
@@ -156,7 +156,7 @@
       font-weight: 600;
       transition: color 0.2s ease;
     }
-    .post-list .post-link:hover { color: var(--color-accent-hover); text-decoration: none; }
+    .post-list .post-link:hover { color: var(--color-accent-hover); text-decoration: underline; }
     .post-entry--external, .post-entry--forthcoming { display: flex; flex-direction: column; gap: 0.2rem; }
     .post-entry--external .post-status { font-size: 0.8125rem; color: var(--color-text-soft); margin-top: 0.15rem; }
     .post-entry--external .post-title-zh,
@@ -332,22 +332,32 @@
             </div>
           </div>
         </li>
-        <li>
-          <div class="post-entry post-entry--external">
-            <a href="706-coliving-report-2024.pdf" class="post-link post-link--external" target="_blank" rel="noopener">
-              <span class="post-title-zh">2024共居生活洞察报告</span><br />
-              <span class="post-title-en">2024 China Coliving Research Report</span>
-            </a>
-            <span class="post-status">706青年空间，2024</span>
+        <li class="post-item post-item--with-image">
+          <div class="post-external-row">
+            <div class="post-entry post-entry--external">
+              <a href="706-coliving-report-2024.pdf" class="post-link post-link--external" target="_blank" rel="noopener">
+                <span class="post-title-zh">2024共居生活洞察报告</span><br />
+                <span class="post-title-en">2024 China Coliving Research Report</span>
+              </a>
+              <span class="post-status">706青年空间，2024</span>
+            </div>
+            <div class="post-image-wrap">
+              <img src="coliving-report-2024.png" alt="2024共居生活洞察报告" class="post-image" style="object-position: top;" />
+            </div>
           </div>
         </li>
-        <li>
-          <div class="post-entry post-entry--external">
-            <a href="706-coliving-report-2025.pdf" class="post-link post-link--external" target="_blank" rel="noopener">
-              <span class="post-title-zh">2025共居生活洞察报告</span><br />
-              <span class="post-title-en">2025 China Coliving research report</span>
-            </a>
-            <span class="post-status">706青年空间，2025</span>
+        <li class="post-item post-item--with-image">
+          <div class="post-external-row">
+            <div class="post-entry post-entry--external">
+              <a href="706-coliving-report-2025.pdf" class="post-link post-link--external" target="_blank" rel="noopener">
+                <span class="post-title-zh">2025共居生活洞察报告</span><br />
+                <span class="post-title-en">2025 China Coliving research report</span>
+              </a>
+              <span class="post-status">706青年空间，2025</span>
+            </div>
+            <div class="post-image-wrap">
+              <img src="coliving-report-2025.png" alt="2025共居生活洞察报告" class="post-image" style="object-position: top;" />
+            </div>
           </div>
         </li>
         <li>
@@ -377,7 +387,7 @@
       </p>
       <div class="sub-project">
         <h3 class="sub-project-title">
-          <span class="sub-title-zh">去哪儿串门——全国有趣空间漫游目录</span><br />
+          <span class="sub-title-zh"><a href="https://cyanlibra.notion.site/b69055f077ef4124925a639c48ebbdf4" target="_blank" rel="noopener noreferrer">去哪儿串门</a>——全国有趣空间漫游目录</span><br />
           <span class="sub-title-en">Where to Visit — A Traveling Directory of Alternative Spaces Across China</span>
         </h3>
         <img class="sub-project-img" src="protopia-roaming.png" alt="全国有趣空间漫游目录 — 去哪儿串门" />
@@ -403,12 +413,12 @@
         <li class="activity-item">
           <details class="activity-details">
             <summary class="activity-summary">
-              <p class="activity-title-zh">共识之路——欧洲共识社区访问</p>
-              <p class="activity-title-en">The Path of Consensus — Visits to European Consensus Communities</p>
+              <p class="activity-title-zh"><a href="https://mp.weixin.qq.com/s/nZ6iMb04DdmJVH1gqcQziQ" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">共识之路——欧洲共识社区访问</a></p>
+              <p class="activity-title-en"><a href="https://mp.weixin.qq.com/s/nZ6iMb04DdmJVH1gqcQziQ" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">The Path of Consensus — Visits to European Consensus Communities</a></p>
               <p class="activity-org">家园计划 · The Home Project</p>
             </summary>
             <div class="activity-body">
-              <p class="activity-placeholder">内容稍后补充。Content to be added.</p>
+              <p><a href="https://mp.weixin.qq.com/s/nZ6iMb04DdmJVH1gqcQziQ" target="_blank" rel="noopener noreferrer">相关文章 · Related article (微信)</a></p>
             </div>
           </details>
         </li>
@@ -418,12 +428,12 @@
         <li class="activity-item">
           <details class="activity-details">
             <summary class="activity-summary">
-              <p class="activity-title-zh">池化：普罗托邦研究文献展</p>
-              <p class="activity-title-en">Pooling: A Research Literature Exhibition on Prototopia</p>
+              <p class="activity-title-zh"><a href="https://mp.weixin.qq.com/s/u1tmkgwR9eMbvUOTm3Vpeg" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">池化：普罗托邦研究文献展</a></p>
+              <p class="activity-title-en"><a href="https://mp.weixin.qq.com/s/u1tmkgwR9eMbvUOTm3Vpeg" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Pooling: A Research Literature Exhibition on Prototopia</a></p>
               <p class="activity-org">普罗托邦 · Prototopia</p>
             </summary>
             <div class="activity-body">
-              <p class="activity-placeholder">内容稍后补充。Content to be added.</p>
+              <p><a href="https://mp.weixin.qq.com/s/u1tmkgwR9eMbvUOTm3Vpeg" target="_blank" rel="noopener noreferrer">相关文章 · Related article (微信)</a></p>
             </div>
           </details>
         </li>
@@ -433,24 +443,24 @@
         <li class="activity-item">
           <details class="activity-details">
             <summary class="activity-summary">
-              <p class="activity-title-zh">浮城圆桌：知合 NEXUS 上海年聚系列沙龙</p>
-              <p class="activity-title-en">Floating City Roundtable: Zhihé NEXUS Shanghai Annual Salon Series</p>
+              <p class="activity-title-zh"><a href="https://mp.weixin.qq.com/s/UEOVT1x8RMnF6O9Um6-yYw" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">浮城圆桌：知合 NEXUS 上海年聚系列沙龙</a></p>
+              <p class="activity-title-en"><a href="https://mp.weixin.qq.com/s/UEOVT1x8RMnF6O9Um6-yYw" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Floating City Roundtable: Zhihé NEXUS Shanghai Annual Salon Series</a></p>
               <p class="activity-org">知合 NEXUS · NEXUS</p>
             </summary>
             <div class="activity-body">
-              <p class="activity-placeholder">内容稍后补充。Content to be added.</p>
+              <p><a href="https://mp.weixin.qq.com/s/UEOVT1x8RMnF6O9Um6-yYw" target="_blank" rel="noopener noreferrer">相关文章 · Related article (微信)</a></p>
             </div>
           </details>
         </li>
         <li class="activity-item">
           <details class="activity-details">
             <summary class="activity-summary">
-              <p class="activity-title-zh">In-between 共居生活系列沙龙</p>
-              <p class="activity-title-en">In-Between Co-living Life Salon Series</p>
+              <p class="activity-title-zh"><a href="https://mp.weixin.qq.com/s/bkq3axmQ8wcUPfhaXpjLiQ" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">In-between 共居生活系列沙龙</a></p>
+              <p class="activity-title-en"><a href="https://mp.weixin.qq.com/s/bkq3axmQ8wcUPfhaXpjLiQ" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">In-Between Co-living Life Salon Series</a></p>
               <p class="activity-org">Dweller</p>
             </summary>
             <div class="activity-body">
-              <p class="activity-placeholder">内容稍后补充。Content to be added.</p>
+              <p><a href="https://mp.weixin.qq.com/s/bkq3axmQ8wcUPfhaXpjLiQ" target="_blank" rel="noopener noreferrer">相关文章 · Related article (微信)</a></p>
             </div>
           </details>
         </li>
