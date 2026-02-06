@@ -1,0 +1,175 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+import { projects } from '../data/projects';
+---
+
+<BaseLayout
+  title="Projects"
+  description="Selected projects and experiments."
+  mycelium="full"
+>
+  <div class="container container--wide">
+    <header class="projects-header">
+      <h1>Projects</h1>
+    </header>
+    <h2 class="project-group-title">
+      <a href="/projects/protopia">普罗托邦 PROTOPIA</a>
+    </h2>
+    <p class="protopia-intro-zh">
+      「普罗托邦」来源于未来学家凯文·凯利，它不是「一切都会对每个人都好」的乌托邦，而是描述朝着共同希望的方向前进的可能性——共同的能力。普罗托邦小组希望继承《全球概览》的精神，关注面向未来的精神世界和生活可能。通过观察当今社会发展及其涌现的诸多文化现象，综合文化脉络的反思与可能，以凝聚当代思想之共识，以引领当下行动之发生。
+    </p>
+    <p class="protopia-intro-en">
+      “Protopian” is a term originating from futurist Kevin Kelly. It does not describe a utopia in which everything turns out well for everyone; it refers to the possibility of moving in a shared, hopeful direction—a set of shared capacities. The Protopian group seeks to carry forward the spirit of the Whole Earth Catalog, focusing on future-oriented inner worlds and possible ways of living. By observing contemporary social developments and the many cultural phenomena that emerge from them, and by integrating reflections on cultural contexts and future possibilities, the group aims to bring together a shared consensus of contemporary thought and to inspire meaningful action in the present.
+    </p>
+    <div class="sub-project">
+      <h3 class="sub-project-title">
+        <span class="sub-title-zh">去哪儿串门——全国有趣空间漫游目录</span><br />
+        <span class="sub-title-en">Where to Visit — A Traveling Directory of Alternative Spaces Across China</span>
+      </h3>
+      <img class="sub-project-img" src="/protopia-roaming.png" alt="全国有趣空间漫游目录 — 去哪儿串门" />
+    </div>
+    <ul class="project-list">
+      {projects.map((p) => (
+        <li class="project-node">
+          <article>
+            <h2>
+              <a href={`/projects/${p.slug}`}>{p.title}</a>
+            </h2>
+            {(p.year || (p.tags && p.tags.length)) && (
+              <p class="meta">
+                {p.year && <span class="year">{p.year}</span>}
+                {p.tags && p.tags.length > 0 && (
+                  <span class="tags">{p.tags.join(' · ')}</span>
+                )}
+              </p>
+            )}
+            {p.id === 'zhine-nexus' ? (
+              <>
+                <p class="protopia-intro-zh">{p.shortDescription}</p>
+                {p.descriptionEn && (
+                  <p class="protopia-intro-en">{p.descriptionEn}</p>
+                )}
+                {p.longDescriptionZh && (
+                  <p class="protopia-intro-zh">{p.longDescriptionZh}</p>
+                )}
+                {p.longDescriptionEn && (
+                  <p class="protopia-intro-en">{p.longDescriptionEn}</p>
+                )}
+              </>
+            ) : (
+              <>
+                <p class="description">{p.shortDescription}</p>
+                {p.descriptionEn && (
+                  <p class="description description-en">{p.descriptionEn}</p>
+                )}
+              </>
+            )}
+          </article>
+        </li>
+      ))}
+    </ul>
+  </div>
+</BaseLayout>
+
+<style>
+  .projects-header {
+    margin-bottom: 2.5rem;
+  }
+  .projects-header h1 {
+    margin-bottom: 0.5rem;
+  }
+  .subtitle {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+  }
+  .project-group-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-logo-green);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 0 0 1rem;
+  }
+  .protopia-intro-zh,
+  .protopia-intro-en {
+    max-width: 48rem;
+    margin: 0 0 0.75rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+  .protopia-intro-en {
+    font-size: 0.95rem;
+    color: var(--color-text-soft);
+  }
+  .sub-project {
+    margin: 2.5rem 0 2rem;
+    text-align: right;
+  }
+  .sub-project .sub-project-title {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--color-text);
+    margin: 0 0 0.75rem auto;
+    max-width: 36rem;
+    text-align: right;
+  }
+  .sub-project .sub-title-en {
+    display: block;
+    font-size: 0.93rem;
+    font-weight: 400;
+    color: var(--color-text-soft);
+    line-height: 1.7;
+  }
+  .sub-project .sub-project-img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    display: block;
+  }
+  .project-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 2rem;
+  }
+  .project-node {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--color-mist);
+  }
+  .project-node:last-child {
+    border-bottom: none;
+  }
+  .project-node h2 {
+    font-size: 1.2rem;
+    margin-top: 0;
+    margin-bottom: 0.35rem;
+  }
+  .project-node h2 a {
+    color: var(--color-logo-green);
+  }
+  .project-node h2 a:hover {
+    color: var(--color-accent);
+  }
+  .meta {
+    font-size: 0.875rem;
+    color: var(--color-text-soft);
+    margin: 0 0 0.5rem;
+  }
+  .year {
+    margin-right: 0.5rem;
+  }
+  .description {
+    margin: 0;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+  .description-en {
+    margin-top: 0.35rem;
+  }
+  .description-long-zh,
+  .description-long-en {
+    margin-top: 1rem;
+  }
+</style>

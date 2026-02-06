@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Practice — Alexis Liao"
+  description="Practice around co-living, commons, and alternative spaces."
+  mycelium="subtle"
+>
+  <article class="container reading">
+    <header class="about-sub-header">
+      <h1>Practice</h1>
+      <p class="about-sub-intro">
+        Experiments in co-living, commons, and alternative spaces — and how
+        they grow as part of a wider ecology.
+      </p>
+    </header>
+
+    <section>
+      <h2>Co-living and commons</h2>
+      <p>
+        This section can hold concrete notes on co-living and commons practice:
+        how specific communities are organized, how daily life is arranged, and
+        what kinds of support and friction appear.
+      </p>
+    </section>
+
+    <section>
+      <h2>Alternative spaces</h2>
+      <p>
+        You can expand here on spaces like Dweller, Protopia, and other nodes
+        in the map of alternative spaces — how they are made, and how they
+        relate to one another.
+      </p>
+    </section>
+
+    <p class="back-link">
+      <a href="/about">← Back to About</a>
+    </p>
+  </article>
+</BaseLayout>
+
+<style>
+  .about-sub-header {
+    margin-bottom: 2.5rem;
+  }
+  .about-sub-intro {
+    color: var(--color-text-muted);
+  }
+  .back-link {
+    margin-top: 3rem;
+    font-size: 0.9rem;
+  }
+  .back-link a {
+    color: var(--color-text-soft);
+  }
+  .back-link a:hover {
+    color: var(--color-accent);
+  }
+</style>
+

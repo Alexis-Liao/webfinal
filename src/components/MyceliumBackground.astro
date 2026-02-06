@@ -1,0 +1,139 @@
+---
+/**
+ * Mycelium background: thin line network as structural metaphor.
+ * Build-time generated SVG, no biological imagery. Low contrast, optional subtle motion.
+ */
+interface Props {
+  /** 'full' | 'subtle' | 'none'. Writing pages may use 'none' or 'subtle'. */
+  intensity?: 'full' | 'subtle' | 'none';
+  /** Optional class for wrapper */
+  class?: string;
+}
+
+const { intensity = 'full', class: className = '' } = Astro.props;
+
+if (intensity === 'none') {
+  // No output
+}
+
+// Deterministic pseudo-random for reproducible networks
+function seeded(seed: number) {
+  return () => {
+    seed = (seed * 9301 + 49297) % 233280;
+    return seed / 233280;
+  };
+}
+const rnd = seeded(42);
+
+interface Point {
+  x: number;
+  y: number;
+  id: number;
+}
+
+const width = 1200;
+const height = 800;
+const numPoints = intensity === 'full' ? 55 : 28;
+const jitter = 35;
+const connectRadius = 140;
+const maxConnections = 4;
+
+const points: Point[] = [];
+// Non-uniform grid with jitter
+const cols = 8;
+const rows = Math.ceil(numPoints / cols);
+for (let i = 0; i < numPoints; i++) {
+  const col = i % cols;
+  const row = Math.floor(i / cols);
+  const baseX = (col + 0.5) * (width / cols);
+  const baseY = (row + 0.5) * (height / rows);
+  points.push({
+    x: baseX + (rnd() - 0.5) * jitter * 2,
+    y: baseY + (rnd() - 0.5) * jitter * 2,
+    id: i,
+  });
+}
+
+// Build edges: each point connects to up to maxConnections nearest neighbors
+const edges: { x1: number; y1: number; x2: number; y2: number }[] = [];
+const seen = new Set<string>();
+function edgeKey(a: number, b: number) {
+  return a < b ? `${a}-${b}` : `${b}-${a}`;
+}
+for (const p of points) {
+  const dists = points
+    .filter((q) => q.id !== p.id)
+    .map((q) => ({
+      q,
+      d: (p.x - q.x) ** 2 + (p.y - q.y) ** 2,
+    }))
+    .sort((a, b) => a.d - b.d);
+  let count = 0;
+  for (const { q } of dists) {
+    if (count >= maxConnections) break;
+    if (q.x - p.x > connectRadius || p.x - q.x > connectRadius) continue;
+    if (q.y - p.y > connectRadius || p.y - q.y > connectRadius) continue;
+    const key = edgeKey(p.id, q.id);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    edges.push({ x1: p.x, y1: p.y, x2: q.x, y2: q.y });
+    count++;
+  }
+}
+
+const strokeOpacity = intensity === 'full' ? 0.07 : 0.04;
+const strokeWidth = 0.6;
+---
+
+{intensity !== 'none' && (
+  <div class={`mycelium-wrap ${className}`} aria-hidden="true">
+    <svg
+      class="mycelium-svg"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox={`0 0 ${width} ${height}`}
+      preserveAspectRatio="xMidYMid slice"
+      focusable="false"
+    >
+      <g class="mycelium-lines">
+        {edges.map((e) => (
+          <line
+            x1={e.x1}
+            y1={e.y1}
+            x2={e.x2}
+            y2={e.y2}
+            stroke="var(--mycelium-stroke-strong)"
+            stroke-width={strokeWidth}
+            stroke-opacity={strokeOpacity}
+            vector-effect="non-scaling-stroke"
+          />
+        ))}
+      </g>
+    </svg>
+  </div>
+)}
+
+<style>
+  .mycelium-wrap {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .mycelium-svg {
+    width: 100%;
+    height: 100%;
+    opacity: 0.75;
+    transition: opacity 0.8s ease;
+  }
+  /* Optional: very subtle opacity shift on scroll (ignorable) */
+  @media (prefers-reduced-motion: no-preference) {
+    .mycelium-lines {
+      animation: mycelium-breathe 12s ease-in-out infinite;
+    }
+  }
+  @keyframes mycelium-breathe {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.94; }
+  }
+</style>

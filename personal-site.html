@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alexis Liao</title>
+  <style>
+    :root {
+      --color-deep-cyan: #2d5a5a;
+      --color-forest: #3d5c4a;
+      --color-bg: #f6f8f7;
+      --color-surface: #fafbfa;
+      --color-mist: #e8ecea;
+      --color-text: #2c3532;
+      --color-text-muted: #5a6560;
+      --color-accent: #4a7c6e;
+      --color-accent-hover: #3d6b5e;
+      --color-logo-green: #75B4A9;
+      --mycelium: rgba(45, 90, 90, 0.08);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 1.12rem;
+      line-height: 1.7;
+      color: var(--color-text);
+      background-color: var(--color-bg);
+      background-image: url('mycelium-texture.png');
+      background-repeat: repeat;
+      background-attachment: fixed;
+      background-size: 480px auto;
+    }
+    .mycelium-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+      opacity: 0.6;
+    }
+    .mycelium-bg svg {
+      width: 100%;
+      height: 100%;
+      stroke: var(--mycelium);
+    }
+    header {
+      position: relative;
+      z-index: 1;
+      padding: 0.75rem 0.75rem;
+      border-bottom: 1px solid var(--color-mist);
+      background: var(--color-surface);
+    }
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-left { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
+    .nav-logo { display: block; line-height: 0; }
+    .nav-logo img { height: 1.75rem; width: auto; display: block; }
+    nav a {
+      color: var(--color-text-muted);
+      text-decoration: none;
+      font-size: 0.9375rem;
+    }
+    nav a:hover, nav a.active { color: var(--color-accent); }
+    nav .home { font-weight: 600; color: var(--color-text); font-size: 1rem; }
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 0.75rem 4rem;
+    }
+    section { padding: 2.5rem 0 1rem; border-bottom: 1px solid var(--color-mist); }
+    section:last-of-type { border-bottom: none; }
+    section[id] { scroll-margin-top: 1rem; }
+    h1 { font-size: 1.5rem; margin-bottom: 1rem; }
+    h2 { font-size: 1.15rem; margin: 1.5em 0 0.5em; }
+    p { margin: 0 0 1em; color: var(--color-text-muted); }
+    .site-name {
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--color-logo-green);
+      text-shadow: 0 0.15rem 0.45rem rgba(0, 0, 0, 0.03);
+      margin: 0 0 0.5rem;
+      line-height: 1.2;
+    }
+    .home-intro {
+      font-size: 0.9375rem;
+      line-height: 1.7;
+      color: var(--color-text-muted);
+      margin: 0 0 2.25rem;
+      max-width: 28rem;
+    }
+    .home-intro .intro-zh { margin-bottom: 0.35rem; }
+    .home-intro .intro-en { color: var(--color-text-soft); }
+    @media (min-width: 900px) {
+      .home-intro .intro-en { white-space: nowrap; }
+    }
+    .focus-heading { font-size: 1rem; font-weight: 500; color: var(--color-text-muted); margin: 0 0 0.75rem; letter-spacing: 0.01em; }
+    .focus-block { max-width: 36em; line-height: 1.75; color: var(--color-text-muted); font-size: 0.9375rem; }
+    .focus-block .focus-para { margin: 0 0 0.85rem; }
+    .focus-block .focus-para:last-child { margin-bottom: 0; }
+    .focus-block .term { font-weight: 500; color: var(--color-logo-green); }
+    .about-reading { max-width: 48rem; }
+    .about-reading p { margin: 0 0 0.75rem; color: var(--color-text-muted); line-height: 1.7; }
+    .about-reading p:last-child { margin-bottom: 0; }
+    .about-reading .lang-block { margin-top: 2.5rem; }
+    .about-reading .lang-label { font-size: 0.8125rem; color: var(--color-text-soft); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .about-reading [lang="en"] p { font-size: 0.95rem; color: var(--color-text-soft); }
+    .activities-intro { color: var(--color-text-muted); line-height: 1.7; max-width: 48rem; margin: 0 0 0.25rem; }
+    .activities-intro-en { font-size: 0.95rem; color: var(--color-text-soft); }
+    .activities-category { font-size: 1.1rem; font-weight: 700; color: var(--color-logo-green); letter-spacing: 0.04em; margin: 2rem 0 0.75rem; }
+    .activities-category:first-of-type { margin-top: 0; }
+    .activity-list { list-style: none; padding: 0; margin: 0 0 1.5rem; }
+    .activity-item { padding: 0; border-bottom: 1px solid var(--color-mist); }
+    .activity-item:last-child { border-bottom: none; }
+    .activity-details { padding: 1rem 0; }
+    .activity-summary { list-style: none; cursor: pointer; outline: none; }
+    .activity-summary::-webkit-details-marker { display: none; }
+    .activity-summary::marker { display: none; }
+    .activity-summary::before { content: ''; display: inline-block; width: 0.5rem; height: 0.5rem; margin-right: 0.5rem; border-right: 2px solid var(--color-text-soft); border-bottom: 2px solid var(--color-text-soft); transform: rotate(45deg); vertical-align: 0.2rem; transition: transform 0.2s ease; }
+    .activity-details[open] .activity-summary::before { transform: rotate(-135deg); vertical-align: 0.05rem; }
+    .activity-title-zh { font-weight: 500; color: var(--color-text); margin: 0 0 0.2rem; max-width: 48rem; }
+    .activity-title-en { font-size: 0.95rem; color: var(--color-text-soft); margin: 0 0 0.35rem; max-width: 48rem; }
+    .activity-org { font-size: 0.8125rem; color: var(--color-text-soft); margin: 0; }
+    .activity-body { margin-top: 1rem; padding: 1rem 0 0; border-top: 1px solid var(--color-mist); max-width: 48rem; }
+    .activity-body p { color: var(--color-text-muted); line-height: 1.7; margin: 0 0 0.75rem; }
+    .activity-body p:last-child { margin-bottom: 0; }
+    .activity-placeholder { font-size: 0.95rem; color: var(--color-text-soft); }
+    a { color: var(--color-accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .post-list, .project-list { list-style: none; padding: 0; margin: 0; }
+    .post-list li, .project-list li {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--color-mist);
+    }
+    .post-item--with-image { padding-bottom: 2rem; }
+    .post-external-row { display: flex; align-items: flex-start; gap: 1.75rem; }
+    .post-image-wrap { flex-shrink: 0; max-width: 260px; margin-left: auto; }
+    .post-image { width: 100%; height: auto; border-radius: 4px; display: block; }
+    .post-list .post-link {
+      color: var(--color-logo-green);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+    .post-list .post-link:hover { color: var(--color-accent-hover); text-decoration: none; }
+    .post-entry--external, .post-entry--forthcoming { display: flex; flex-direction: column; gap: 0.2rem; }
+    .post-entry--external .post-status { font-size: 0.8125rem; color: var(--color-text-soft); margin-top: 0.15rem; }
+    .post-entry--external .post-title-zh,
+    .post-entry--forthcoming .post-title-zh { color: var(--color-logo-green); font-weight: 600; }
+    .post-entry--external .post-title-en,
+    .post-entry--forthcoming .post-title-en { font-size: 0.9375rem; color: var(--color-text-muted); }
+    .post-entry--forthcoming .post-status { font-size: 0.8125rem; color: var(--color-text-soft); margin-top: 0.15rem; }
+    .project-group-title { font-size: 1.1rem; font-weight: 700; color: var(--color-logo-green); text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 1rem; }
+    .protopia-intro-zh,
+    .protopia-intro-en { max-width: 48rem; margin: 0 0 0.75rem; color: var(--color-text-muted); line-height: 1.7; }
+    .protopia-intro-en { font-size: 0.95rem; color: var(--color-text-soft); }
+    .sub-project { margin: 2.5rem 0 2rem; text-align: right; }
+    .sub-project .sub-project-title { font-size: 1.05rem; font-weight: 500; color: var(--color-text); margin: 0 0 0.75rem auto; max-width: 36rem; text-align: right; }
+    .sub-project .sub-title-en { display: block; font-size: 0.93rem; font-weight: 400; color: var(--color-text-soft); line-height: 1.7; }
+    .sub-project .sub-project-img { width: 100%; max-width: 100%; height: auto; border-radius: 4px; display: block; }
+    .project-node h3 { font-size: 1.1rem; margin: 0 0 0.35rem; color: var(--color-logo-green); }
+    .meta { font-size: 0.875rem; color: var(--color-text-muted); margin: 0 0 0.25rem; }
+    .project-node .description-en { margin-top: 0.35rem; }
+    /* Justified text: content blocks */
+    main p, main .description, main .focus-para, main .intro-zh, main .intro-en,
+    main .post-entry--forthcoming .post-title-zh, main .post-entry--forthcoming .post-title-en,
+    main .contact-lead, main section > p {
+      text-align: justify;
+      text-justify: inter-word;
+      line-height: 1.7;
+    }
+    #about p, .about-reading p { text-justify: inter-character; }
+    [lang="en"] p, .focus-para[lang="en"] { hyphens: auto; -webkit-hyphens: auto; }
+    @media (max-width: 768px) {
+      main p, main .description, main .focus-para, main .intro-zh, main .intro-en,
+      main .post-entry--forthcoming .post-title-zh, main .post-entry--forthcoming .post-title-en,
+      main .contact-lead, main section > p {
+        text-align: left;
+        text-justify: auto;
+        hyphens: none;
+      }
+    }
+    .contact-links { list-style: none; padding: 0; margin: 0; }
+    .contact-links li { margin-bottom: 0.35rem; }
+    .contact-label { font-size: 0.9rem; color: var(--color-text-soft); margin-right: 0.4rem; }
+    .contact-links a {
+      display: inline;
+      padding: 0;
+      color: var(--color-accent);
+      text-decoration: none;
+      font-size: 1rem;
+      line-height: 1.6;
+      border-bottom: none;
+      transition: color 0.2s ease, text-decoration-color 0.2s ease;
+    }
+    .contact-links a:hover { color: var(--color-accent-hover); text-decoration: underline; text-decoration-color: rgba(61,107,94,0.4); }
+    #contact {
+      padding-top: 3rem;
+      padding-bottom: 4rem;
+      line-height: 1.75;
+      text-align: right;
+    }
+    #contact .contact-lead { color: var(--color-text-muted); margin-bottom: 2rem; font-size: 0.9375rem; }
+    #contact h1 { margin-bottom: 0.5rem; }
+    strong, b { color: var(--color-logo-green); font-weight: 600; }
+    /* Home section fills full viewport height on desktop */
+    @media (min-width: 900px) {
+      #home {
+        min-height: calc(100vh - 3rem);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="mycelium-bg" aria-hidden="true">
+    <svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <line x1="80" y1="120" x2="220" y2="180" stroke-width="0.5" fill="none"/>
+      <line x1="220" y1="180" x2="380" y2="140" stroke-width="0.5" fill="none"/>
+      <line x1="380" y1="140" x2="520" y2="200" stroke-width="0.5" fill="none"/>
+      <line x1="520" y1="200" x2="680" y2="160" stroke-width="0.5" fill="none"/>
+      <line x1="120" y1="280" x2="260" y2="320" stroke-width="0.5" fill="none"/>
+      <line x1="260" y1="320" x2="400" y2="280" stroke-width="0.5" fill="none"/>
+      <line x1="400" y1="280" x2="540" y2="340" stroke-width="0.5" fill="none"/>
+      <line x1="200" y1="180" x2="240" y2="300" stroke-width="0.5" fill="none"/>
+      <line x1="360" y1="140" x2="400" y2="270" stroke-width="0.5" fill="none"/>
+      <line x1="500" y1="200" x2="520" y2="330" stroke-width="0.5" fill="none"/>
+      <line x1="140" y1="400" x2="280" y2="440" stroke-width="0.5" fill="none"/>
+      <line x1="280" y1="440" x2="420" y2="400" stroke-width="0.5" fill="none"/>
+      <line x1="420" y1="400" x2="560" y2="460" stroke-width="0.5" fill="none"/>
+      <line x1="260" y1="320" x2="280" y2="430" stroke-width="0.5" fill="none"/>
+      <line x1="400" y1="280" x2="410" y2="390" stroke-width="0.5" fill="none"/>
+    </svg>
+  </div>
+  <header>
+    <nav>
+      <div class="nav-left">
+        <a href="#home" class="home">Alexis Liao</a>
+        <a href="#about">About</a>
+        <a href="#writing">Writing</a>
+        <a href="#projects">Projects</a>
+        <a href="#activities">Activities</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a href="#home" class="nav-logo" aria-label="Home"><img src="logo.png" alt="" width="32" height="32" /></a>
+    </nav>
+  </header>
+  <main>
+    <section id="home">
+      <h1 class="site-name">Alexis Liao</h1>
+      <div class="home-intro" lang="zh">
+        <p class="intro-zh">社区与自组织独立研究者、写作者</p>
+        <p class="intro-en" lang="en">Independent researcher and writer on communities and self-organization</p>
+      </div>
+    </section>
+    <section id="about">
+      <h1>About</h1>
+      <article class="about-reading">
+        <div lang="zh">
+          <p class="lang-label">中文</p>
+          <p>Alexis是一名关注社区与自组织的<strong>独立研究者、写作者</strong>。自2022年以来，他从实践和研究两个层面推动国内共居社区和替代性空间的研究与发展，撰写与编译相关文章三十余篇，目前居住于上海的<strong>共居社区 Dweller</strong>。作为一名研究者，他主要关注关注<strong>共居（co-living）、合作居住（co-housing）、公地（commons）和替代性空间（alternative spaces）</strong>，切入点为社区情感氛围与文化。</p>
+          <p>同时，他也是一名<strong>行动者和实践者</strong>。他有着五年的非政府组织实践与工作经历，他曾经担任<strong>格致计划（Project Nous）</strong>主席，并和实践者一起创建了<strong>知合Nexus</strong>平台，探索公益性的博雅教育；他曾发起<strong>天津706</strong>，参与搭建706的跨地区网络;带领<strong>家园计划</strong>“共识之路”行程，考察欧洲的生态村与共识社区,这些经历让他如今和朋友一起发起了<strong>普罗托邦</strong>，创作当代《全球概览》。</p>
+          <p>他毕业于<strong>南开大学社会学系</strong>，并在Watson Institute和<strong>广州公益慈善书院</strong>接受了系统的社会创新学习。他也曾经在<strong>孤独的阅读者、斯坦福社会创新评论</strong>有过工作和实践经历。</p>
+          <p>他将自己比喻为「流淌在社区与自组织之间的河，扎根在行动与研究中的树」。</p>
+        </div>
+        <div class="lang-block" lang="en">
+          <p class="lang-label">English</p>
+          <p>Alexis is an <strong>independent researcher and writer</strong> focusing on communities and self-organization. Since 2022, he has been advancing research and practice around co-living communities and alternative spaces in China, publishing and curating more than thirty related articles. He currently lives in the <strong>co-living community Dweller</strong> in Shanghai. His research interests include <strong>co-living, co-housing, commons, and alternative spaces</strong>, with a particular emphasis on community affective atmospheres and culture.</p>
+          <p>He is also an <strong>activist and practitioner</strong>. With five years of experience working in non-governmental organizations, he previously served as Chair of <strong>Project Nous</strong> and co-founded the <strong>Nexus</strong> platform, exploring public-oriented liberal education together with fellow practitioners. He initiated <strong>Tianjin 706</strong> and contributed to building its cross-regional network, and led the “Path of Consensus” journey under the <strong>Anotherland Project</strong>, visiting ecovillages and consensus-based communities across Europe. These experiences have led him to co-found <strong>Protopia</strong> with friends, where they are creating a contemporary version of the Whole Earth Catalog.</p>
+          <p>Alexis graduated from the <strong>Department of Sociology at Nankai University</strong> and received systematic training in social innovation at the Watson Institute and the <strong>Guangzhou Institute of Philanthropy</strong>. He has also worked and gained practical experience with <strong>The Lonely Reader and the Stanford Social Innovation Review (Chinese edition)</strong>.</p>
+          <p>He describes himself as “a river flowing between communities and self-organization, and a tree rooted in action and research.”</p>
+        </div>
+      </article>
+    </section>
+    <section id="writing">
+      <h1>Writing</h1>
+      <ul class="post-list">
+        <li class="post-item post-item--with-image">
+          <div class="post-external-row">
+            <div class="post-entry post-entry--external">
+              <a href="https://blog.uncommons.cc/community-the-60s/" class="post-link post-link--external" target="_blank" rel="noopener">
+                <span class="post-title-zh">60年代的社区遗产：生态村、太阳朋克与安那其</span><br />
+                <span class="post-title-en">The Community Legacy of the 1960s: Ecovillages, Solarpunk, and Anarchy</span>
+              </a>
+              <span class="post-status">Uncommons，2025</span>
+            </div>
+            <div class="post-image-wrap">
+              <img src="community-legacy.png" alt="60年代的社区遗产：生态村、太阳朋克与安那其" class="post-image" />
+            </div>
+          </div>
+        </li>
+        <li class="post-item post-item--with-image">
+          <div class="post-external-row">
+            <div class="post-entry post-entry--external">
+              <a href="https://mp.weixin.qq.com/s/-0U_xeCPbDnO4J8-1vqUYQ" class="post-link post-link--external" target="_blank" rel="noopener">
+                <span class="post-title-zh">马来西亚行记：从地方生出的触角，跨越地域与种族</span><br />
+                <span class="post-title-en">Travel Notes from Malaysia: Tendrils Emerging from Place, Crossing Regions and Ethnicities</span>
+              </a>
+              <span class="post-status">生活力场，2025</span>
+            </div>
+            <div class="post-image-wrap">
+              <img src="malaysia-map.png" alt="马来西亚行记：从地方生出的触角，跨越地域与种族" class="post-image" />
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="post-entry post-entry--forthcoming">
+            <span class="post-title-zh">集体与个体，在共居中寻找自我主体性</span>
+            <span class="post-title-en">Collective and Individual: Searching for Subjectivity within Co-living</span>
+            <span class="post-status">《四开》（待刊出）</span>
+          </div>
+        </li>
+        <li>
+          <div class="post-entry post-entry--forthcoming">
+            <span class="post-title-zh">消失又重建的青年乌托邦</span>
+            <span class="post-title-en">Youth Utopias: Disappearing and Rebuilding</span>
+            <span class="post-status">《四开》（待刊出）</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <section id="projects">
+      <h1>Projects</h1>
+      <h2 class="project-group-title">普罗托邦 PROTOPIA</h2>
+      <p class="protopia-intro-zh">
+        「普罗托邦」来源于未来学家凯文·凯利，它不是「一切都会对每个人都好」的乌托邦，而是描述朝着共同希望的方向前进的可能性——共同的能力。普罗托邦小组希望继承《全球概览》的精神，关注面向未来的精神世界和生活可能。通过观察当今社会发展及其涌现的诸多文化现象，综合文化脉络的反思与可能，以凝聚当代思想之共识，以引领当下行动之发生。
+      </p>
+      <p class="protopia-intro-en">
+        “Protopian” is a term originating from futurist Kevin Kelly. It does not describe a utopia in which everything turns out well for everyone; it refers to the possibility of moving in a shared, hopeful direction—a set of shared capacities. The Protopian group seeks to carry forward the spirit of the Whole Earth Catalog, focusing on future-oriented inner worlds and possible ways of living. By observing contemporary social developments and the many cultural phenomena that emerge from them, and by integrating reflections on cultural contexts and future possibilities, the group aims to bring together a shared consensus of contemporary thought and to inspire meaningful action in the present.
+      </p>
+      <div class="sub-project">
+        <h3 class="sub-project-title">
+          <span class="sub-title-zh">去哪儿串门——全国有趣空间漫游目录</span><br />
+          <span class="sub-title-en">Where to Visit — A Traveling Directory of Alternative Spaces Across China</span>
+        </h3>
+        <img class="sub-project-img" src="protopia-roaming.png" alt="全国有趣空间漫游目录 — 去哪儿串门" />
+      </div>
+      <ul class="project-list">
+        <li class="project-node">
+          <h3>知合 NEXUS</h3>
+          <p class="protopia-intro-zh">为中国非一线城市提供免费的博雅教育。</p>
+          <p class="protopia-intro-en">Providing free liberal arts education for non–first-tier cities in China.</p>
+          <p class="protopia-intro-zh">知合是一个教育创新组织，也是一个青年网络，我们将走向这个国家的文化平原，那些山峰和盆地之间的广阔地带——那里有无数青年正在寻找路径。我们将展开一场新的实验，用圆桌的方式，连接两个不同但又相似的群体——领读人与共读人。我们也将与无数的地方文化、教育组织互动，与一群有着求索之心的人一起——追问、探寻、分享。</p>
+          <p class="protopia-intro-en">Nexus is an educational innovation organization and a youth network. We are moving toward the cultural plains of this country—the vast spaces between mountains and basins—where countless young people are searching for their own paths.</p>
+          <p class="protopia-intro-en">We will launch a new experiment, using the roundtable as a form to connect two distinct yet kindred groups: lead readers and co-readers.</p>
+          <p class="protopia-intro-en">We will also engage with numerous local cultural and educational organizations, and join a community of people driven by inquiry to question, explore, and share together.</p>
+        </li>
+      </ul>
+    </section>
+    <section id="activities">
+      <h1>Activities</h1>
+      <p class="activities-intro activities-intro-zh">代表性活动选例</p>
+      <p class="activities-intro activities-intro-en">Representative Cases of Curated Activities</p>
+      <h2 class="activities-category">游学 · Study Tours</h2>
+      <ul class="activity-list">
+        <li class="activity-item">
+          <details class="activity-details">
+            <summary class="activity-summary">
+              <p class="activity-title-zh">共识之路——欧洲共识社区访问</p>
+              <p class="activity-title-en">The Path of Consensus — Visits to European Consensus Communities</p>
+              <p class="activity-org">家园计划 · The Home Project</p>
+            </summary>
+            <div class="activity-body">
+              <p class="activity-placeholder">内容稍后补充。Content to be added.</p>
+            </div>
+          </details>
+        </li>
+      </ul>
+      <h2 class="activities-category">展览 · Exhibitions</h2>
+      <ul class="activity-list">
+        <li class="activity-item">
+          <details class="activity-details">
+            <summary class="activity-summary">
+              <p class="activity-title-zh">池化：普罗托邦研究文献展</p>
+              <p class="activity-title-en">Pooling: A Research Literature Exhibition on Prototopia</p>
+              <p class="activity-org">普罗托邦 · Prototopia</p>
+            </summary>
+            <div class="activity-body">
+              <p class="activity-placeholder">内容稍后补充。Content to be added.</p>
+            </div>
+          </details>
+        </li>
+      </ul>
+      <h2 class="activities-category">沙龙 · Salons</h2>
+      <ul class="activity-list">
+        <li class="activity-item">
+          <details class="activity-details">
+            <summary class="activity-summary">
+              <p class="activity-title-zh">浮城圆桌：知合 NEXUS 上海年聚系列沙龙</p>
+              <p class="activity-title-en">Floating City Roundtable: Zhihé NEXUS Shanghai Annual Salon Series</p>
+              <p class="activity-org">知合 NEXUS · NEXUS</p>
+            </summary>
+            <div class="activity-body">
+              <p class="activity-placeholder">内容稍后补充。Content to be added.</p>
+            </div>
+          </details>
+        </li>
+        <li class="activity-item">
+          <details class="activity-details">
+            <summary class="activity-summary">
+              <p class="activity-title-zh">In-between 共居生活系列沙龙</p>
+              <p class="activity-title-en">In-Between Co-living Life Salon Series</p>
+              <p class="activity-org">Dweller</p>
+            </summary>
+            <div class="activity-body">
+              <p class="activity-placeholder">内容稍后补充。Content to be added.</p>
+            </div>
+          </details>
+        </li>
+      </ul>
+    </section>
+    <section id="contact">
+      <h1>Contact</h1>
+      <ul class="contact-links">
+        <li><span class="contact-label">Email：</span><a href="mailto:alexisprotopia@gmail.com">alexisprotopia@gmail.com</a></li>
+        <li><span class="contact-label">微信公众号：</span><a href="https://mp.weixin.qq.com/s/sO-pa_9-Ccq2rV4cnp8H8A" target="_blank" rel="noopener">河与树</a></li>
+        <li><span class="contact-label">Ins：</span><a href="https://instagram.com/alexisprotopia" target="_blank" rel="noopener">alexisprotopia</a></li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

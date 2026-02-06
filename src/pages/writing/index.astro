@@ -1,0 +1,174 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { externalArticles } from '../data/externalArticles';
+import { forthcomingArticles } from '../data/forthcomingArticles';
+
+const posts = (await getCollection('writing')).sort(
+  (a, b) => new Date(b.data.pubDate ?? 0).getTime() - new Date(a.data.pubDate ?? 0).getTime()
+);
+---
+
+<BaseLayout
+  title="Writing"
+  description="Essays and notes."
+  mycelium="subtle"
+>
+  <div class="container">
+    <header class="writing-index-header">
+      <h1>Writing</h1>
+    </header>
+    <ul class="post-list">
+      {externalArticles.map((article) => (
+        <li class={article.image ? 'post-item post-item--with-image' : 'post-item'}>
+          <div class="post-external-row">
+            <a
+              href={`/writing/${article.slug}`}
+              class="post-link post-link--external"
+            >
+              <div class="post-entry post-entry--external">
+                <span class="post-title-zh">{article.title}</span>
+                {article.titleEn && (
+                  <span class="post-title-en">{article.titleEn}</span>
+                )}
+                {article.sourceLine && <span class="post-status">{article.sourceLine}</span>}
+              </div>
+            </a>
+            {article.image && (
+              <div class="post-image-wrap">
+                <img src={article.image} alt={article.title} class="post-image" />
+              </div>
+            )}
+          </div>
+        </li>
+      ))}
+      {forthcomingArticles.map((article) => (
+        <li>
+          <a href={`/writing/${article.slug}`} class="post-link post-link--forthcoming">
+            <div class="post-entry post-entry--forthcoming">
+              <span class="post-title-zh">{article.titleZh}</span>
+              <span class="post-title-en">{article.titleEn}</span>
+              <span class="post-status">{article.status}</span>
+            </div>
+          </a>
+        </li>
+      ))}
+      {posts.map((post) => (
+        <li>
+          <a href={`/writing/${post.slug}`} class="post-link">
+            <span class="post-title">{post.data.title}</span>
+            {post.data.pubDate && (
+              <time class="post-date" datetime={new Date(post.data.pubDate).toISOString()}>
+                {new Date(post.data.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+              </time>
+            )}
+          </a>
+          {post.data.description && <p class="post-desc">{post.data.description}</p>}
+        </li>
+      ))}
+    </ul>
+  </div>
+</BaseLayout>
+
+<style>
+  .writing-index-header {
+    margin-bottom: 2rem;
+  }
+  .writing-index-header h1 {
+    margin-bottom: 0.5rem;
+  }
+  .subtitle {
+    color: var(--color-text-muted);
+  }
+  .post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .post-list li {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--color-mist);
+  }
+  .post-item--with-image {
+    padding-bottom: 2rem;
+  }
+  .post-external-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.75rem;
+  }
+  .post-image-wrap {
+    flex-shrink: 0;
+    max-width: 260px;
+    margin-left: auto;
+  }
+  .post-image {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    display: block;
+  }
+  .post-link {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.75rem;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .post-link:hover {
+    color: var(--color-accent);
+  }
+  .post-link--external,
+  .post-link--forthcoming {
+    color: var(--color-logo-green);
+    font-weight: 600;
+  }
+  .post-link--external:hover,
+  .post-link--forthcoming:hover {
+    color: var(--color-accent-hover);
+    text-decoration: none;
+  }
+  .post-entry--external,
+  .post-entry--forthcoming {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .post-entry--external .post-status {
+    font-size: 0.8125rem;
+    color: var(--color-text-soft);
+    margin-top: 0.15rem;
+  }
+  .post-entry--external .post-title-zh,
+  .post-entry--forthcoming .post-title-zh {
+    display: block;
+    color: var(--color-logo-green);
+    font-weight: 600;
+  }
+  .post-entry--external .post-title-en,
+  .post-entry--forthcoming .post-title-en {
+    display: block;
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+  }
+  .post-entry--forthcoming .post-status {
+    font-size: 0.8125rem;
+    color: var(--color-text-soft);
+    margin-top: 0.15rem;
+  }
+  .post-title {
+    font-weight: 500;
+  }
+  .post-date {
+    font-size: 0.875rem;
+    color: var(--color-text-soft);
+  }
+  .post-desc {
+    margin: 0.35rem 0 0;
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+</style>

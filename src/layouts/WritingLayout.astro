@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  pubDate?: Date;
+}
+
+const { title, description, pubDate } = Astro.props;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  mycelium="none"
+>
+  <article class="container reading">
+    <header class="writing-header">
+      <h1>{title}</h1>
+      {pubDate && (
+        <time class="pub-date" datetime={pubDate.toISOString()}>
+          {pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </time>
+      )}
+    </header>
+    <div class="writing-body">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .writing-header {
+    margin-bottom: 2rem;
+  }
+  .writing-header h1 {
+    margin-bottom: 0.5rem;
+  }
+  .pub-date {
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+  }
+  .writing-body {
+    padding-bottom: 3rem;
+  }
+</style>

@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import { projects } from '../../data/projects';
+
+export async function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { id: project.id },
+  }));
+}
+
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props as Props;
+const project = projects.find((p) => p.id === id);
+---
+
+{project ? (
+  <BaseLayout
+    title={`${project.title} — Projects`}
+    description={project.shortDescription}
+    mycelium="subtle"
+  >
+    <article class="container reading">
+      <header class="project-header">
+        <h1>{project.title}</h1>
+        <p class="project-intro">
+          {project.shortDescription}
+          {project.descriptionEn && (
+            <>
+              <br />
+              <span class="project-intro-en">{project.descriptionEn}</span>
+            </>
+          )}
+        </p>
+      </header>
+
+      <section>
+        <h2>Background</h2>
+        <p>
+          This project page is a placeholder for a fuller description of the
+          background, context, and questions that guide the work. You can expand
+          this section over time as the project develops.
+        </p>
+      </section>
+
+      <section>
+        <h2>Practice</h2>
+        <p>
+          Here you can describe concrete practices, formats, and collaborations
+          that belong to this project: where it happens, who is involved, and
+          how it changes over time.
+        </p>
+      </section>
+
+      <section>
+        <h2>Collaboration</h2>
+        <p>
+          Use this area to note current or potential collaborators, and how
+          others might intersect with this work.
+        </p>
+      </section>
+
+      <p class="back-link">
+        <a href="/projects">← Back to Projects</a>
+      </p>
+    </article>
+  </BaseLayout>
+) : (
+  <BaseLayout title="Project not found" mycelium="none">
+    <div class="container reading">
+      <p>Project not found.</p>
+      <p class="back-link">
+        <a href="/projects">← Back to Projects</a>
+      </p>
+    </div>
+  </BaseLayout>
+)}
+
+<style>
+  .project-header {
+    margin-bottom: 2.5rem;
+  }
+  .project-intro {
+    color: var(--color-text-muted);
+  }
+  .project-intro-en {
+    font-size: 0.95rem;
+    color: var(--color-text-soft);
+  }
+  section {
+    margin-top: 2rem;
+  }
+  .back-link {
+    margin-top: 3rem;
+    font-size: 0.9rem;
+  }
+  .back-link a {
+    color: var(--color-text-soft);
+  }
+  .back-link a:hover {
+    color: var(--color-accent);
+  }
+</style>
+

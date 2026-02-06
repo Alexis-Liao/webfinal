@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Research — Alexis Liao"
+  description="Research themes, questions, and methods."
+  mycelium="subtle"
+>
+  <article class="container reading">
+    <header class="about-sub-header">
+      <h1>Research</h1>
+      <p class="about-sub-intro">
+        Long-term questions around communities, self-organization, and how
+        spaces mediate collective life.
+      </p>
+    </header>
+
+    <section>
+      <h2>Themes</h2>
+      <p>
+        This page is a place to collect and refine research themes over time:
+        how communities form and sustain themselves, how different kinds of
+        co-living and alternative spaces emerge, and how they might be
+        documented and understood.
+      </p>
+    </section>
+
+    <section>
+      <h2>Questions</h2>
+      <p>
+        You can use this section to gather the questions that return across
+        projects and writing — the ones that do not belong to a single piece of
+        work, but to a longer inquiry.
+      </p>
+    </section>
+
+    <p class="back-link">
+      <a href="/about">← Back to About</a>
+    </p>
+  </article>
+</BaseLayout>
+
+<style>
+  .about-sub-header {
+    margin-bottom: 2.5rem;
+  }
+  .about-sub-intro {
+    color: var(--color-text-muted);
+  }
+  .back-link {
+    margin-top: 3rem;
+    font-size: 0.9rem;
+  }
+  .back-link a {
+    color: var(--color-text-soft);
+  }
+  .back-link a:hover {
+    color: var(--color-accent);
+  }
+</style>
+

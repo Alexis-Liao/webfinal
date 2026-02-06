@@ -1,0 +1,144 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { externalArticles } from '../data/externalArticles';
+import { forthcomingArticles } from '../data/forthcomingArticles';
+import WritingLayout from '../../layouts/WritingLayout.astro';
+
+export async function getStaticPaths() {
+  const mdPosts = await getCollection('writing');
+
+  const mdPaths = mdPosts.map((post) => ({
+    params: { slug: post.slug },
+    props: { type: 'content' as const, postId: post.id },
+  }));
+
+  const externalPaths = externalArticles.map((article) => ({
+    params: { slug: article.slug },
+    props: { type: 'external' as const, slug: article.slug },
+  }));
+
+  const forthcomingPaths = forthcomingArticles.map((article) => ({
+    params: { slug: article.slug },
+    props: { type: 'forthcoming' as const, slug: article.slug },
+  }));
+
+  return [...mdPaths, ...externalPaths, ...forthcomingPaths];
+}
+
+type Props =
+  | { type: 'content'; postId: string }
+  | { type: 'external'; slug: string }
+  | { type: 'forthcoming'; slug: string };
+
+const props = Astro.props as Props;
+const mdPosts = await getCollection('writing');
+---
+
+{props.type === 'content' && (() => {
+  const post = mdPosts.find((p) => p.id === props.postId);
+  if (!post) return (
+    <BaseLayout title="Not found" mycelium="none">
+      <div class="container reading">
+        <p>Article not found.</p>
+      </div>
+    </BaseLayout>
+  );
+
+  const { Content } = await post.render();
+
+  return (
+    <WritingLayout
+      title={post.data.title}
+      description={post.data.description}
+      pubDate={post.data.pubDate ? new Date(post.data.pubDate) : undefined}
+    >
+      <Content />
+      <p class="back-link">
+        <a href="/writing">← Back to Writing</a>
+      </p>
+    </WritingLayout>
+  );
+})()}
+
+{props.type === 'external' && (() => {
+  const article = externalArticles.find((a) => a.slug === props.slug);
+  if (!article) return (
+    <BaseLayout title="Not found" mycelium="none">
+      <div class="container reading">
+        <p>Article not found.</p>
+      </div>
+    </BaseLayout>
+  );
+
+  return (
+    <WritingLayout
+      title={article.title}
+      description={article.sourceLine}
+    >
+      <div class="container reading">
+        {article.sourceLine && (
+          <p class="article-meta">{article.sourceLine}</p>
+        )}
+        <p>
+          This article is published externally. You can read the full text on{' '}
+          <a href={article.url} target="_blank" rel="noopener noreferrer">
+            the original site
+          </a>.
+        </p>
+        <p class="back-link">
+          <a href="/writing">← Back to Writing</a>
+        </p>
+      </div>
+    </WritingLayout>
+  );
+})()}
+
+{props.type === 'forthcoming' && (() => {
+  const article = forthcomingArticles.find((a) => a.slug === props.slug);
+  if (!article) return (
+    <BaseLayout title="Not found" mycelium="none">
+      <div class="container reading">
+        <p>Article not found.</p>
+      </div>
+    </BaseLayout>
+  );
+
+  return (
+    <WritingLayout
+      title={article.titleZh}
+      description={article.titleEn}
+    >
+      <div class="container reading">
+        <p class="article-meta">{article.status}</p>
+        <p>{article.titleEn}</p>
+        <p>
+          This piece is forthcoming. Once it is published, the full text or a
+          link to the published version will appear here.
+        </p>
+        <p class="back-link">
+          <a href="/writing">← Back to Writing</a>
+        </p>
+      </div>
+    </WritingLayout>
+  );
+})()}
+
+<style>
+  .article-meta {
+    font-size: 0.875rem;
+    color: var(--color-text-soft);
+    margin-bottom: 1.5rem;
+  }
+  .back-link {
+    margin-top: 3rem;
+    font-size: 0.9rem;
+  }
+  .back-link a {
+    color: var(--color-text-soft);
+  }
+  .back-link a:hover {
+    color: var(--color-accent);
+  }
+</style>
+

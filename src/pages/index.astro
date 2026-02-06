@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Alexis Liao"
+  description="Alexis Liao — independent researcher and writer on communities and self-organization."
+  mycelium="full"
+>
+  <div class="container">
+    <section class="hero">
+      <h1 class="site-name">Alexis Liao</h1>
+      <div class="home-intro">
+        <p class="intro-zh" lang="zh">社区与自组织独立研究者、写作者</p>
+        <p class="intro-en" lang="en">Independent researcher and writer on communities and self-organization</p>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: 2rem 0 3.5rem;
+  }
+  .site-name {
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--color-logo-green);
+    text-shadow: 0 0.15rem 0.45rem rgba(0, 0, 0, 0.03);
+    margin: 0 0 0.5rem;
+    line-height: 1.2;
+  }
+  .home-intro {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin: 0 0 2.25rem;
+    max-width: 28rem;
+  }
+  .home-intro .intro-zh {
+    margin-bottom: 0.35rem;
+  }
+  .home-intro .intro-en {
+    color: var(--color-text-soft);
+  }
+  .focus-heading {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    margin: 0 0 0.75rem;
+    letter-spacing: 0.01em;
+  }
+  .focus-block {
+    max-width: 36em;
+    line-height: 1.75;
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+  }
+  .focus-block .focus-para {
+    margin: 0 0 0.85rem;
+  }
+  .focus-block .focus-para:last-child {
+    margin-bottom: 0;
+  }
+  .focus-block .term {
+    font-weight: 500;
+    color: var(--color-logo-green);
+  }
+</style>

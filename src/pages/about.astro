@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About — Alexis Liao"
+  description="Alexis Liao — independent researcher and writer on communities and self-organization. Co-living, Zhihe NEXUS, Protopian."
+  mycelium="subtle"
+>
+  <div class="container">
+    <article class="about-content about-reading">
+      <h1>About</h1>
+      <div class="lang-block" lang="zh">
+        <p class="lang-label">中文</p>
+        <p>Alexis是一名关注社区与自组织的<strong>独立研究者、写作者</strong>。自2022年以来，他从实践和研究两个层面推动国内共居社区和替代性空间的研究与发展，撰写与编译相关文章三十余篇，目前居住于上海的<strong>共居社区 Dweller</strong>。作为一名研究者，他主要关注关注<strong>共居（co-living）、合作居住（co-housing）、公地（commons）和替代性空间（alternative spaces）</strong>，切入点为社区情感氛围与文化。</p>
+        <p>同时，他也是一名<strong>行动者和实践者</strong>。他有着五年的非政府组织实践与工作经历，他曾经担任<strong>格致计划（Project Nous）</strong>主席，并和实践者一起创建了<strong>知合Nexus</strong>平台，探索公益性的博雅教育；他曾发起<strong>天津706</strong>，参与搭建706的跨地区网络;带领<strong>家园计划</strong>“共识之路”行程，考察欧洲的生态村与共识社区,这些经历让他如今和朋友一起发起了<strong>普罗托邦</strong>，创作当代《全球概览》。</p>
+        <p>他毕业于<strong>南开大学社会学系</strong>，并在Watson Institute和<strong>广州公益慈善书院</strong>接受了系统的社会创新学习。他也曾经在<strong>孤独的阅读者、斯坦福社会创新评论</strong>有过工作和实践经历。</p>
+        <p>他将自己比喻为「流淌在社区与自组织之间的河，扎根在行动与研究中的树」。</p>
+      </div>
+      <div class="lang-block" lang="en">
+        <p class="lang-label">English</p>
+        <p>Alexis is an <strong>independent researcher and writer</strong> focusing on communities and self-organization. Since 2022, he has been advancing research and practice around co-living communities and alternative spaces in China, publishing and curating more than thirty related articles. He currently lives in the <strong>co-living community Dweller</strong> in Shanghai. His research interests include <strong>co-living, co-housing, commons, and alternative spaces</strong>, with a particular emphasis on community affective atmospheres and culture.</p>
+        <p>He is also an <strong>activist and practitioner</strong>. With five years of experience working in non-governmental organizations, he previously served as Chair of <strong>Project Nous</strong> and co-founded the <strong>Nexus</strong> platform, exploring public-oriented liberal education together with fellow practitioners. He initiated <strong>Tianjin 706</strong> and contributed to building its cross-regional network, and led the “Path of Consensus” journey under the <strong>Anotherland Project</strong>, visiting ecovillages and consensus-based communities across Europe. These experiences have led him to co-found <strong>Protopia</strong> with friends, where they are creating a contemporary version of the Whole Earth Catalog.</p>
+        <p>Alexis graduated from the <strong>Department of Sociology at Nankai University</strong> and received systematic training in social innovation at the Watson Institute and the <strong>Guangzhou Institute of Philanthropy</strong>. He has also worked and gained practical experience with <strong>The Lonely Reader and the Stanford Social Innovation Review (Chinese edition)</strong>.</p>
+        <p>He describes himself as “a river flowing between communities and self-organization, and a tree rooted in action and research.”</p>
+      </div>
+      <p class="about-links">
+        <a href="/about/research">Research</a>
+        <span> · </span>
+        <a href="/about/practice">Practice</a>
+      </p>
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .about-content {
+    padding: 0.5rem 0 3rem;
+  }
+  .about-content h1 {
+    margin-bottom: 1.5rem;
+  }
+  .about-reading {
+    max-width: 48rem;
+  }
+  .about-reading p {
+    margin: 0 0 0.75rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+  .about-reading p:last-child {
+    margin-bottom: 0;
+  }
+  .about-reading .lang-block {
+    margin-top: 2.5rem;
+  }
+  .about-reading .lang-block:first-of-type {
+    margin-top: 0;
+  }
+  .about-reading .lang-label {
+    font-size: 0.8125rem;
+    color: var(--color-text-soft);
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .about-reading [lang="en"] p {
+    font-size: 0.95rem;
+    color: var(--color-text-soft);
+  }
+  .about-links {
+    margin-top: 2.5rem;
+    font-size: 0.9rem;
+    color: var(--color-text-soft);
+  }
+  .about-links a {
+    color: var(--color-text-soft);
+  }
+  .about-links a:hover {
+    color: var(--color-accent);
+  }
+</style>

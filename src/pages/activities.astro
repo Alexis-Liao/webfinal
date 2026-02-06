@@ -1,0 +1,183 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Activities — Alexis Liao"
+  description="Representative cases of curated activities: study tours, exhibitions, salons."
+  mycelium="subtle"
+>
+  <div class="container">
+    <header class="activities-header">
+      <h1>Activities</h1>
+      <p class="activities-intro activities-intro-zh">代表性活动选例</p>
+      <p class="activities-intro activities-intro-en">Representative Cases of Curated Activities</p>
+    </header>
+
+    <h2 class="activities-category">游学 · Study Tours</h2>
+    <ul class="activity-list">
+      <li class="activity-item">
+        <details class="activity-details">
+          <summary class="activity-summary">
+            <p class="activity-title-zh">共识之路——欧洲共识社区访问</p>
+            <p class="activity-title-en">The Path of Consensus — Visits to European Consensus Communities</p>
+            <p class="activity-org">家园计划 · The Home Project</p>
+          </summary>
+          <div class="activity-body">
+            <p class="activity-placeholder">内容稍后补充。Content to be added.</p>
+          </div>
+        </details>
+      </li>
+    </ul>
+
+    <h2 class="activities-category">展览 · Exhibitions</h2>
+    <ul class="activity-list">
+      <li class="activity-item">
+        <details class="activity-details">
+          <summary class="activity-summary">
+            <p class="activity-title-zh">池化：普罗托邦研究文献展</p>
+            <p class="activity-title-en">Pooling: A Research Literature Exhibition on Prototopia</p>
+            <p class="activity-org">普罗托邦 · Prototopia</p>
+          </summary>
+          <div class="activity-body">
+            <p class="activity-placeholder">内容稍后补充。Content to be added.</p>
+          </div>
+        </details>
+      </li>
+    </ul>
+
+    <h2 class="activities-category">沙龙 · Salons</h2>
+    <ul class="activity-list">
+      <li class="activity-item">
+        <details class="activity-details">
+          <summary class="activity-summary">
+            <p class="activity-title-zh">浮城圆桌：知合 NEXUS 上海年聚系列沙龙</p>
+            <p class="activity-title-en">Floating City Roundtable: Zhihé NEXUS Shanghai Annual Salon Series</p>
+            <p class="activity-org">知合 NEXUS · NEXUS</p>
+          </summary>
+          <div class="activity-body">
+            <p class="activity-placeholder">内容稍后补充。Content to be added.</p>
+          </div>
+        </details>
+      </li>
+      <li class="activity-item">
+        <details class="activity-details">
+          <summary class="activity-summary">
+            <p class="activity-title-zh">In-between 共居生活系列沙龙</p>
+            <p class="activity-title-en">In-Between Co-living Life Salon Series</p>
+            <p class="activity-org">Dweller</p>
+          </summary>
+          <div class="activity-body">
+            <p class="activity-placeholder">内容稍后补充。Content to be added.</p>
+          </div>
+        </details>
+      </li>
+    </ul>
+  </div>
+</BaseLayout>
+
+<style>
+  .activities-header {
+    margin-bottom: 2.5rem;
+  }
+  .activities-header h1 {
+    margin-bottom: 0.5rem;
+  }
+  .activities-intro {
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    max-width: 48rem;
+    margin: 0 0 0.25rem;
+  }
+  .activities-intro-en {
+    font-size: 0.95rem;
+    color: var(--color-text-soft);
+  }
+  .activities-category {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-logo-green);
+    letter-spacing: 0.04em;
+    margin: 2rem 0 0.75rem;
+  }
+  .activities-category:first-of-type {
+    margin-top: 0;
+  }
+  .activity-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+  }
+  .activity-item {
+    padding: 0;
+    border-bottom: 1px solid var(--color-mist);
+  }
+  .activity-item:last-child {
+    border-bottom: none;
+  }
+  .activity-details {
+    padding: 1rem 0;
+  }
+  .activity-summary {
+    list-style: none;
+    cursor: pointer;
+    outline: none;
+  }
+  .activity-summary::-webkit-details-marker {
+    display: none;
+  }
+  .activity-summary::marker {
+    display: none;
+  }
+  .activity-summary::before {
+    content: '';
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-right: 0.5rem;
+    border-right: 2px solid var(--color-text-soft);
+    border-bottom: 2px solid var(--color-text-soft);
+    transform: rotate(45deg);
+    vertical-align: 0.2rem;
+    transition: transform 0.2s ease;
+  }
+  .activity-details[open] .activity-summary::before {
+    transform: rotate(-135deg);
+    vertical-align: 0.05rem;
+  }
+  .activity-title-zh {
+    font-weight: 500;
+    color: var(--color-text);
+    margin: 0 0 0.2rem;
+    max-width: 48rem;
+  }
+  .activity-title-en {
+    font-size: 0.95rem;
+    color: var(--color-text-soft);
+    margin: 0 0 0.35rem;
+    max-width: 48rem;
+  }
+  .activity-org {
+    font-size: 0.8125rem;
+    color: var(--color-text-soft);
+    margin: 0;
+  }
+  .activity-body {
+    margin-top: 1rem;
+    padding: 1rem 0 0;
+    border-top: 1px solid var(--color-mist);
+    max-width: 48rem;
+  }
+  .activity-body p {
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin: 0 0 0.75rem;
+  }
+  .activity-body p:last-child {
+    margin-bottom: 0;
+  }
+  .activity-placeholder {
+    font-size: 0.95rem;
+    color: var(--color-text-soft);
+  }
+</style>

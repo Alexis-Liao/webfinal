@@ -1,0 +1,43 @@
+---
+import MyceliumBackground from '../MyceliumBackground.astro';
+import SiteHeader from '../SiteHeader.astro';
+import '../../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** 'full' | 'subtle' | 'none' for mycelium */
+  mycelium?: 'full' | 'subtle' | 'none';
+  /** Extra class for main */
+  class?: string;
+}
+
+const { title, description = 'Personal site — research, writing, projects.', mycelium = 'full', class: className = '' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <MyceliumBackground intensity={mycelium} />
+    <SiteHeader />
+    <main class={`main ${className}`}>
+      <slot />
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  .main {
+    position: relative;
+    z-index: 1;
+    min-height: calc(100vh - 5rem);
+    padding: 2rem 0 4rem;
+  }
+</style>

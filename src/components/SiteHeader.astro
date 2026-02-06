@@ -1,0 +1,91 @@
+---
+const current = Astro.url.pathname;
+const nav = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/writing', label: 'Writing' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/activities', label: 'Activities' },
+  { href: '/contact', label: 'Contact' },
+];
+---
+
+<header class="site-header">
+  <nav class="nav container" aria-label="Main">
+    <div class="nav-left">
+      <a class="nav-home" href="/">Alexis Liao</a>
+      <ul class="nav-links">
+        {nav.filter((n) => n.href !== '/').map((n) => (
+          <li>
+            <a
+              href={n.href}
+              class:list={[current === n.href || (n.href !== '/' && current.startsWith(n.href)) && 'active']}
+            >
+              {n.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <a class="nav-logo" href="/" aria-label="Home">
+      <img src="/logo.png" alt="" width="32" height="32" />
+    </a>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    position: relative;
+    z-index: 1;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--color-mist);
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .nav-left {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .nav-logo {
+    display: block;
+    line-height: 0;
+  }
+  .nav-logo img {
+    height: 1.75rem;
+    width: auto;
+    display: block;
+  }
+  .nav-home {
+    font-weight: 600;
+    color: var(--color-text);
+  }
+  .nav-home:hover {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 1.5rem;
+  }
+  .nav-links a {
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+  }
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: var(--color-accent);
+  }
+  .nav-links a.active {
+    font-weight: 500;
+  }
+</style>
