@@ -55,5 +55,7 @@ export const externalArticles: ExternalArticle[] = [
     titleEn: 'Translated Essays Collection',
     url: '#',
     sourceLine: '河与树，2022-2026',
+    image: '/translated-essays-zine.png',
+    imagePosition: 'top',
   },
 ];
