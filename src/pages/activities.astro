@@ -32,7 +32,7 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
 
     <h2 class="activities-category reveal-item" data-reveal="body">展览 · Exhibitions</h2>
     <ul class="activity-list">
-      <li class="activity-item reveal-item" data-reveal="body">
+      <li class="activity-item activity-item--right reveal-item" data-reveal="body">
         <details class="activity-details">
           <summary class="activity-summary">
             <p class="activity-title-zh"><a href="https://mp.weixin.qq.com/s/u1tmkgwR9eMbvUOTm3Vpeg" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">池化：普罗托邦研究文献展</a></p>
@@ -60,7 +60,7 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
           </div>
         </details>
       </li>
-      <li class="activity-item reveal-item" data-reveal="body">
+      <li class="activity-item activity-item--right reveal-item" data-reveal="body">
         <details class="activity-details">
           <summary class="activity-summary">
             <p class="activity-title-zh"><a href="https://mp.weixin.qq.com/s/bkq3axmQ8wcUPfhaXpjLiQ" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">In-between 共居生活系列沙龙</a></p>
@@ -111,6 +111,15 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
   }
   .activity-item:last-child {
     border-bottom: none;
+  }
+  .activity-item--right {
+    margin-left: auto;
+    max-width: 48rem;
+    text-align: right;
+  }
+  .activity-item--right .activity-summary::before {
+    margin-right: 0;
+    margin-left: 0.5rem;
   }
   .activity-details {
     padding: 1rem 0;

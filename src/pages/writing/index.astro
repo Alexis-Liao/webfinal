@@ -10,12 +10,12 @@ const posts = (await getCollection('writing')).sort(
 ---
 
 <BaseLayout
-  title="Writing"
+  title="Writings"
   description="Essays and notes."
   mycelium="subtle"
 >
   <header class="writing-index-header container">
-    <h1>Writing</h1>
+    <h1>Writings</h1>
   </header>
   <ul class="post-list">
     {externalArticles.map((article) => (
