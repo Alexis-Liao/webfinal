@@ -19,8 +19,8 @@ export const projects: Project[] = [
     id: 'zhine-nexus',
     slug: 'zhine-nexus',
     title: '知合 NEXUS',
-    shortDescription: '为中国非一线城市提供免费的博雅教育。',
-    descriptionEn: 'Providing free liberal arts education for non–first-tier cities in China.',
+    shortDescription: '大学无法提供我们想要的知识和共同体，于是我们在校外创建它。',
+    descriptionEn: 'Universities did not provide the knowledge and community we sought, so we created it beyond the campus.',
     longDescriptionZh:
       '知合是一个教育创新组织，也是一个青年网络，我们将走向这个国家的文化平原，那些山峰和盆地之间的广阔地带——那里有无数青年正在寻找路径。我们将展开一场新的实验，用圆桌的方式，连接两个不同但又相似的群体——领读人与共读人。我们也将与无数的地方文化、教育组织互动，与一群有着求索之心的人一起——追问、探寻、分享。',
     longDescriptionEn:

@@ -9,14 +9,34 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
 >
   <div class="container">
     <section class="hero">
-      <h1 class="site-name">Alexis Liao</h1>
-      <div class="home-intro">
-        <p class="intro-zh" lang="zh">社区与自组织独立研究者、写作者</p>
-        <p class="intro-en" lang="en">Independent researcher and writer on communities and self-organization</p>
+      <div class="hero-content">
+        <div class="hero-default">
+          <h1 class="site-name">Alexis Liao</h1>
+          <div class="home-intro">
+            <p class="intro-zh" lang="zh">社区与自组织独立研究者、写作者</p>
+            <p class="intro-en" lang="en">Independent researcher and writer on communities and self-organization</p>
+          </div>
+        </div>
+        <div class="hero-hover" aria-hidden="true">
+          <p class="hero-hover-zh" lang="zh">流淌在社区与自组织之间的河，扎根在行动与研究中的树</p>
+          <p class="hero-hover-en" lang="en">A river flowing between community and self-organization; a tree rooted in action and research.</p>
+        </div>
       </div>
     </section>
   </div>
 </BaseLayout>
+
+<script>
+  const heroContent = document.querySelector('.hero-content');
+  if (heroContent) {
+    const threshold = 80;
+    const update = () => {
+      heroContent.classList.toggle('is-scrolled', window.scrollY > threshold);
+    };
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+  }
+</script>
 
 <style>
   .hero {
@@ -25,6 +45,46 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+  .hero-content {
+    position: relative;
+    cursor: default;
+  }
+  .hero-default {
+    transition: opacity 3s ease;
+  }
+  .hero-content.is-scrolled .hero-default {
+    opacity: 0;
+  }
+  .hero-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transition: opacity 3s ease;
+    pointer-events: none;
+    max-width: 28rem;
+    text-align: right;
+  }
+  .hero-content.is-scrolled .hero-hover {
+    opacity: 1;
+  }
+  .hero-hover .hero-hover-zh {
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 500;
+    color: var(--color-text);
+    line-height: 1.35;
+    margin: 0 0 0.35rem;
+    letter-spacing: -0.02em;
+  }
+  .hero-hover .hero-hover-en {
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 500;
+    color: var(--color-text-muted);
+    line-height: 1.35;
+    margin: 0;
+    letter-spacing: -0.02em;
   }
   .site-name {
     font-size: clamp(1.75rem, 4vw, 2.25rem);
