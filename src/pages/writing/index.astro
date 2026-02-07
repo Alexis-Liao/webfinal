@@ -7,6 +7,44 @@ import { forthcomingArticles } from '../../data/forthcomingArticles';
 const posts = (await getCollection('writing')).sort(
   (a, b) => new Date(b.data.pubDate ?? 0).getTime() - new Date(a.data.pubDate ?? 0).getTime()
 );
+
+type CardItem = {
+  title: string;
+  subtitle?: string;
+  meta?: string;
+  href: string;
+  image?: string;
+  imagePosition?: string;
+};
+
+const cards: CardItem[] = [
+  ...externalArticles.map((a) => ({
+    title: a.title,
+    subtitle: a.titleEn,
+    meta: a.sourceLine,
+    href: `/writing/${a.slug}`,
+    image: a.image,
+    imagePosition: a.imagePosition,
+  })),
+  ...forthcomingArticles.map((a) => ({
+    title: a.titleZh,
+    subtitle: a.titleEn,
+    meta: a.status,
+    href: `/writing/${a.slug}`,
+    image: a.image,
+    imagePosition: a.imagePosition,
+  })),
+  ...posts.map((p) => ({
+    title: p.data.title,
+    subtitle: p.data.pubDate
+      ? new Date(p.data.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+      : p.data.description,
+    meta: undefined,
+    href: `/writing/${p.slug}`,
+    image: undefined,
+    imagePosition: undefined,
+  })),
+];
 ---
 
 <BaseLayout
@@ -17,221 +55,118 @@ const posts = (await getCollection('writing')).sort(
   <header class="writing-index-header container">
     <h1>Writings</h1>
   </header>
-  <ul class="post-list">
-    {externalArticles.map((article) => (
-      <li class={article.image ? 'post-item post-item--with-image' : 'post-item'}>
-        <div class="container">
-          <div class="post-external-row">
-            <a
-              href={`/writing/${article.slug}`}
-              class="post-link post-link--external"
-            >
-              <div class="post-entry post-entry--external">
-                <span class="post-title-zh">{article.title}</span>
-                {article.titleEn && (
-                  <span class="post-title-en">{article.titleEn}</span>
-                )}
-                {article.sourceLine && <span class="post-status">{article.sourceLine}</span>}
-              </div>
-            </a>
-            {article.image && (
-              <a href={`/writing/${article.slug}`} class="post-image-wrap writing-image-wrap img-hover-wrap post-image-link">
-                <img
-                  src={article.image}
-                  alt={article.title}
-                  class="post-image writing-image"
-                  style={article.imagePosition ? { objectPosition: article.imagePosition } : undefined}
-                />
-                <div class="img-hover-overlay" aria-hidden="true" />
-                <span class="img-hover-caption">点击图片了解更多</span>
-              </a>
-            )}
-          </div>
+  <div class="writing-cards container">
+    {cards.map((card) => (
+      <a href={card.href} class="writing-card">
+        <div class="writing-card-text">
+          <span class="writing-card-title">{card.title}</span>
+          {card.subtitle && <span class="writing-card-subtitle">{card.subtitle}</span>}
+          {card.meta && <span class="writing-card-meta">{card.meta}</span>}
         </div>
-      </li>
-    ))}
-    {forthcomingArticles.map((article) => (
-      <li class={article.image ? 'post-item post-item--with-image' : 'post-item'}>
-        <div class="container">
-          <div class={article.image ? 'post-external-row' : undefined}>
-            <a href={`/writing/${article.slug}`} class="post-link post-link--forthcoming">
-              <div class="post-entry post-entry--forthcoming">
-                <span class="post-title-zh">{article.titleZh}</span>
-                <span class="post-title-en">{article.titleEn}</span>
-                <span class="post-status">{article.status}</span>
-              </div>
-            </a>
-            {article.image && (
-              <a href={`/writing/${article.slug}`} class="post-image-wrap writing-image-wrap img-hover-wrap post-image-link">
-                <img
-                  src={article.image}
-                  alt={article.titleZh}
-                  class="post-image writing-image writing-image--top-crop"
-                  style={article.imagePosition ? { objectPosition: article.imagePosition } : undefined}
-                />
-                <div class="img-hover-overlay" aria-hidden="true" />
-                <span class="img-hover-caption">点击图片了解更多</span>
-              </a>
-            )}
-          </div>
+        <div class="writing-card-image-wrap">
+          {card.image ? (
+            <img
+              src={card.image}
+              alt=""
+              class="writing-card-image"
+              style={card.imagePosition ? { objectPosition: card.imagePosition } : undefined}
+            />
+          ) : (
+            <div class="writing-card-image-placeholder" aria-hidden="true" />
+          )}
         </div>
-      </li>
+      </a>
     ))}
-    {posts.map((post) => (
-      <li class="post-item">
-        <div class="container">
-          <a href={`/writing/${post.slug}`} class="post-link">
-            <span class="post-title">{post.data.title}</span>
-            {post.data.pubDate && (
-              <time class="post-date" datetime={new Date(post.data.pubDate).toISOString()}>
-                {new Date(post.data.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
-              </time>
-            )}
-          </a>
-          {post.data.description && <p class="post-desc">{post.data.description}</p>}
-        </div>
-      </li>
-    ))}
-  </ul>
+  </div>
 </BaseLayout>
 
 <style>
   .writing-index-header {
-    margin-bottom: 0;
+    margin-bottom: 1.5rem;
   }
   .writing-index-header h1 {
     margin-bottom: 0.5rem;
   }
-  .subtitle {
-    color: var(--color-text-muted);
+  .writing-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    padding-bottom: 2rem;
   }
-  .post-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .post-list li {
-    padding: 1.25rem 0;
-    border-bottom: 1px solid var(--color-mist);
-  }
-  .post-external-row {
+  .writing-card {
     display: flex;
-    align-items: center;
-    gap: 1.75rem;
-  }
-  .post-image-wrap {
-    position: relative;
-    flex-shrink: 0;
-    margin-left: auto;
-    border-radius: 4px;
+    flex-direction: column;
+    background: var(--color-bg);
+    border: 1px solid var(--color-mist);
+    border-radius: 8px;
     overflow: hidden;
-  }
-  .post-image-link {
-    display: block;
     text-decoration: none;
     color: inherit;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
   }
-  .post-image-link:hover {
-    color: inherit;
+  .writing-card:hover {
+    border-color: var(--color-text-soft);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   }
-  .writing-image-wrap {
-    width: min(52%, 55vw);
-    max-width: 100%;
-    height: 200px;
-  }
-  .writing-image-wrap .writing-image {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-  }
-  .post-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .post-link {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0.75rem;
-    color: var(--color-text);
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-  .post-link:hover {
-    color: var(--color-accent);
-    text-decoration: underline;
-  }
-  .post-link--external,
-  .post-link--forthcoming {
-    color: var(--color-text);
-    font-weight: 600;
-  }
-  .post-link--external:hover,
-  .post-link--forthcoming:hover {
-    color: var(--color-accent-hover);
-    text-decoration: underline;
-  }
-  .post-entry--external,
-  .post-entry--forthcoming {
+  .writing-card-text {
+    padding: 1rem 1rem 0.75rem;
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
+    flex: 0 0 auto;
   }
-  .post-entry--external .post-status {
-    font-size: 0.8125rem;
-    color: var(--color-text-soft);
-    margin-top: 0.15rem;
-  }
-  .post-entry--external .post-title-zh,
-  .post-entry--forthcoming .post-title-zh {
-    display: block;
-    color: var(--color-text);
+  .writing-card-title {
     font-weight: 600;
-  }
-  .post-entry--external .post-title-en,
-  .post-entry--forthcoming .post-title-en {
-    display: block;
     font-size: 0.9375rem;
-    color: var(--color-text-muted);
+    line-height: 1.35;
+    color: var(--color-text);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
-  .post-entry--forthcoming .post-status {
+  .writing-card-subtitle {
     font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .writing-card-meta {
+    font-size: 0.75rem;
     color: var(--color-text-soft);
     margin-top: 0.15rem;
   }
-  .post-title {
-    font-weight: 500;
+  .writing-card-image-wrap {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    flex: 1 1 auto;
+    min-height: 0;
+    background: var(--color-mist);
+    overflow: hidden;
   }
-  .post-date {
-    font-size: 0.875rem;
-    color: var(--color-text-soft);
+  .writing-card-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
   }
-  .post-desc {
-    margin: 0.35rem 0 0;
-    font-size: 0.9375rem;
-    color: var(--color-text-muted);
-    line-height: 1.5;
+  .writing-card-image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--color-mist) 0%, var(--color-bg) 100%);
   }
-  @media (max-width: 768px) {
-    .post-external-row {
-      flex-direction: column;
+  @media (max-width: 1024px) {
+    .writing-cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 600px) {
+    .writing-cards {
+      grid-template-columns: 1fr;
       gap: 1rem;
-      align-items: stretch;
-    }
-    .post-image-wrap {
-      width: 100%;
-      max-width: 100%;
-      margin-left: 0;
-    }
-    .writing-image-wrap {
-      width: 100%;
-      height: 200px;
-    }
-    .post-list li {
-      padding: 1.5rem 0;
     }
   }
 </style>
