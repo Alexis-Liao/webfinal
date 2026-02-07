@@ -50,6 +50,22 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
     update();
     window.addEventListener('scroll', update, { passive: true });
   }
+  const storyColors = document.querySelectorAll('.hero-story, .hero-colors');
+  if (storyColors.length) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+          } else {
+            entry.target.classList.remove('in-view');
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px' }
+    );
+    storyColors.forEach((el) => observer.observe(el));
+  }
 </script>
 
 <style>
@@ -74,6 +90,28 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
   }
   .hero-colors {
     max-width: 28rem;
+  }
+  .hero-story .story-heading,
+  .hero-story .story-body,
+  .hero-colors .story-heading,
+  .hero-colors .story-body {
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+  .hero-story.in-view .story-heading,
+  .hero-story.in-view .story-body,
+  .hero-colors.in-view .story-heading,
+  .hero-colors.in-view .story-body {
+    opacity: 1;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-story .story-heading,
+    .hero-story .story-body,
+    .hero-colors .story-heading,
+    .hero-colors .story-body {
+      opacity: 1;
+      transition: none;
+    }
   }
   .story-heading {
     font-size: clamp(1.75rem, 4vw, 2.25rem);
