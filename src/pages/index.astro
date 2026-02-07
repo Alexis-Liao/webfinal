@@ -179,4 +179,14 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
     font-weight: 500;
     color: var(--color-text);
   }
+  @media (max-width: 768px) {
+    .hero {
+      gap: 3rem;
+      padding-bottom: 2rem;
+    }
+    .hero-story,
+    .hero-colors {
+      max-width: 100%;
+    }
+  }
 </style>

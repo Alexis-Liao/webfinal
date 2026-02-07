@@ -76,4 +76,12 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
   .about-links a:hover {
     color: var(--color-accent);
   }
+  @media (max-width: 768px) {
+    .about-content {
+      padding: 0.5rem 0 2rem;
+    }
+    .about-reading .lang-block {
+      margin-top: 2rem;
+    }
+  }
 </style>

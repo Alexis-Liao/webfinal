@@ -30,7 +30,7 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
       </li>
     </ul>
 
-    <h2 class="activities-category reveal-item" data-reveal="body">展览 · Exhibitions</h2>
+    <h2 class="activities-category activities-category--right reveal-item" data-reveal="body">展览 · Exhibitions</h2>
     <ul class="activity-list">
       <li class="activity-item activity-item--right reveal-item" data-reveal="body">
         <details class="activity-details">
@@ -60,6 +60,9 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
           </div>
         </details>
       </li>
+    </ul>
+    <h2 class="activities-category activities-category--right reveal-item" data-reveal="body">沙龙 · Salons</h2>
+    <ul class="activity-list">
       <li class="activity-item activity-item--right reveal-item" data-reveal="body">
         <details class="activity-details">
           <summary class="activity-summary">
@@ -99,6 +102,11 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
     color: var(--color-text);
     letter-spacing: 0.04em;
     margin: 2rem 0 0.75rem;
+  }
+  .activities-category--right {
+    margin-left: auto;
+    max-width: 48rem;
+    text-align: right;
   }
   .activity-list {
     list-style: none;
@@ -185,5 +193,14 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
   .activity-placeholder {
     font-size: 0.95rem;
     color: var(--color-text-soft);
+  }
+  @media (max-width: 768px) {
+    .activity-item--right {
+      margin-left: 0;
+      text-align: right;
+    }
+    .activities-category {
+      margin: 1.5rem 0 0.75rem;
+    }
   }
 </style>

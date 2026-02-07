@@ -202,6 +202,12 @@ html {
   padding-right: 0.75rem;
 }
 .container--wide { max-width: 1440px; }
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
 
 /* 滚动触发的渐显：初始隐藏、向下偏移，进入视口后一次触发（About / Projects / Activities / Resources） */
 .reveal-item {
