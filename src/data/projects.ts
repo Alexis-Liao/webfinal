@@ -18,7 +18,7 @@ export const projects: Project[] = [
   {
     id: 'zhine-nexus',
     slug: 'zhine-nexus',
-    title: '知合 NEXUS',
+    title: '知合 Nexus',
     shortDescription: '大学无法提供我们想要的知识和共同体，于是我们在校外创建它。',
     descriptionEn: 'Universities did not provide the knowledge and community we sought, so we created it beyond the campus.',
     longDescriptionZh:

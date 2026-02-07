@@ -119,6 +119,11 @@ const Content = contentRender?.Content ?? null;
       <div class="container reading">
         <p class="article-meta">{article.status}</p>
         <p>{article.titleEn}</p>
+        {article.articleImage && (
+          <figure class="article-full-image">
+            <img src={article.articleImage} alt="706 余烬派对 Ember Camp" />
+          </figure>
+        )}
         {article.placeholderBody ? (
           <p class="article-placeholder-body">{article.placeholderBody}</p>
         ) : (
@@ -142,6 +147,15 @@ const Content = contentRender?.Content ?? null;
     font-size: 0.875rem;
     color: var(--color-text-soft);
     margin-bottom: 1.5rem;
+  }
+  .article-full-image {
+    margin: 1.5rem 0;
+  }
+  .article-full-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 6px;
   }
   .article-placeholder-body {
     line-height: 1.7;
