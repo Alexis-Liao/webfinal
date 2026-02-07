@@ -13,12 +13,12 @@
         </ul>
       </section>
     </div>
-  </div>
-  <div class="contact-branding-layer" aria-hidden="true">
-    <div class="container contact-branding-wrap">
-      <div class="contact-branding">
-        <img class="contact-logo" src="/logo.png" alt="" width="32" height="32" />
-        <img class="contact-river-tree" src="/river-and-tree.png" alt="河与树 RIVER AND TREE" />
+    <div class="contact-branding-layer" aria-hidden="true">
+      <div class="container contact-branding-wrap">
+        <div class="contact-branding">
+          <img class="contact-logo" src="/logo.png" alt="" width="32" height="32" />
+          <img class="contact-river-tree" src="/river-and-tree.png" alt="河与树 RIVER AND TREE" />
+        </div>
       </div>
     </div>
   </div>
@@ -136,33 +136,39 @@
   }
   @media (max-width: 768px) {
     .site-footer {
-      display: flex;
-      flex-direction: column;
+      min-width: 0;
     }
     .site-footer-overlay {
-      padding: 2rem 0 1rem;
+      padding: 2rem 0 1.5rem;
+      min-width: 0;
+    }
+    .contact-container {
+      min-width: 0;
+      flex-direction: column;
+      align-items: flex-start;
     }
     .contact-branding-layer {
       position: relative;
+      left: auto;
+      right: auto;
+      top: auto;
+      bottom: auto;
       padding-bottom: 0;
-      justify-content: center;
       padding-top: 1rem;
-      padding-bottom: 1.5rem;
+      justify-content: flex-end;
     }
     .contact-branding-wrap {
       width: 100%;
-      justify-content: center;
+      justify-content: flex-end;
+      max-width: 100%;
+      min-width: 0;
     }
     .contact-branding {
-      align-items: center;
+      align-items: flex-end;
     }
     .contact-river-tree {
       height: 3rem;
-      max-width: 14rem;
-    }
-    .contact-container {
-      flex-direction: column;
-      align-items: flex-start;
+      max-width: min(14rem, 45vw);
     }
     .contact-content {
       text-align: left;

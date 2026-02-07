@@ -210,14 +210,37 @@ html {
 }
 .container--wide { max-width: 1440px; }
 @media (max-width: 768px) {
+  html {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  body {
+    overflow-x: hidden;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
   .container {
     padding-left: 1rem;
     padding-right: 1rem;
     min-width: 0;
+    max-width: 100%;
   }
   main {
     min-width: 0;
     max-width: 100%;
+    overflow-x: hidden;
+  }
+  .site-header,
+  .site-footer,
+  .site-footer-overlay {
+    min-width: 0;
+    max-width: 100%;
+  }
+  /* 防止长链接/长单词撑开布局 */
+  a {
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 }
 
