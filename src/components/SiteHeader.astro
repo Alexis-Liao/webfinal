@@ -97,14 +97,23 @@ const nav = [
   .nav-links a {
     color: var(--color-text-muted);
     font-size: 0.9375rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 9999px;
+    text-decoration: none;
+    transition: color 0.2s ease, background-color 0.2s ease;
   }
-  .nav-links a:hover,
-  .nav-links a.active {
-    color: var(--color-accent);
-    text-decoration: underline;
+  .nav-links a:hover {
+    color: #fff;
+    background-color: var(--color-accent);
+    text-decoration: none;
   }
   .nav-links a.active {
+    color: #fff;
+    background-color: var(--color-accent);
     font-weight: 500;
+  }
+  .nav-links a.active:hover {
+    background-color: var(--color-accent-hover);
   }
   @media (max-width: 768px) {
     .site-header {

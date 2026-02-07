@@ -119,12 +119,16 @@ const Content = contentRender?.Content ?? null;
       <div class="container reading">
         <p class="article-meta">{article.status}</p>
         <p>{article.titleEn}</p>
-        <p class="read-full-cta">
-          <a href="#">
-            <span lang="zh">阅读完整内容请点击这里</span>
-            <span class="read-full-cta-en" lang="en">Click here to read the full content</span>
-          </a>
-        </p>
+        {article.placeholderBody ? (
+          <p class="article-placeholder-body">{article.placeholderBody}</p>
+        ) : (
+          <p class="read-full-cta">
+            <a href="#">
+              <span lang="zh">阅读完整内容请点击这里</span>
+              <span class="read-full-cta-en" lang="en">Click here to read the full content</span>
+            </a>
+          </p>
+        )}
         <p class="back-link">
           <a href="/writing">← Back to Writings</a>
         </p>
@@ -138,6 +142,11 @@ const Content = contentRender?.Content ?? null;
     font-size: 0.875rem;
     color: var(--color-text-soft);
     margin-bottom: 1.5rem;
+  }
+  .article-placeholder-body {
+    line-height: 1.7;
+    margin-top: 1rem;
+    color: var(--color-text);
   }
   .back-link {
     margin-top: 3rem;

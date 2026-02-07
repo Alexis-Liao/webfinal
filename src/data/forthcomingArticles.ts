@@ -11,9 +11,18 @@ export interface ForthcomingArticle {
   image?: string;
   /** 配图裁切位置，如 'top' 表示只显示图片最上部分 */
   imagePosition?: string;
+  /** 点进文章页时显示的说明段落（不对外发布时用） */
+  placeholderBody?: string;
 }
 
 export const forthcomingArticles: ForthcomingArticle[] = [
+  {
+    slug: 'consensus-community-reproduction-706',
+    titleZh: '共识社区再生产——706青年空间的行动民族志',
+    titleEn: 'Reproducing Community by Consensus: An Action Ethnography of 706 Youth Space',
+    status: '南开大学，2025.',
+    placeholderBody: '本文为毕业论文，暂时不对外发布和公开。文章正在修改撰写为书籍，如有兴趣后续请联系我阅读/修改。',
+  },
   {
     slug: 'collective-and-individual-co-living',
     titleZh: '集体与个体，在共居中寻找自我主体性',
