@@ -58,19 +58,21 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
     min-height: calc(100vh - 3.5rem);
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
     align-items: flex-start;
-    gap: clamp(2.5rem, 8vw, 4rem);
+    gap: clamp(4rem, 12vw, 6rem);
   }
   .hero-content {
     position: relative;
     cursor: default;
     width: 100%;
+    margin-top: auto;
   }
-  .hero-story,
-  .hero-colors {
+  .hero-story {
     margin-left: auto;
     text-align: right;
+    max-width: 28rem;
+  }
+  .hero-colors {
     max-width: 28rem;
   }
   .story-heading {
