@@ -13,12 +13,14 @@ const nav = [
 <header class="site-header">
   <nav class="nav container" aria-label="Main">
     <div class="nav-left">
-      <a class="nav-home" href="/" aria-label="Alexis 智立 — Home">
-        <img class="nav-home-logo" src="/river-and-tree.png" alt="河与树 RIVER AND TREE" />
-      </a>
-      <a class="nav-logo" href="#contact" aria-label="Contact">
-        <img src="/logo.png" alt="" width="32" height="32" />
-      </a>
+      <div class="nav-brand">
+        <a class="nav-home" href="/" aria-label="Alexis 智立 — Home">
+          <img class="nav-home-logo" src="/river-and-tree.png" alt="河与树 RIVER AND TREE" />
+        </a>
+        <a class="nav-logo" href="#contact" aria-label="Contact">
+          <img src="/logo.png" alt="" width="32" height="32" />
+        </a>
+      </div>
       <ul class="nav-links">
         {nav.filter((n) => n.href !== '/').map((n) => (
           <li>
@@ -55,6 +57,11 @@ const nav = [
     flex-wrap: wrap;
     gap: 2.25rem;
     width: 100%;
+  }
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
   .nav-logo {
     display: block;
@@ -128,10 +135,14 @@ const nav = [
       min-width: 0;
     }
     .nav-left {
-      gap: 0.5rem;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
       min-width: 0;
-      flex-wrap: wrap;
       width: 100%;
+    }
+    .nav-brand {
+      flex-shrink: 0;
     }
     .nav-logo {
       margin-left: 0;
@@ -146,7 +157,6 @@ const nav = [
       flex-shrink: 0;
     }
     .nav-links {
-      flex-basis: 100%;
       width: 100%;
       margin-left: 0;
       margin-top: 0.5rem;
