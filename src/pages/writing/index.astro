@@ -42,7 +42,6 @@ const posts = (await getCollection('writing')).sort(
                   class="post-image writing-image"
                   style={article.imagePosition ? { objectPosition: article.imagePosition } : undefined}
                 />
-                <div class="writing-image-overlay" aria-hidden="true" />
               </div>
             )}
           </div>
@@ -101,7 +100,7 @@ const posts = (await getCollection('writing')).sort(
   }
   .post-external-row {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 1.75rem;
   }
   .post-image-wrap {
@@ -114,19 +113,13 @@ const posts = (await getCollection('writing')).sort(
   .writing-image-wrap {
     width: min(52%, 55vw);
     max-width: 100%;
-  }
-  .writing-image-wrap .writing-image-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.2);
-    pointer-events: none;
+    height: 200px;
   }
   .writing-image-wrap .writing-image {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
-    vertical-align: middle;
-    object-fit: contain;
+    object-fit: cover;
   }
   .post-image {
     width: 100%;
