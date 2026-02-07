@@ -51,15 +51,29 @@ const posts = (await getCollection('writing')).sort(
       </li>
     ))}
     {forthcomingArticles.map((article) => (
-      <li class="post-item">
+      <li class={article.image ? 'post-item post-item--with-image' : 'post-item'}>
         <div class="container">
-          <a href={`/writing/${article.slug}`} class="post-link post-link--forthcoming">
-            <div class="post-entry post-entry--forthcoming">
-              <span class="post-title-zh">{article.titleZh}</span>
-              <span class="post-title-en">{article.titleEn}</span>
-              <span class="post-status">{article.status}</span>
-            </div>
-          </a>
+          <div class={article.image ? 'post-external-row' : undefined}>
+            <a href={`/writing/${article.slug}`} class="post-link post-link--forthcoming">
+              <div class="post-entry post-entry--forthcoming">
+                <span class="post-title-zh">{article.titleZh}</span>
+                <span class="post-title-en">{article.titleEn}</span>
+                <span class="post-status">{article.status}</span>
+              </div>
+            </a>
+            {article.image && (
+              <a href={`/writing/${article.slug}`} class="post-image-wrap writing-image-wrap img-hover-wrap post-image-link">
+                <img
+                  src={article.image}
+                  alt={article.titleZh}
+                  class="post-image writing-image writing-image--top-crop"
+                  style={article.imagePosition ? { objectPosition: article.imagePosition } : undefined}
+                />
+                <div class="img-hover-overlay" aria-hidden="true" />
+                <span class="img-hover-caption">点击图片了解更多</span>
+              </a>
+            )}
+          </div>
         </div>
       </li>
     ))}
@@ -78,24 +92,6 @@ const posts = (await getCollection('writing')).sort(
         </div>
       </li>
     ))}
-    <li class="post-item post-item--with-image">
-      <div class="container">
-        <div class="post-external-row">
-          <a href="https://www.xiaohongshu.com/search_result?keyword=四开" target="_blank" rel="noopener noreferrer" class="post-link post-link--external">
-            <div class="post-entry post-entry--external">
-              <span class="post-title-zh">四开 · 适合你的知识尺寸</span>
-              <span class="post-title-en">SIKAI — Contact · 合作 · 投稿 · 应聘</span>
-              <span class="post-status">小红书 四开编辑部 · sikai@zsstudio.net</span>
-            </div>
-          </a>
-          <a href="https://www.xiaohongshu.com/search_result?keyword=四开" target="_blank" rel="noopener noreferrer" class="post-image-wrap writing-image-wrap img-hover-wrap post-image-link">
-            <img src="/sikai-contact.png" alt="四开 SIKAI — Contact" class="post-image writing-image" />
-            <div class="img-hover-overlay" aria-hidden="true" />
-            <span class="img-hover-caption">点击图片了解更多</span>
-          </a>
-        </div>
-      </div>
-    </li>
   </ul>
 </BaseLayout>
 
