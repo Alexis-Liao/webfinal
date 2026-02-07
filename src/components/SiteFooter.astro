@@ -3,10 +3,6 @@
 <footer class="site-footer" id="contact">
   <div class="site-footer-overlay">
     <div class="container contact-container">
-      <div class="contact-branding">
-        <img class="contact-logo" src="/logo.png" alt="" width="32" height="32" />
-        <img class="contact-river-tree" src="/river-and-tree.png" alt="河与树 RIVER AND TREE" />
-      </div>
       <section class="contact-content">
         <h2 class="contact-heading">Contact</h2>
         <ul class="contact-links">
@@ -18,6 +14,14 @@
       </section>
     </div>
   </div>
+  <div class="contact-branding-layer" aria-hidden="true">
+    <div class="container contact-branding-wrap">
+      <div class="contact-branding">
+        <img class="contact-logo" src="/logo.png" alt="" width="32" height="32" />
+        <img class="contact-river-tree" src="/river-and-tree.png" alt="河与树 RIVER AND TREE" />
+      </div>
+    </div>
+  </div>
 </footer>
 
 <style>
@@ -26,6 +30,24 @@
     z-index: 1;
     margin-top: auto;
     width: 100%;
+  }
+  .contact-branding-layer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    pointer-events: none;
+  }
+  .contact-branding-wrap {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    pointer-events: auto;
   }
   .contact-branding {
     display: flex;
@@ -67,7 +89,7 @@
   .contact-container {
     display: flex;
     align-items: flex-end;
-    justify-content: space-between;
+    justify-content: flex-end;
     gap: 2rem;
     flex-wrap: wrap;
   }
