@@ -228,10 +228,15 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
   @media (max-width: 768px) {
     .hero {
       padding-bottom: 2rem;
+      min-width: 0;
+    }
+    .hero-content {
+      min-width: 0;
     }
     .hero-below {
       gap: 3rem;
       padding-top: 3rem;
+      min-width: 0;
     }
     .hero-story,
     .hero-colors {
