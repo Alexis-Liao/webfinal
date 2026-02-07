@@ -49,4 +49,11 @@ export const externalArticles: ExternalArticle[] = [
     image: '/coliving-report-2025.png',
     imagePosition: 'top',
   },
+  {
+    slug: 'translated-essays-collection',
+    title: '翻译论文合集',
+    titleEn: 'Translated Essays Collection',
+    url: '#',
+    sourceLine: '河与树，2022-2026',
+  },
 ];

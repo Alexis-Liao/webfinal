@@ -238,7 +238,7 @@ html {
   }
 }
 
-/* 图片悬停：蒙版 + 居中提示文字，仅 hover 触发 */
+/* 图片悬停：蒙版 + 左下角提示文字，仅 hover 触发 */
 .img-hover-wrap {
   position: relative;
   display: block;
@@ -254,11 +254,10 @@ html {
 }
 .img-hover-wrap .img-hover-caption {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, calc(-50% + 8px));
+  left: 0.75rem;
+  bottom: 0.75rem;
   opacity: 0;
-  transition: opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1), transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   color: #fff;
   font-size: 0.875rem;
   white-space: nowrap;
@@ -269,7 +268,6 @@ html {
 }
 .img-hover-wrap:hover .img-hover-caption {
   opacity: 1;
-  transform: translate(-50%, -50%);
 }
 @media (prefers-reduced-motion: reduce) {
   .img-hover-wrap .img-hover-overlay,

@@ -35,13 +35,15 @@ const posts = (await getCollection('writing')).sort(
               </div>
             </a>
             {article.image && (
-              <div class="post-image-wrap writing-image-wrap">
+              <div class="post-image-wrap writing-image-wrap img-hover-wrap">
                 <img
                   src={article.image}
                   alt={article.title}
                   class="post-image writing-image"
                   style={article.imagePosition ? { objectPosition: article.imagePosition } : undefined}
                 />
+                <div class="img-hover-overlay" aria-hidden="true" />
+                <span class="img-hover-caption">点击图片了解更多</span>
               </div>
             )}
           </div>
