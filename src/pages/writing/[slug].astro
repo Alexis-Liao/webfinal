@@ -45,6 +45,12 @@ const Content = contentRender?.Content ?? null;
     pubDate={contentPost.data.pubDate ? new Date(contentPost.data.pubDate) : undefined}
   >
     <Content />
+    <p class="read-full-cta">
+      <a href="#" id="read-full-link">
+        <span lang="zh">阅读完整内容请点击这里</span>
+        <span class="read-full-cta-en" lang="en">Click here to read the full content</span>
+      </a>
+    </p>
     <p class="back-link">
       <a href="/writing">← Back to Writings</a>
     </p>
@@ -76,11 +82,16 @@ const Content = contentRender?.Content ?? null;
         {article.sourceLine && (
           <p class="article-meta">{article.sourceLine}</p>
         )}
-        <p>
-          This article is published externally. You can read the full text on{' '}
+        {article.image && (
+          <figure class="article-full-image">
+            <img src={article.image} alt={article.title} style={article.imagePosition ? { objectPosition: article.imagePosition } : undefined} />
+          </figure>
+        )}
+        <p class="read-full-cta">
           <a href={article.url} target="_blank" rel="noopener noreferrer">
-            the original site
-          </a>.
+            <span lang="zh">阅读完整内容请点击这里</span>
+            <span class="read-full-cta-en" lang="en">Click here to read the full content</span>
+          </a>
         </p>
         <p class="back-link">
           <a href="/writing">← Back to Writings</a>
@@ -108,9 +119,11 @@ const Content = contentRender?.Content ?? null;
       <div class="container reading">
         <p class="article-meta">{article.status}</p>
         <p>{article.titleEn}</p>
-        <p>
-          This piece is forthcoming. Once it is published, the full text or a
-          link to the published version will appear here.
+        <p class="read-full-cta">
+          <a href="#">
+            <span lang="zh">阅读完整内容请点击这里</span>
+            <span class="read-full-cta-en" lang="en">Click here to read the full content</span>
+          </a>
         </p>
         <p class="back-link">
           <a href="/writing">← Back to Writings</a>
