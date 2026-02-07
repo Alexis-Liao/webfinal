@@ -21,26 +21,28 @@ const posts = (await getCollection('writing')).sort(
     {externalArticles.map((article) => (
       article.image ? (
         <li class="post-item post-item--fullscreen">
-          <a href={`/writing/${article.slug}`} class="writing-screen-link">
-            <span class="writing-screen-bg">
-              <img
-                src={article.image}
-                alt=""
-                class="writing-screen-img"
-                style={article.imagePosition ? { objectPosition: article.imagePosition } : undefined}
-              />
-              <span class="writing-screen-overlay" aria-hidden="true" />
-            </span>
-            <span class="writing-screen-text">
-              <span class="writing-screen-title-zh">{article.title}</span>
-              {article.titleEn && (
-                <span class="writing-screen-title-en">{article.titleEn}</span>
-              )}
-              {article.sourceLine && (
-                <span class="writing-screen-status">{article.sourceLine}</span>
-              )}
-            </span>
-          </a>
+          <div class="writing-screen-wrap container">
+            <a href={`/writing/${article.slug}`} class="writing-screen-link">
+              <span class="writing-screen-bg">
+                <img
+                  src={article.image}
+                  alt=""
+                  class="writing-screen-img"
+                  style={article.imagePosition ? { objectPosition: article.imagePosition } : undefined}
+                />
+                <span class="writing-screen-overlay" aria-hidden="true" />
+              </span>
+              <span class="writing-screen-text">
+                <span class="writing-screen-title-zh">{article.title}</span>
+                {article.titleEn && (
+                  <span class="writing-screen-title-en">{article.titleEn}</span>
+                )}
+                {article.sourceLine && (
+                  <span class="writing-screen-status">{article.sourceLine}</span>
+                )}
+              </span>
+            </a>
+          </div>
         </li>
       ) : (
         <li class="post-item">
@@ -115,12 +117,18 @@ const posts = (await getCollection('writing')).sort(
   .post-item:not(.post-item--fullscreen) {
     padding: 1.25rem 0;
   }
-  /* 全屏图块：每张图占满一屏，尺寸一致，适当裁剪，文字叠在图片上方 */
+  /* 图块：与下方文字同宽（container），高度缩小，文字叠在图片上方 */
   .post-item--fullscreen {
-    height: 100vh;
-    min-height: 320px;
     padding: 0;
     border-bottom: none;
+  }
+  .writing-screen-wrap {
+    position: relative;
+    height: 70vh;
+    min-height: 280px;
+    margin: 2.5rem 0;
+    border-radius: 4px;
+    overflow: hidden;
   }
   .writing-screen-link {
     display: block;
@@ -153,12 +161,11 @@ const posts = (await getCollection('writing')).sort(
     left: 0;
     right: 0;
     top: 0;
-    padding: clamp(2rem, 6vw, 4rem) 0.75rem;
+    padding: clamp(2rem, 6vw, 4rem) 0;
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 100%;
     box-sizing: border-box;
   }
   .writing-screen-title-zh {

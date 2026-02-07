@@ -22,6 +22,20 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
           <p class="hero-hover-en" lang="en">A river flowing between community and self-organization; a tree rooted in action and research.</p>
         </div>
       </div>
+      <div class="hero-story">
+        <h2 class="story-heading">Story</h2>
+        <div class="story-body">
+          <p class="story-para" lang="zh">蘑菇有两个部分。在地上，伞状的蘑菇体称为子实体。在地下，真菌构建了一个复杂的地下网络，被称为「菌丝网络」或「真菌地毯」。这种网络能够连接不同植物根系，促进养分和信息的共享，形成一种生态互助的关系。如果说城市和农村是人类所处的森林，那么有机的人类社区，就是森林中的子实体。秉承菌丝网络的精神，我喜欢那些自上而下的，有生命力的实践方式。</p>
+          <p class="story-para story-para-en" lang="en">Mushrooms have two parts. Above the ground, the cap-shaped body is called the fruiting body. Below the ground, fungi build a complex subterranean network known as the mycelial network, or the fungal mat. This network connects the roots of different plants, enabling the sharing of nutrients and information, and fostering a form of ecological mutual support. If cities and rural areas are the forests humans inhabit, then organic human communities are the fruiting bodies within that forest. Guided by the spirit of the mycelial network, I'm drawn to practices that grow from the ground up and carry a sense of life and vitality.</p>
+        </div>
+      </div>
+      <div class="hero-colors">
+        <h2 class="story-heading">Colors</h2>
+        <div class="story-body">
+          <p class="story-para" lang="zh">在初春到临之前，在清道的雨树下，我看到了世界上最耀眼的绿色。午后他们总说，「我们回香巴拉吧」，但我知道的香巴拉从来不在那里，香巴拉只在我的心中，在那棵雨树之下。那一刻我明白，我的生命中增加了另一种颜色——那棵雨树的绿色。锋利而冷峻的冰原蓝色，参天耀眼的绿色，冰河与雨树，是我生命的颜色。</p>
+          <p class="story-para story-para-en" lang="en">Just before early spring arrived, beneath the rain trees along the street, I saw the most dazzling green in the world. In the afternoons they would say, "Let's go back to Shambhala," yet the Shambhala I know has never been there. It lives within me, beneath that rain tree. In that moment, I realized my life had gained another color—the green of that rain tree. Sharp and austere glacial blue, towering and radiant green—glaciers and rain trees are the colors of my life.</p>
+        </div>
+      </div>
     </section>
   </div>
 </BaseLayout>
@@ -46,11 +60,40 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-start;
+    gap: clamp(2.5rem, 8vw, 4rem);
   }
   .hero-content {
     position: relative;
     cursor: default;
     width: 100%;
+  }
+  .hero-story,
+  .hero-colors {
+    margin-left: auto;
+    text-align: right;
+    max-width: 28rem;
+  }
+  .story-heading {
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    margin: 0 0 0.75rem;
+    line-height: 1.2;
+  }
+  .story-body {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+  .story-para {
+    margin: 0 0 1rem;
+  }
+  .story-para:last-child {
+    margin-bottom: 0;
+  }
+  .story-para-en {
+    color: var(--color-text-soft);
   }
   .hero-default {
     transition: opacity 3s ease;
