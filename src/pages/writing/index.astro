@@ -114,6 +114,16 @@ const cards: CardItem[] = [
     flex-direction: column;
     gap: 0.2rem;
     flex: 0 0 auto;
+    aspect-ratio: 12 / 5;
+    min-height: 0;
+    box-sizing: border-box;
+    background: rgba(246, 248, 247, 0.72);
+    backdrop-filter: blur(8px);
+  }
+  @media (prefers-color-scheme: dark) {
+    .writing-card-text {
+      background: rgba(26, 31, 29, 0.72);
+    }
   }
   .writing-card-title {
     font-weight: 600;
