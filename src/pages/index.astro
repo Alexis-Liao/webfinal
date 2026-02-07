@@ -22,6 +22,8 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
           <p class="hero-hover-en" lang="en">A river flowing between community and self-organization; a tree rooted in action and research.</p>
         </div>
       </div>
+    </section>
+    <section class="hero-below">
       <div class="hero-story">
         <h2 class="story-heading">Story</h2>
         <div class="story-body">
@@ -70,18 +72,24 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
 
 <style>
   .hero {
-    padding: 0 0 clamp(2rem, 5vw, 3.5rem);
-    min-height: calc(100vh - 3.5rem);
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: clamp(4rem, 12vw, 6rem);
+    justify-content: flex-end;
+    padding-bottom: clamp(2rem, 5vw, 3.5rem);
   }
   .hero-content {
     position: relative;
     cursor: default;
     width: 100%;
-    margin-top: auto;
+  }
+  .hero-below {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: clamp(4rem, 12vw, 6rem);
+    padding: clamp(4rem, 12vw, 6rem) 0 clamp(2rem, 5vw, 3.5rem);
   }
   .hero-story {
     margin-left: auto;
@@ -219,8 +227,11 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
   }
   @media (max-width: 768px) {
     .hero {
-      gap: 3rem;
       padding-bottom: 2rem;
+    }
+    .hero-below {
+      gap: 3rem;
+      padding-top: 3rem;
     }
     .hero-story,
     .hero-colors {
