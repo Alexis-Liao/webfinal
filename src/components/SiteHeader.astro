@@ -16,6 +16,9 @@ const nav = [
       <a class="nav-home" href="/" aria-label="Alexis 智立 — Home">
         <img class="nav-home-logo" src="/river-and-tree.png" alt="河与树 RIVER AND TREE" />
       </a>
+      <a class="nav-logo" href="#contact" aria-label="Contact">
+        <img src="/logo.png" alt="" width="32" height="32" />
+      </a>
       <ul class="nav-links">
         {nav.filter((n) => n.href !== '/').map((n) => (
           <li>
@@ -29,9 +32,6 @@ const nav = [
         ))}
       </ul>
     </div>
-    <a class="nav-logo" href="#contact" aria-label="Contact">
-      <img src="/logo.png" alt="" width="32" height="32" />
-    </a>
   </nav>
 </header>
 
@@ -58,6 +58,8 @@ const nav = [
   .nav-logo {
     display: block;
     line-height: 0;
+    margin-left: auto;
+    flex-shrink: 0;
   }
   .nav-logo img {
     height: 1.75rem;
@@ -117,20 +119,40 @@ const nav = [
   }
   @media (max-width: 768px) {
     .site-header {
-      padding: 1rem 0;
+      padding: 0.75rem 0;
       min-width: 0;
     }
     .nav {
-      gap: 0.75rem;
+      gap: 0;
       min-width: 0;
     }
     .nav-left {
-      gap: 1.25rem;
+      gap: 0.5rem;
       min-width: 0;
+      flex-wrap: nowrap;
+      width: 100%;
+    }
+    .nav-logo {
+      margin-left: 0;
+      flex-shrink: 0;
+    }
+    .nav-logo img {
+      height: 1.35rem;
+    }
+    .nav-home {
+      width: 5.5rem;
+      height: 1.6rem;
+      flex-shrink: 0;
     }
     .nav-links {
-      gap: 1.25rem;
-      flex-wrap: wrap;
+      gap: 0.35rem;
+      flex-wrap: nowrap;
+      flex-shrink: 1;
+      min-width: 0;
+    }
+    .nav-links a {
+      padding: 0.25rem 0.45rem;
+      font-size: 0.8125rem;
     }
   }
 </style>
