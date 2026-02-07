@@ -125,7 +125,7 @@ const nav = [
   .nav-links a.active:hover {
     background-color: var(--color-accent-hover);
   }
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     .site-header {
       padding: 0.75rem 0;
       min-width: 0;
@@ -168,14 +168,16 @@ const nav = [
       gap: 0.25rem;
       flex-shrink: 0;
       min-width: 0;
+      text-align: right;
     }
     .nav-links li {
       display: block;
+      width: fit-content;
     }
     .nav-links a {
       display: block;
-      padding: 0.3rem 0;
-      font-size: 0.8125rem;
+      padding: 0.35rem 0;
+      font-size: 0.875rem;
     }
   }
 </style>
