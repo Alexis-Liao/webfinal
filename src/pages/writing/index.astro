@@ -15,6 +15,8 @@ type CardItem = {
   href: string;
   image?: string;
   imagePosition?: string;
+  /** 该卡片下方全宽展示的图片（如 706 余烬派对） */
+  imageBelow?: string;
 };
 
 const cards: CardItem[] = [
@@ -25,6 +27,7 @@ const cards: CardItem[] = [
     href: `/writing/${a.slug}`,
     image: a.image,
     imagePosition: a.imagePosition,
+    imageBelow: undefined,
   })),
   ...forthcomingArticles.map((a) => ({
     title: a.titleZh,
@@ -33,6 +36,7 @@ const cards: CardItem[] = [
     href: `/writing/${a.slug}`,
     image: a.image,
     imagePosition: a.imagePosition,
+    imageBelow: a.imageBelow,
   })),
   ...posts.map((p) => ({
     title: p.data.title,
@@ -43,6 +47,7 @@ const cards: CardItem[] = [
     href: `/writing/${p.slug}`,
     image: undefined,
     imagePosition: undefined,
+    imageBelow: undefined,
   })),
 ];
 ---
@@ -57,25 +62,32 @@ const cards: CardItem[] = [
   </header>
   <div class="writing-cards container">
     {cards.map((card) => (
-      <a href={card.href} class="writing-card">
-        <div class="writing-card-text">
-          <span class="writing-card-title">{card.title}</span>
-          {card.subtitle && <span class="writing-card-subtitle">{card.subtitle}</span>}
-          {card.meta && <span class="writing-card-meta">{card.meta}</span>}
-        </div>
-        <div class="writing-card-image-wrap">
-          {card.image ? (
-            <img
-              src={card.image}
-              alt=""
-              class="writing-card-image"
-              style={card.imagePosition ? { objectPosition: card.imagePosition } : undefined}
-            />
-          ) : (
-            <div class="writing-card-image-placeholder" aria-hidden="true" />
-          )}
-        </div>
-      </a>
+      <>
+        <a href={card.href} class="writing-card">
+          <div class="writing-card-text">
+            <span class="writing-card-title">{card.title}</span>
+            {card.subtitle && <span class="writing-card-subtitle">{card.subtitle}</span>}
+            {card.meta && <span class="writing-card-meta">{card.meta}</span>}
+          </div>
+          <div class="writing-card-image-wrap">
+            {card.image ? (
+              <img
+                src={card.image}
+                alt=""
+                class="writing-card-image"
+                style={card.imagePosition ? { objectPosition: card.imagePosition } : undefined}
+              />
+            ) : (
+              <div class="writing-card-image-placeholder" aria-hidden="true" />
+            )}
+          </div>
+        </a>
+        {card.imageBelow && (
+          <div class="writing-below-card-image">
+            <img src={card.imageBelow} alt="706 余烬派对 Ember Camp" />
+          </div>
+        )}
+      </>
     ))}
   </div>
 </BaseLayout>
@@ -159,6 +171,19 @@ const cards: CardItem[] = [
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, var(--color-mist) 0%, var(--color-bg) 100%);
+  }
+  .writing-below-card-image {
+    grid-column: 1 / -1;
+    margin-top: 0.25rem;
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .writing-below-card-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    vertical-align: middle;
   }
   @media (max-width: 1024px) {
     .writing-cards {

@@ -13,6 +13,8 @@ export interface ForthcomingArticle {
   imagePosition?: string;
   /** 点进文章页时显示的说明段落（不对外发布时用） */
   placeholderBody?: string;
+  /** 卡片下方展示的图片（如 706 余烬派对海报） */
+  imageBelow?: string;
 }
 
 export const forthcomingArticles: ForthcomingArticle[] = [
@@ -22,6 +24,7 @@ export const forthcomingArticles: ForthcomingArticle[] = [
     titleEn: 'Reproducing Community by Consensus: An Action Ethnography of 706 Youth Space',
     status: '南开大学，2025.',
     placeholderBody: '本文为毕业论文，暂时不对外发布和公开。文章正在修改撰写为书籍，如有兴趣后续请联系我阅读/修改。',
+    imageBelow: '/706-ember-camp.png',
   },
   {
     slug: 'collective-and-individual-co-living',
