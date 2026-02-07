@@ -1,0 +1,86 @@
+---
+---
+<footer class="site-footer" id="contact">
+  <div class="site-footer-overlay">
+    <div class="container">
+      <section class="contact-content">
+        <h2 class="contact-heading">Contact</h2>
+        <ul class="contact-links">
+          <li><span class="contact-label">Email：</span><a href="mailto:alexisprotopia@gmail.com">alexisprotopia@gmail.com</a></li>
+          <li><span class="contact-label">微信公众号：</span><a href="https://mp.weixin.qq.com/s/sO-pa_9-Ccq2rV4cnp8H8A" target="_blank" rel="noopener noreferrer">河与树</a></li>
+          <li><span class="contact-label">Instagram：</span><a href="https://instagram.com/alexisprotopia" target="_blank" rel="noopener noreferrer">alexisprotopia</a></li>
+          <li><span class="contact-label">小红书：</span><a href="https://www.xiaohongshu.com/search_result?keyword=Alexis智立" target="_blank" rel="noopener noreferrer">@Alexis智立</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    position: relative;
+    z-index: 1;
+    margin-top: auto;
+    width: 100%;
+  }
+  .site-footer-overlay {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.78);
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--color-mist);
+  }
+  @media (prefers-color-scheme: dark) {
+    .site-footer-overlay {
+      background: rgba(34, 40, 38, 0.85);
+    }
+  }
+  .contact-content {
+    padding: 0;
+    line-height: 1.75;
+    max-width: 28rem;
+    margin-left: auto;
+    text-align: right;
+  }
+  .contact-heading {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 0.75rem;
+    color: var(--color-text);
+  }
+  .contact-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .contact-links li {
+    margin-bottom: 0.35rem;
+  }
+  .contact-label {
+    font-size: 0.9rem;
+    color: var(--color-text-soft);
+    margin-right: 0.4rem;
+  }
+  .contact-links a {
+    display: inline;
+    padding: 0;
+    color: var(--color-accent);
+    text-decoration: none;
+    font-size: 1rem;
+    line-height: 1.6;
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+  }
+  .contact-links a:hover {
+    color: var(--color-accent-hover);
+    text-decoration: underline;
+    text-decoration-color: rgba(61, 107, 94, 0.4);
+  }
+  @media (max-width: 768px) {
+    .site-footer-overlay {
+      padding: 2rem 0;
+    }
+    .contact-content {
+      text-align: right;
+      max-width: 100%;
+    }
+  }
+</style>

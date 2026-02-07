@@ -9,14 +9,14 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
 >
   <div class="container">
     <header class="activities-header">
-      <h1>Activities</h1>
-      <p class="activities-intro activities-intro-zh">部分活动</p>
-      <p class="activities-intro activities-intro-en">Selected Activities</p>
+      <h1 class="reveal-item" data-reveal="title">Activities</h1>
+      <p class="activities-intro activities-intro-zh reveal-item" data-reveal="body">部分活动</p>
+      <p class="activities-intro activities-intro-en reveal-item" data-reveal="body">Selected Activities</p>
     </header>
 
-    <h2 class="activities-category">游学 · Study Tours</h2>
+    <h2 class="activities-category reveal-item" data-reveal="body">游学 · Study Tours</h2>
     <ul class="activity-list">
-      <li class="activity-item">
+      <li class="activity-item reveal-item" data-reveal="body">
         <details class="activity-details">
           <summary class="activity-summary">
             <p class="activity-title-zh"><a href="https://mp.weixin.qq.com/s/nZ6iMb04DdmJVH1gqcQziQ" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">共识之路——欧洲共识社区访问</a></p>
@@ -30,9 +30,9 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
       </li>
     </ul>
 
-    <h2 class="activities-category">展览 · Exhibitions</h2>
+    <h2 class="activities-category reveal-item" data-reveal="body">展览 · Exhibitions</h2>
     <ul class="activity-list">
-      <li class="activity-item">
+      <li class="activity-item reveal-item" data-reveal="body">
         <details class="activity-details">
           <summary class="activity-summary">
             <p class="activity-title-zh"><a href="https://mp.weixin.qq.com/s/u1tmkgwR9eMbvUOTm3Vpeg" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">池化：普罗托邦研究文献展</a></p>
@@ -46,9 +46,9 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
       </li>
     </ul>
 
-    <h2 class="activities-category">沙龙 · Salons</h2>
+    <h2 class="activities-category reveal-item" data-reveal="body">沙龙 · Salons</h2>
     <ul class="activity-list">
-      <li class="activity-item">
+      <li class="activity-item reveal-item" data-reveal="body">
         <details class="activity-details">
           <summary class="activity-summary">
             <p class="activity-title-zh"><a href="https://mp.weixin.qq.com/s/UEOVT1x8RMnF6O9Um6-yYw" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">浮城圆桌：知合 NEXUS 上海年聚系列沙龙</a></p>
@@ -60,7 +60,7 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
           </div>
         </details>
       </li>
-      <li class="activity-item">
+      <li class="activity-item reveal-item" data-reveal="body">
         <details class="activity-details">
           <summary class="activity-summary">
             <p class="activity-title-zh"><a href="https://mp.weixin.qq.com/s/bkq3axmQ8wcUPfhaXpjLiQ" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">In-between 共居生活系列沙龙</a></p>

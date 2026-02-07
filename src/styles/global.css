@@ -203,6 +203,75 @@ html {
 }
 .container--wide { max-width: 1440px; }
 
+/* 滚动触发的渐显：初始隐藏、向下偏移，进入视口后一次触发（About / Projects / Activities / Resources） */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-item[data-reveal="title"] {
+  transition-delay: 0.05s;
+}
+.reveal-item[data-reveal="body"] {
+  transition-delay: 0.2s;
+}
+.reveal-item[data-reveal="supp"] {
+  transition-delay: 0.35s;
+}
+.reveal-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-item {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* 图片悬停：蒙版 + 居中提示文字，仅 hover 触发 */
+.img-hover-wrap {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+.img-hover-wrap .img-hover-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.28);
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+.img-hover-wrap .img-hover-caption {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, calc(-50% + 8px));
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1), transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  color: #fff;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.img-hover-wrap:hover .img-hover-overlay {
+  opacity: 1;
+}
+.img-hover-wrap:hover .img-hover-caption {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .img-hover-wrap .img-hover-overlay,
+  .img-hover-wrap .img-hover-caption {
+    transition: none;
+  }
+}
+
 /* Utility */
 .sr-only {
   position: absolute;
