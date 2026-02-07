@@ -15,6 +15,8 @@ export interface ForthcomingArticle {
   placeholderBody?: string;
   /** 文章页内展示的图片（如 706 余烬派对海报） */
   articleImage?: string;
+  /** 列表页该卡片下方全宽展示的图片 */
+  imageBelow?: string;
 }
 
 export const forthcomingArticles: ForthcomingArticle[] = [
@@ -25,6 +27,7 @@ export const forthcomingArticles: ForthcomingArticle[] = [
     status: '南开大学，2025.',
     placeholderBody: '本文为毕业论文，暂时不对外发布和公开。文章正在修改撰写为书籍，如有兴趣后续请联系我阅读/修改。',
     articleImage: '/706-ember-camp.png',
+    imageBelow: '/706-ember-camp.png',
   },
   {
     slug: 'collective-and-individual-co-living',
