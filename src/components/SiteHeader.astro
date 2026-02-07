@@ -157,18 +157,24 @@ const nav = [
       flex-shrink: 0;
     }
     .nav-links {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
       width: 100%;
       margin-left: 0;
       margin-top: 0.5rem;
       padding-top: 0.5rem;
       border-top: 1px solid var(--color-mist);
-      gap: 0.35rem;
-      flex-wrap: wrap;
+      gap: 0.25rem;
       flex-shrink: 0;
       min-width: 0;
     }
+    .nav-links li {
+      display: block;
+    }
     .nav-links a {
-      padding: 0.25rem 0.45rem;
+      display: block;
+      padding: 0.3rem 0;
       font-size: 0.8125rem;
     }
   }
