@@ -32,7 +32,13 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
         </div>
       </div>
       <div class="hero-colors">
-        <h2 class="story-heading">Colors</h2>
+        <h2 class="story-heading story-heading--colors">
+          Colors
+          <span class="color-swatches" aria-hidden="true">
+            <span class="swatch swatch-glacier" title="冰原蓝"></span>
+            <span class="swatch swatch-rain" title="雨树绿"></span>
+          </span>
+        </h2>
         <div class="story-body">
           <p class="story-para" lang="zh">在初春到临之前，在清道的雨树下，我看到了世界上最耀眼的绿色。午后他们总说，「我们回香巴拉吧」，但我知道的香巴拉从来不在那里，香巴拉只在我的心中，在那棵雨树之下。那一刻我明白，我的生命中增加了另一种颜色——那棵雨树的绿色。锋利而冷峻的冰原蓝色，参天耀眼的绿色，冰河与雨树，是我生命的颜色。</p>
           <p class="story-para story-para-en" lang="en">Just before early spring arrived, beneath the rain trees along the street, I saw the most dazzling green in the world. In the afternoons they would say, "Let's go back to Shambhala," yet the Shambhala I know has never been there. It lives within me, beneath that rain tree. In that moment, I realized my life had gained another color—the green of that rain tree. Sharp and austere glacial blue, towering and radiant green—glaciers and rain trees are the colors of my life.</p>
@@ -92,11 +98,26 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
     align-items: flex-start;
     justify-content: flex-end;
     padding-bottom: clamp(5rem, 18vw, 12rem);
+    /* 首屏纹理再退一步，让名字成为焦点 */
+    background:
+      radial-gradient(
+        ellipse 70% 55% at 18% 78%,
+        color-mix(in srgb, var(--color-bg) 92%, transparent) 0%,
+        transparent 70%
+      );
   }
   .hero-content {
     position: relative;
     cursor: default;
     width: 100%;
+    max-width: 34rem;
+    padding: 1.25rem 1.35rem 1.35rem;
+    margin-left: -0.35rem;
+    border-radius: 2px;
+    background: var(--panel-wash);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-mist) 65%, transparent);
   }
   .hero-below {
     display: flex;
@@ -108,10 +129,20 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
   .hero-story {
     margin-left: auto;
     text-align: right;
-    max-width: 28rem;
+    max-width: 30rem;
+    padding: 1.15rem 1.25rem;
+    background: var(--panel-wash);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-right: 2px solid var(--color-rain-tree);
   }
   .hero-colors {
-    max-width: 28rem;
+    max-width: 30rem;
+    padding: 1.15rem 1.25rem;
+    background: var(--panel-wash);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-left: 2px solid var(--color-glacier);
   }
   .hero-story .story-heading,
   .hero-story .story-body,
@@ -143,9 +174,32 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
     margin: 0 0 0.75rem;
     line-height: 1.2;
   }
+  .story-heading--colors {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+  .color-swatches {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .swatch {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-text) 8%, transparent);
+  }
+  .swatch-glacier {
+    background: var(--color-glacier);
+  }
+  .swatch-rain {
+    background: var(--color-rain-tree);
+  }
   .story-body {
     font-size: 0.9375rem;
-    line-height: 1.7;
+    line-height: 1.75;
     color: var(--color-text-muted);
     text-align: justify;
   }
@@ -157,6 +211,7 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
   }
   .story-para-en {
     color: var(--color-text-soft);
+    font-size: 0.9em;
   }
   .hero-default {
     transition: opacity 0.65s ease;
@@ -166,9 +221,9 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
   }
   .hero-hover {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 1.25rem;
+    left: 1.35rem;
+    right: 1.35rem;
     opacity: 0;
     transition: opacity 0.65s ease;
     pointer-events: none;
@@ -179,42 +234,43 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
     opacity: 1;
   }
   .hero-hover .hero-hover-zh {
-    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-size: clamp(1.45rem, 3.4vw, 1.9rem);
     font-weight: 500;
     color: var(--color-text);
-    line-height: 1.35;
-    margin: 0 0 0.35rem;
+    line-height: 1.4;
+    margin: 0 0 0.4rem;
     letter-spacing: -0.02em;
   }
   .hero-hover .hero-hover-en {
-    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-size: clamp(1rem, 2.2vw, 1.15rem);
     font-weight: 500;
     color: var(--color-text-muted);
-    line-height: 1.35;
+    line-height: 1.5;
     margin: 0;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
   }
   .site-name {
-    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-size: clamp(2rem, 4.5vw, 2.65rem);
     font-weight: 600;
     letter-spacing: -0.02em;
     color: var(--color-text);
-    text-shadow: 0 0.15rem 0.45rem rgba(0, 0, 0, 0.03);
-    margin: 0 0 0.5rem;
-    line-height: 1.2;
+    margin: 0 0 0.55rem;
+    line-height: 1.15;
   }
   .home-intro {
-    font-size: 0.9375rem;
+    font-size: 1rem;
     line-height: 1.7;
     color: var(--color-text-muted);
-    margin: 0 0 2.25rem;
+    margin: 0;
     max-width: 28rem;
   }
   .home-intro .intro-zh {
     margin-bottom: 0.35rem;
+    color: var(--color-text);
   }
   .home-intro .intro-en {
     color: var(--color-text-soft);
+    font-size: 0.94em;
   }
   /* 首屏入场：名字 → 中文 → 英文，错开淡入上移，只播一次 */
   html.js-reveal .hero-enter {
@@ -262,20 +318,29 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
   }
   @media (max-width: 768px) {
     .hero {
-      padding-bottom: 15rem;
+      padding-bottom: 10rem;
       min-width: 0;
     }
     .hero-content {
       min-width: 0;
+      margin-left: 0;
+      padding: 1rem 1.05rem 1.1rem;
+      max-width: 100%;
+    }
+    .hero-hover {
+      top: 1rem;
+      left: 1.05rem;
+      right: 1.05rem;
     }
     .hero-below {
-      gap: 3rem;
-      padding-top: 3rem;
+      gap: 2.25rem;
+      padding-top: 2.5rem;
       min-width: 0;
     }
     .hero-story,
     .hero-colors {
       max-width: 100%;
+      padding: 1rem;
     }
   }
 </style>

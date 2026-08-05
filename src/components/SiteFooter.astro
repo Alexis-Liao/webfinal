@@ -69,23 +69,27 @@
     max-width: 20rem;
     object-fit: contain;
     object-position: left bottom;
-    mix-blend-mode: lighten;
+    mix-blend-mode: multiply;
+    opacity: 0.9;
   }
   @media (prefers-color-scheme: dark) {
     .contact-river-tree {
-      mix-blend-mode: lighten;
+      mix-blend-mode: screen;
+      opacity: 0.95;
     }
   }
   .site-footer-overlay {
     position: relative;
     width: 100%;
-    background: rgba(255, 255, 255, 0.78);
-    padding: 2.5rem 0;
-    border-top: 1px solid var(--color-mist);
+    background: color-mix(in srgb, var(--color-surface) 88%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 2.75rem 0;
+    border-top: 1px solid color-mix(in srgb, var(--color-mist) 85%, transparent);
   }
   @media (prefers-color-scheme: dark) {
     .site-footer-overlay {
-      background: rgba(34, 40, 38, 0.85);
+      background: color-mix(in srgb, var(--color-surface) 90%, transparent);
     }
   }
   .contact-container {
