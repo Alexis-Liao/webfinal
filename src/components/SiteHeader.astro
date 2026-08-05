@@ -26,14 +26,7 @@ const nav = [
           <li>
             <a
               href={n.href}
-              class:list={[
-                {
-                  active:
-                    current === n.href ||
-                    current === `${n.href}/` ||
-                    (n.href !== '/' && current.startsWith(`${n.href}/`)),
-                },
-              ]}
+              class:list={[current === n.href || (n.href !== '/' && current.startsWith(n.href)) && 'active']}
             >
               {n.label}
             </a>
@@ -48,23 +41,8 @@ const nav = [
   .site-header {
     position: relative;
     z-index: 1;
-    padding: 1.5rem 0 1.1rem;
-    border-bottom: 1px solid transparent;
-    background: linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--color-bg) 88%, transparent) 0%,
-      color-mix(in srgb, var(--color-bg) 55%, transparent) 70%,
-      transparent 100%
-    );
-  }
-  .site-header::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 1px;
-    background: color-mix(in srgb, var(--color-mist) 80%, transparent);
+    padding: 1.75rem 0 1.25rem;
+    border-bottom: 1px solid var(--color-mist);
   }
   .nav {
     display: flex;
@@ -111,13 +89,11 @@ const nav = [
     display: block;
     object-fit: cover;
     object-position: center;
-    mix-blend-mode: multiply;
-    opacity: 0.92;
+    mix-blend-mode: lighten;
   }
   @media (prefers-color-scheme: dark) {
     .nav-home-logo {
-      mix-blend-mode: screen;
-      opacity: 0.95;
+      mix-blend-mode: lighten;
     }
   }
   .nav-links {

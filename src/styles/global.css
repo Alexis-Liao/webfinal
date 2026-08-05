@@ -19,55 +19,42 @@
   --color-cool-green: #4a6b5c;
   --color-soft-teal: #5a7a6e;
 
-  /* Life colors: 冰河蓝 · 雨树绿 */
-  --color-glacier: #5b7c8f;
-  --color-glacier-soft: rgba(91, 124, 143, 0.14);
-  --color-rain-tree: #3f7a5c;
-  --color-rain-tree-soft: rgba(63, 122, 92, 0.14);
-
-  /* Surfaces & text — slightly clearer contrast over texture */
-  --color-bg: #f3f6f4;
-  --color-surface: #f7faf8;
+  /* Surfaces & text */
+  --color-bg: #f6f8f7;
+  --color-surface: #fafbfa;
   --color-surface-elevated: #ffffff;
-  --color-mist: #dfe6e2;
-  --color-text: #24302c;
-  --color-text-muted: #4f5c56;
-  --color-text-soft: #6e7c74;
+  --color-mist: #e8ecea;
+  --color-text: #2c3532;
+  --color-text-muted: #5a6560;
+  --color-text-soft: #7d8a84;
 
-  /* Accent: rain-tree leaning green */
-  --color-accent: #3f7a5c;
-  --color-accent-hover: #32634b;
-  --color-accent-soft: rgba(63, 122, 92, 0.14);
+  /* Accent: low-saturation cyan-green */
+  --color-accent: #4a7c6e;
+  --color-accent-hover: #3d6b5e;
+  --color-accent-soft: rgba(74, 124, 110, 0.15);
+  /* Logo / bold emphasis (cyan-green #75B4A9) */
   --color-logo-green: #75B4A9;
 
   /* Mycelium background */
-  --mycelium-stroke: rgba(45, 90, 90, 0.07);
-  --mycelium-stroke-strong: rgba(45, 90, 90, 0.11);
-  --texture-wash: rgba(243, 246, 244, 0.78);
-  --panel-wash: rgba(247, 250, 248, 0.72);
+  --mycelium-stroke: rgba(45, 90, 90, 0.08);
+  --mycelium-stroke-strong: rgba(45, 90, 90, 0.12);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-bg: #161b19;
-    --color-surface: #1e2421;
-    --color-surface-elevated: #262c29;
-    --color-mist: #323a36;
-    --color-text: #e6ece9;
-    --color-text-muted: #a3afa7;
-    --color-text-soft: #7a8780;
-    --color-glacier: #7a9aab;
-    --color-glacier-soft: rgba(122, 154, 171, 0.18);
-    --color-rain-tree: #6b9d8e;
-    --color-rain-tree-soft: rgba(107, 157, 142, 0.18);
+    --color-bg: #1a1f1d;
+    --color-surface: #222826;
+    --color-surface-elevated: #2a302e;
+    --color-mist: #343b38;
+    --color-text: #e2e8e5;
+    --color-text-muted: #9ca89f;
+    --color-text-soft: #6b7a70;
     --color-accent: #6b9d8e;
     --color-accent-hover: #7dad9e;
-    --color-accent-soft: rgba(107, 157, 142, 0.22);
+    --color-accent-soft: rgba(107, 157, 142, 0.2);
     --color-logo-green: #8fc4bb;
-    --mycelium-stroke: rgba(180, 200, 195, 0.05);
-    --mycelium-stroke-strong: rgba(180, 200, 195, 0.09);
-    --texture-wash: rgba(22, 27, 25, 0.68);
-    --panel-wash: rgba(30, 36, 33, 0.62);
+    --mycelium-stroke: rgba(180, 200, 195, 0.06);
+    --mycelium-stroke-strong: rgba(180, 200, 195, 0.1);
   }
 }
 
@@ -86,13 +73,10 @@ body {
   line-height: 1.7;
   color: var(--color-text);
   background-color: var(--color-bg);
-  /* 纹理退一层：浅色 wash 盖在 mycelium 上，正文更易读 */
-  background-image:
-    linear-gradient(var(--texture-wash), var(--texture-wash)),
-    url('/mycelium-texture.png');
-  background-repeat: no-repeat, repeat;
-  background-attachment: fixed, fixed;
-  background-size: auto, 560px auto;
+  background-image: url('/mycelium-texture.png');
+  background-repeat: repeat;
+  background-attachment: fixed;
+  background-size: 480px auto;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
   max-width: 100%;
@@ -218,13 +202,13 @@ html {
 }
 .container {
   width: 100%;
-  max-width: 1120px;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
-.container--wide { max-width: 1320px; }
+.container--wide { max-width: 1440px; }
 @media (max-width: 768px) {
   html {
     overflow-x: hidden;
