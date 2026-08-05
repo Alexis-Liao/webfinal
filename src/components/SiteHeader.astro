@@ -105,25 +105,42 @@ const nav = [
     margin-left: auto;
   }
   .nav-links a {
+    position: relative;
     color: var(--color-text-muted);
     font-size: 0.9375rem;
-    padding: 0.35rem 0.75rem;
-    border-radius: 9999px;
+    padding: 0.35rem 0;
     text-decoration: none;
-    transition: color 0.2s ease, background-color 0.2s ease;
+    transition: color 0.25s ease;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--color-accent);
+    transform: translateX(-50%) scaleX(0);
+    transform-origin: center;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
   }
   .nav-links a:hover {
-    color: #fff;
-    background-color: var(--color-accent);
+    color: var(--color-text);
     text-decoration: none;
   }
+  .nav-links a:hover::after,
+  .nav-links a.active::after {
+    transform: translateX(-50%) scaleX(1);
+  }
   .nav-links a.active {
-    color: #fff;
-    background-color: var(--color-accent);
+    color: var(--color-text);
     font-weight: 500;
   }
-  .nav-links a.active:hover {
-    background-color: var(--color-accent-hover);
+  @media (prefers-reduced-motion: reduce) {
+    .nav-links a::after {
+      transition: none;
+    }
   }
   @media (max-width: 900px) {
     .site-header {
@@ -174,6 +191,16 @@ const nav = [
       display: block;
       padding: 0.35rem 0;
       font-size: 0.875rem;
+    }
+    .nav-links a::after {
+      left: auto;
+      right: 0;
+      transform: scaleX(0);
+      transform-origin: right center;
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      transform: scaleX(1);
     }
   }
 </style>

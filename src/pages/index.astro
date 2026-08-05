@@ -11,10 +11,10 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
     <section class="hero">
       <div class="hero-content">
         <div class="hero-default">
-          <h1 class="site-name">Alexis 智立</h1>
+          <h1 class="site-name hero-enter" style="--enter-delay: 0ms">Alexis 智立</h1>
           <div class="home-intro">
-            <p class="intro-zh" lang="zh">社区与自组织独立研究者、写作者</p>
-            <p class="intro-en" lang="en">Independent researcher and writer on communities and self-organization</p>
+            <p class="intro-zh hero-enter" lang="zh" style="--enter-delay: 140ms">社区与自组织独立研究者、写作者</p>
+            <p class="intro-en hero-enter" lang="en" style="--enter-delay: 260ms">Independent researcher and writer on communities and self-organization</p>
           </div>
         </div>
         <div class="hero-hover" aria-hidden="true">
@@ -51,6 +51,14 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
     };
     update();
     window.addEventListener('scroll', update, { passive: true });
+
+    const playEnter = () => heroContent.classList.add('is-entered');
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      playEnter();
+    } else {
+      requestAnimationFrame(() => requestAnimationFrame(playEnter));
+    }
+    window.setTimeout(playEnter, 1200);
   }
   const storyColors = document.querySelectorAll('.hero-story, .hero-colors');
   if (storyColors.length) {
@@ -59,14 +67,20 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('in-view');
-          } else {
-            entry.target.classList.remove('in-view');
+            observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.15, rootMargin: '0px' }
+      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
     );
-    storyColors.forEach((el) => observer.observe(el));
+    storyColors.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.92 && rect.bottom > 0) {
+        el.classList.add('in-view');
+      } else {
+        observer.observe(el);
+      }
+    });
   }
 </script>
 
@@ -104,7 +118,7 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
   .hero-colors .story-heading,
   .hero-colors .story-body {
     opacity: 0;
-    transition: opacity 3s ease;
+    transition: opacity 0.7s ease;
   }
   .hero-story.in-view .story-heading,
   .hero-story.in-view .story-body,
@@ -145,7 +159,7 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
     color: var(--color-text-soft);
   }
   .hero-default {
-    transition: opacity 3s ease;
+    transition: opacity 0.65s ease;
   }
   .hero-content.is-scrolled .hero-default {
     opacity: 0;
@@ -156,7 +170,7 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
     left: 0;
     right: 0;
     opacity: 0;
-    transition: opacity 3s ease;
+    transition: opacity 0.65s ease;
     pointer-events: none;
     max-width: 28rem;
     text-align: left;
@@ -201,6 +215,27 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
   }
   .home-intro .intro-en {
     color: var(--color-text-soft);
+  }
+  /* 首屏入场：名字 → 中文 → 英文，错开淡入上移，只播一次 */
+  html.js-reveal .hero-enter {
+    opacity: 0;
+    transform: translateY(0.7rem);
+  }
+  html.js-reveal .hero-content.is-entered .hero-enter {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--enter-delay, 0ms);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html.js-reveal .hero-enter,
+    html.js-reveal .hero-content.is-entered .hero-enter {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
   }
   .focus-heading {
     font-size: 1rem;

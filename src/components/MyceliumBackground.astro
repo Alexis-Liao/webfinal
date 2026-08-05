@@ -83,6 +83,7 @@ for (const p of points) {
 
 const strokeOpacity = intensity === 'full' ? 0.07 : 0.04;
 const strokeWidth = 0.6;
+const breatheDuration = intensity === 'full' ? 11 : 14;
 ---
 
 {intensity !== 'none' && (
@@ -95,18 +96,26 @@ const strokeWidth = 0.6;
       focusable="false"
     >
       <g class="mycelium-lines">
-        {edges.map((e) => (
-          <line
-            x1={e.x1}
-            y1={e.y1}
-            x2={e.x2}
-            y2={e.y2}
-            stroke="var(--mycelium-stroke-strong)"
-            stroke-width={strokeWidth}
-            stroke-opacity={strokeOpacity}
-            vector-effect="non-scaling-stroke"
-          />
-        ))}
+        {edges.map((e, i) => {
+          const len = Math.hypot(e.x2 - e.x1, e.y2 - e.y1);
+          const dash = Math.max(len, 1);
+          return (
+            <line
+              class="mycelium-line"
+              x1={e.x1}
+              y1={e.y1}
+              x2={e.x2}
+              y2={e.y2}
+              stroke="var(--mycelium-stroke-strong)"
+              stroke-width={strokeWidth}
+              stroke-opacity={strokeOpacity}
+              stroke-dasharray={dash}
+              stroke-dashoffset={0}
+              vector-effect="non-scaling-stroke"
+              style={`--i: ${i}; --len: ${dash}; --breathe-dur: ${breatheDuration}s; --stroke-op: ${strokeOpacity}`}
+            />
+          );
+        })}
       </g>
     </svg>
   </div>
@@ -126,14 +135,28 @@ const strokeWidth = 0.6;
     opacity: 0.75;
     transition: opacity 0.8s ease;
   }
-  /* Optional: very subtle opacity shift on scroll (ignorable) */
+  /* 菌丝呼吸：单线错峰，透明度 + 极轻「收缩」dash */
   @media (prefers-reduced-motion: no-preference) {
     .mycelium-lines {
-      animation: mycelium-breathe 12s ease-in-out infinite;
+      animation: mycelium-group-breathe 16s ease-in-out infinite;
+    }
+    .mycelium-line {
+      animation: mycelium-line-breathe var(--breathe-dur, 11s) ease-in-out infinite;
+      animation-delay: calc(var(--i, 0) * -0.28s);
     }
   }
-  @keyframes mycelium-breathe {
+  @keyframes mycelium-group-breathe {
     0%, 100% { opacity: 1; }
-    50% { opacity: 0.94; }
+    50% { opacity: 0.92; }
+  }
+  @keyframes mycelium-line-breathe {
+    0%, 100% {
+      stroke-opacity: var(--stroke-op, 0.07);
+      stroke-dashoffset: 0;
+    }
+    50% {
+      stroke-opacity: calc(var(--stroke-op, 0.07) * 0.4);
+      stroke-dashoffset: calc(var(--len, 80) * 0.12);
+    }
   }
 </style>
