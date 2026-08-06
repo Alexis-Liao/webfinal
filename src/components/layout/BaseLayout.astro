@@ -1,5 +1,6 @@
 ---
 import MyceliumBackground from '../MyceliumBackground.astro';
+import CursorFollow from '../CursorFollow.astro';
 import SiteHeader from '../SiteHeader.astro';
 import SiteFooter from '../SiteFooter.astro';
 import '../../styles/global.css';
@@ -29,6 +30,7 @@ const { title, description = 'Personal site — research, writing, projects.', m
     </script>
   </head>
   <body>
+    <CursorFollow />
     <MyceliumBackground intensity={mycelium} />
     <SiteHeader />
     <main class={`main ${className}`}>

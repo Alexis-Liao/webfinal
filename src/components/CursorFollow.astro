@@ -1,0 +1,54 @@
+<div id="cursor-dot" aria-hidden="true"></div>
+
+<style is:global>
+  #cursor-dot {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(168, 216, 188, 0.75);
+    box-shadow: 0 0 0 1px rgba(117, 180, 169, 0.25);
+    pointer-events: none;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.15s ease;
+    will-change: transform, left, top;
+  }
+
+  #cursor-dot.is-visible {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
+    #cursor-dot {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const dot = document.getElementById('cursor-dot');
+  if (dot && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    let visible = false;
+
+    const onMove = (e: MouseEvent) => {
+      dot.style.left = `${e.clientX}px`;
+      dot.style.top = `${e.clientY}px`;
+      if (!visible) {
+        dot.classList.add('is-visible');
+        visible = true;
+      }
+    };
+
+    const onLeave = () => {
+      dot.classList.remove('is-visible');
+      visible = false;
+    };
+
+    window.addEventListener('mousemove', onMove, { passive: true });
+    document.documentElement.addEventListener('mouseleave', onLeave);
+  }
+</script>
