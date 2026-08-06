@@ -38,7 +38,11 @@ import { projects } from '../data/projects';
         <li class="project-node reveal-item" data-reveal="body">
           <article>
             <h2>
-              <a href={`/projects/${p.slug}`}>{p.title}</a>
+              {p.href ? (
+                <a href={p.href} target="_blank" rel="noopener noreferrer">{p.title}</a>
+              ) : (
+                <a href={`/projects/${p.slug}`}>{p.title}</a>
+              )}
             </h2>
             {(p.year || (p.tags && p.tags.length)) && (
               <p class="meta">

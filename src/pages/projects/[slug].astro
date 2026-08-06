@@ -25,7 +25,18 @@ const project = projects.find((p) => p.id === id);
   >
     <article class="container reading">
       <header class="project-header">
-        <h1>{project.title}</h1>
+        <h1>
+          {project.href ? (
+            <a href={project.href} target="_blank" rel="noopener noreferrer">{project.title}</a>
+          ) : (
+            project.title
+          )}
+        </h1>
+        {project.href && (
+          <p class="project-site">
+            <a href={project.href} target="_blank" rel="noopener noreferrer">{project.href.replace(/^https?:\/\//, '')}</a>
+          </p>
+        )}
         <p class="project-intro">
           {project.shortDescription}
           {project.descriptionEn && (
@@ -82,6 +93,22 @@ const project = projects.find((p) => p.id === id);
 <style>
   .project-header {
     margin-bottom: 2.5rem;
+  }
+  .project-header h1 a {
+    color: var(--color-text);
+  }
+  .project-header h1 a:hover {
+    color: var(--color-accent);
+  }
+  .project-site {
+    margin: 0 0 0.75rem;
+    font-size: 0.95rem;
+  }
+  .project-site a {
+    color: var(--color-text-soft);
+  }
+  .project-site a:hover {
+    color: var(--color-accent);
   }
   .project-intro {
     color: var(--color-text-muted);
