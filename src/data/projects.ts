@@ -40,15 +40,15 @@ export const projects: Project[] = [
     href: 'https://dweller.live',
   },
   {
-    // English name is a romanization; no official English name was confirmed.
     // References: https://www.gccofficial.org/project and the Youthology introduction above.
     id: 'hehe-university',
     slug: 'hehe-university',
-    title: '合禾联大 · Hehe Lianda',
+    title: '合禾联大 · Harmony academy',
     shortDescription: '走出传统教室，在真实的人与社会中学习。',
     descriptionEn: 'Learning beyond the classroom, through encounters with people and society.',
     longDescriptionZh: '合禾联大以共学与行动研究支持青年探索公益慈善、社会创新和公共生活。通过社科共读、师友对谈、主题参访与田野研习，将学习带入具体处境，在对话与实践中发展公共精神。',
-    longDescriptionEn: 'Hehe brings shared learning and action research into young people’s exploration of philanthropy, social innovation and public life. Reading groups, mentoring conversations, visits and fieldwork connect inquiry with lived experience and public engagement.',
+    longDescriptionEn: 'Harmony academy brings shared learning and action research into young people’s exploration of philanthropy, social innovation and public life. Reading groups, mentoring conversations, visits and fieldwork connect inquiry with lived experience and public engagement.',
+    href: 'https://real-zomia.vercel.app',
     sourceUrl: 'https://www.gccofficial.org/project',
   },
 ];
