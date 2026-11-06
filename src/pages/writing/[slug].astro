@@ -73,6 +73,7 @@ const Content = contentRender?.Content ?? null;
       description={article.sourceLine}
     >
       <div class="container reading">
+        {article.titleEn && <p class="article-meta" lang="en">{article.titleEn}</p>}
         {article.sourceLine && (
           <p class="article-meta">{article.sourceLine}</p>
         )}

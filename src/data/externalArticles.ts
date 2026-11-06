@@ -19,6 +19,15 @@ export interface ExternalArticle {
 
 export const externalArticles: ExternalArticle[] = [
   {
+    slug: 'our-community-is-not-your-thesis',
+    title: '“我们的社区，不是你的论文”',
+    titleEn: '“Our Community Is Not Your Thesis”',
+    url: 'https://mp.weixin.qq.com/s/EWvw9J4L6Ddmzz6uNVwwYw',
+    sourceLine: '河与树 · River and Tree',
+    image: '/our-community-not-your-thesis.png',
+  },
+
+  {
     slug: 'collective-and-individual-co-living',
     title: '集体与个体，在共居中寻找自我主体性',
     titleEn: 'Collective and Individual: Searching for Subjectivity within Co-living',
