@@ -13,11 +13,21 @@ export interface ForthcomingArticle {
   imagePosition?: string;
   /** 点进文章页时显示的说明段落（不对外发布时用） */
   placeholderBody?: string;
+  placeholderBodyEn?: string;
   /** 文章页内展示的图片（如 706 余烬派对海报） */
   articleImage?: string;
 }
 
 export const forthcomingArticles: ForthcomingArticle[] = [
+  {
+    slug: 'producing-community-atmosphere-coliving',
+    titleZh: '生产共同体氛围——共居空间如何区分于合租',
+    titleEn: 'Producing a Sense of Community: How Co-living Spaces Differ from Shared Rentals',
+    status: '中国人民大学，2026 · Renmin University of China',
+    placeholderBody: '本文暂未提供公开原文链接。',
+    placeholderBodyEn: 'A public link to the full text is not yet available.',
+  },
+
   {
     slug: 'consensus-community-reproduction-706',
     titleZh: '共识社区再生产——706青年空间的行动民族志',

@@ -130,6 +130,7 @@ const Content = contentRender?.Content ?? null;
         ) : (
           <p class="article-placeholder-body" lang="zh">本文待刊出，完整内容将在发表后提供。</p>
         )}
+        {article.placeholderBodyEn && <p class="article-placeholder-body" lang="en">{article.placeholderBodyEn}</p>}
         <p class="back-link">
           <a href="/writing">← Back to Writings</a>
         </p>
