@@ -24,9 +24,13 @@ const { title, description = 'Personal site — research, writing, projects.', m
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
     <title>{title}</title>
     <script is:inline>
       document.documentElement.classList.add('js-reveal');
+      window.setTimeout(function () {
+        document.documentElement.classList.remove('js-reveal');
+      }, 2500);
     </script>
   </head>
   <body>

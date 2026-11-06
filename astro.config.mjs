@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://yoursite.com',
+  site: 'https://riverandtree.me',
   trailingSlash: 'ignore',
 });

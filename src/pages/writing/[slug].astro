@@ -1,12 +1,12 @@
 ---
 import BaseLayout from '../../components/layout/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import { getWritingPosts } from '../../data/writing';
 import { externalArticles } from '../../data/externalArticles';
 import { forthcomingArticles } from '../../data/forthcomingArticles';
 import WritingLayout from '../../layouts/WritingLayout.astro';
 
 export async function getStaticPaths() {
-  const mdPosts = await getCollection('writing');
+  const mdPosts = await getWritingPosts();
 
   const mdPaths = mdPosts.map((post) => ({
     params: { slug: post.slug },
@@ -32,7 +32,7 @@ type Props =
   | { type: 'forthcoming'; slug: string };
 
 const props = Astro.props as Props;
-const mdPosts = await getCollection('writing');
+const mdPosts = await getWritingPosts();
 const contentPost = props.type === 'content' ? mdPosts.find((p) => p.id === props.postId) : null;
 const contentRender = contentPost ? await contentPost.render() : null;
 const Content = contentRender?.Content ?? null;
@@ -45,12 +45,6 @@ const Content = contentRender?.Content ?? null;
     pubDate={contentPost.data.pubDate ? new Date(contentPost.data.pubDate) : undefined}
   >
     <Content />
-    <p class="read-full-cta">
-      <a href="#" id="read-full-link">
-        <span lang="zh">阅读完整内容请点击这里</span>
-        <span class="read-full-cta-en" lang="en">Click here to read the full content</span>
-      </a>
-    </p>
     <p class="back-link">
       <a href="/writing">← Back to Writings</a>
     </p>
@@ -87,12 +81,16 @@ const Content = contentRender?.Content ?? null;
             <img src={article.image} alt={article.title} style={article.imagePosition ? { objectPosition: article.imagePosition } : undefined} />
           </figure>
         )}
+        {article.url ? (
         <p class="read-full-cta">
           <a href={article.url} target="_blank" rel="noopener noreferrer">
             <span lang="zh">阅读完整内容请点击这里</span>
             <span class="read-full-cta-en" lang="en">Click here to read the full content</span>
           </a>
         </p>
+        ) : (
+          <p class="article-placeholder-body" lang="zh">内容整理中，敬请期待。欢迎通过页脚联系方式与我交流。</p>
+        )}
         <p class="back-link">
           <a href="/writing">← Back to Writings</a>
         </p>
@@ -127,12 +125,7 @@ const Content = contentRender?.Content ?? null;
         {article.placeholderBody ? (
           <p class="article-placeholder-body">{article.placeholderBody}</p>
         ) : (
-          <p class="read-full-cta">
-            <a href="#">
-              <span lang="zh">阅读完整内容请点击这里</span>
-              <span class="read-full-cta-en" lang="en">Click here to read the full content</span>
-            </a>
-          </p>
+          <p class="article-placeholder-body" lang="zh">本文待刊出，完整内容将在发表后提供。</p>
         )}
         <p class="back-link">
           <a href="/writing">← Back to Writings</a>

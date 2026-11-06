@@ -6,7 +6,7 @@ export interface ExternalArticle {
   slug: string;
   title: string;
   titleEn?: string;
-  url: string;
+  url?: string;
   sourceLine?: string;
   image?: string;
   /** CSS object-position for image (e.g. 'top' to show upper part) */
@@ -53,7 +53,6 @@ export const externalArticles: ExternalArticle[] = [
     slug: 'translated-essays-collection',
     title: '翻译论文合集',
     titleEn: 'Translated Essays Collection',
-    url: '#',
     sourceLine: '河与树，2022-2026',
     image: '/translated-essays-zine.png',
     imagePosition: 'top',

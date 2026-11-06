@@ -1,5 +1,5 @@
 ---
-const current = Astro.url.pathname;
+const current = Astro.url.pathname.replace(/\/$/, '') || '/';
 const nav = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
@@ -26,7 +26,8 @@ const nav = [
           <li>
             <a
               href={n.href}
-              class:list={[current === n.href || (n.href !== '/' && current.startsWith(n.href)) && 'active']}
+              class:list={[{ active: current === n.href || current.startsWith(`${n.href}/`) }]}
+              aria-current={current === n.href ? 'page' : undefined}
             >
               {n.label}
             </a>

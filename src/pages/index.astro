@@ -61,7 +61,7 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
     window.setTimeout(playEnter, 1200);
   }
   const storyColors = document.querySelectorAll('.hero-story, .hero-colors');
-  if (storyColors.length) {
+  if (storyColors.length && 'IntersectionObserver' in window) {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -73,6 +73,8 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
       },
       { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
     );
+    document.documentElement.classList.add('js-story');
+    window.setTimeout(() => document.documentElement.classList.remove('js-story'), 2500);
     storyColors.forEach((el) => {
       const rect = el.getBoundingClientRect();
       if (rect.top < window.innerHeight * 0.92 && rect.bottom > 0) {
@@ -117,8 +119,14 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
   .hero-story .story-body,
   .hero-colors .story-heading,
   .hero-colors .story-body {
-    opacity: 0;
+    opacity: 1;
     transition: opacity 0.7s ease;
+  }
+  html.js-story .hero-story:not(.in-view) .story-heading,
+  html.js-story .hero-story:not(.in-view) .story-body,
+  html.js-story .hero-colors:not(.in-view) .story-heading,
+  html.js-story .hero-colors:not(.in-view) .story-body {
+    opacity: 0;
   }
   .hero-story.in-view .story-heading,
   .hero-story.in-view .story-body,
@@ -127,10 +135,10 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
     opacity: 1;
   }
   @media (prefers-reduced-motion: reduce) {
-    .hero-story .story-heading,
-    .hero-story .story-body,
-    .hero-colors .story-heading,
-    .hero-colors .story-body {
+    html.js-story .hero-story:not(.in-view) .story-heading,
+    html.js-story .hero-story:not(.in-view) .story-body,
+    html.js-story .hero-colors:not(.in-view) .story-heading,
+    html.js-story .hero-colors:not(.in-view) .story-body {
       opacity: 1;
       transition: none;
     }
