@@ -8,12 +8,44 @@ export interface ExternalArticle {
   titleEn?: string;
   url?: string;
   sourceLine?: string;
+  publicationNoteZh?: string;
+  publicationNoteEn?: string;
+  linkLabelZh?: string;
+  linkLabelEn?: string;
   image?: string;
   /** CSS object-position for image (e.g. 'top' to show upper part) */
   imagePosition?: string;
 }
 
 export const externalArticles: ExternalArticle[] = [
+  {
+    slug: 'collective-and-individual-co-living',
+    title: '集体与个体，在共居中寻找自我主体性',
+    titleEn: 'Collective and Individual: Searching for Subjectivity within Co-living',
+    sourceLine: '《四开07：来社区偶遇吧！》 · SIKAI 07',
+    publicationNoteZh: '已发表于《四开07：来社区偶遇吧！》。全文请见纸本刊物。',
+    publicationNoteEn: 'Published in SIKAI 07, the community-themed issue. The full article is available in the print edition.',
+    url: 'https://motatabooks.com/products/四开07-来社区偶遇吧',
+    linkLabelZh: '查看刊物介绍',
+    linkLabelEn: 'About the print edition',
+    image: '/sikai-contact.png',
+    imagePosition: 'top',
+  },
+
+  {
+    slug: 'youth-utopias',
+    title: '消失又重建的青年乌托邦',
+    titleEn: 'Youth Utopias: Disappearing and Rebuilding',
+    sourceLine: '《四开07：来社区偶遇吧！》 · SIKAI 07',
+    publicationNoteZh: '已发表于《四开07：来社区偶遇吧！》。全文请见纸本刊物。',
+    publicationNoteEn: 'Published in SIKAI 07, the community-themed issue. The full article is available in the print edition.',
+    url: 'https://motatabooks.com/products/四开07-来社区偶遇吧',
+    linkLabelZh: '查看刊物介绍',
+    linkLabelEn: 'About the print edition',
+    image: '/sikai-contact.png',
+    imagePosition: 'top',
+  },
+
   {
     slug: 'community-the-60s',
     title: '60年代的社区遗产：生态村、太阳朋克与安那其',

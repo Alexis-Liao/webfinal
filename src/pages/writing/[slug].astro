@@ -81,11 +81,13 @@ const Content = contentRender?.Content ?? null;
             <img src={article.image} alt={article.title} style={article.imagePosition ? { objectPosition: article.imagePosition } : undefined} />
           </figure>
         )}
+        {article.publicationNoteZh && <p lang="zh">{article.publicationNoteZh}</p>}
+        {article.publicationNoteEn && <p lang="en">{article.publicationNoteEn}</p>}
         {article.url ? (
         <p class="read-full-cta">
           <a href={article.url} target="_blank" rel="noopener noreferrer">
-            <span lang="zh">阅读完整内容请点击这里</span>
-            <span class="read-full-cta-en" lang="en">Click here to read the full content</span>
+            <span lang="zh">{article.linkLabelZh ?? '阅读完整内容请点击这里'}</span>
+            <span class="read-full-cta-en" lang="en">{article.linkLabelEn ?? 'Click here to read the full content'}</span>
           </a>
         </p>
         ) : (

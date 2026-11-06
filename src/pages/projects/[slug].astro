@@ -48,31 +48,15 @@ const project = projects.find((p) => p.id === id);
         </p>
       </header>
 
-      <section>
-        <h2>Background</h2>
-        <p>
-          This project page is a placeholder for a fuller description of the
-          background, context, and questions that guide the work. You can expand
-          this section over time as the project develops.
-        </p>
-      </section>
-
-      <section>
-        <h2>Practice</h2>
-        <p>
-          Here you can describe concrete practices, formats, and collaborations
-          that belong to this project: where it happens, who is involved, and
-          how it changes over time.
-        </p>
-      </section>
-
-      <section>
-        <h2>Collaboration</h2>
-        <p>
-          Use this area to note current or potential collaborators, and how
-          others might intersect with this work.
-        </p>
-      </section>
+      {(project.longDescriptionZh || project.longDescriptionEn) && (
+        <section aria-label="About the project">
+          {project.longDescriptionZh && <p lang="zh">{project.longDescriptionZh}</p>}
+          {project.longDescriptionEn && <p lang="en">{project.longDescriptionEn}</p>}
+          {project.sourceUrl && (
+            <p><a href={project.sourceUrl} target="_blank" rel="noopener noreferrer">项目介绍来源 · Project reference</a></p>
+          )}
+        </section>
+      )}
 
       <p class="back-link">
         <a href="/projects">← Back to Projects</a>

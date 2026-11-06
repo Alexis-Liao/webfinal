@@ -52,7 +52,7 @@ import { projects } from '../data/projects';
                 )}
               </p>
             )}
-            {p.id === 'zhine-nexus' ? (
+            {(p.longDescriptionZh || p.longDescriptionEn) ? (
               <>
                 <p class="protopia-intro-zh">{p.shortDescription}</p>
                 {p.descriptionEn && (

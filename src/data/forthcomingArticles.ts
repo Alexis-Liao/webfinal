@@ -28,20 +28,4 @@ export const forthcomingArticles: ForthcomingArticle[] = [
     imagePosition: 'top',
     articleImage: '/706-ember-camp.png',
   },
-  {
-    slug: 'collective-and-individual-co-living',
-    titleZh: '集体与个体，在共居中寻找自我主体性',
-    titleEn: 'Collective and Individual: Searching for Subjectivity within Co-living',
-    status: '《四开》（待刊出）',
-    image: '/sikai-contact.png',
-    imagePosition: 'top',
-  },
-  {
-    slug: 'youth-utopias',
-    titleZh: '消失又重建的青年乌托邦',
-    titleEn: 'Youth Utopias: Disappearing and Rebuilding',
-    status: '《四开》（待刊出）',
-    image: '/sikai-contact.png',
-    imagePosition: 'top',
-  },
 ];
