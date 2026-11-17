@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes, viewport-fit=cover">
+  <meta name="theme-color" content="#8f916d">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="description" content="芃麦计划《行动手册 2027》移动端互动翻页版">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="芃麦计划 · 行动手册 2027">
+  <meta property="og:description" content="左右滑动，像翻书一样阅读芃麦计划行动手册。">
+  <meta property="og:url" content="https://riverandtree.me/handbook/">
+  <meta property="og:image" content="https://riverandtree.me/handbook/assets/pages/page-01.jpg">
+  <link rel="canonical" href="https://riverandtree.me/handbook/">
+  <title>芃麦计划 · 行动手册 2027</title>
+  <link rel="preload" as="image" href="assets/pages/page-01.jpg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="reader" aria-label="芃麦计划行动手册阅读器">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">芃</span>
+        <div>
+          <h1>芃麦计划</h1>
+          <p>行动手册 2027</p>
+        </div>
+      </div>
+      <button class="icon-button" id="helpButton" type="button" aria-label="查看阅读提示">?</button>
+    </header>
+
+    <section class="book-area" id="bookArea" aria-live="polite">
+      <div class="book-shadow" aria-hidden="true"></div>
+      <div class="page" id="page">
+        <img id="pageImage" src="assets/pages/page-01.jpg" alt="第 1 页，共 16 页" draggable="false">
+        <span class="page-sheen" aria-hidden="true"></span>
+      </div>
+      <button class="tap-zone tap-prev" id="tapPrev" type="button" aria-label="上一页"></button>
+      <button class="tap-zone tap-next" id="tapNext" type="button" aria-label="下一页"></button>
+      <div class="swipe-hint" id="swipeHint" aria-hidden="true">
+        <span>←</span> 左右滑动翻页 <span>→</span>
+      </div>
+    </section>
+
+    <nav class="controls" aria-label="翻页控制">
+      <button class="round-button" id="prevButton" type="button" aria-label="上一页">‹</button>
+      <label class="progress-wrap" aria-label="阅读进度">
+        <span class="page-count"><strong id="currentPage">1</strong><span>/ 16</span></span>
+        <input id="pageSlider" type="range" min="1" max="16" value="1" step="1" aria-label="跳转页码">
+      </label>
+      <button class="round-button" id="nextButton" type="button" aria-label="下一页">›</button>
+      <button class="zoom-button" id="zoomButton" type="button" aria-label="放大当前页">
+        <span aria-hidden="true">＋</span> 放大
+      </button>
+    </nav>
+  </main>
+
+  <div class="modal" id="zoomModal" role="dialog" aria-modal="true" aria-label="放大阅读" hidden>
+    <button class="modal-close" id="zoomClose" type="button" aria-label="关闭放大阅读">×</button>
+    <div class="zoom-scroller" id="zoomScroller">
+      <img id="zoomImage" alt="放大的当前页面" draggable="false">
+    </div>
+  </div>
+
+  <div class="modal help-modal" id="helpModal" role="dialog" aria-modal="true" aria-label="阅读提示" hidden>
+    <div class="help-card">
+      <button class="modal-close help-close" id="helpClose" type="button" aria-label="关闭阅读提示">×</button>
+      <span class="help-mark" aria-hidden="true">芃</span>
+      <h2>像翻书一样阅读</h2>
+      <ul>
+        <li>向左滑，或点击页面右侧：下一页</li>
+        <li>向右滑，或点击页面左侧：上一页</li>
+        <li>点击“放大”：查看细节与小字</li>
+        <li>拖动底部进度条：快速跳页</li>
+      </ul>
+      <button class="primary-button" id="startReading" type="button">开始阅读</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
