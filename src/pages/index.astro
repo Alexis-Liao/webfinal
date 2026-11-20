@@ -24,18 +24,18 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
       </div>
     </section>
     <section class="hero-below">
-      <div class="hero-story">
-        <h2 class="story-heading">Story</h2>
+      <div class="hero-story reveal-item" data-reveal="body">
+        <h2 class="story-heading"><span lang="zh">故事</span> · Story</h2>
         <div class="story-body">
           <p class="story-para" lang="zh">蘑菇有两个部分。在地上，伞状的蘑菇体称为子实体。在地下，真菌构建了一个复杂的地下网络，被称为「菌丝网络」或「真菌地毯」。这种网络能够连接不同植物根系，促进养分和信息的共享，形成一种生态互助的关系。如果说城市和农村是人类所处的森林，那么有机的人类社区，就是森林中的子实体。秉承菌丝网络的精神，我喜欢那些自下而上的，有生命力的实践方式。</p>
           <p class="story-para story-para-en" lang="en">Mushrooms have two parts. Above the ground, the cap-shaped body is called the fruiting body. Below the ground, fungi build a complex subterranean network known as the mycelial network, or the fungal mat. This network connects the roots of different plants, enabling the sharing of nutrients and information, and fostering a form of ecological mutual support. If cities and rural areas are the forests humans inhabit, then organic human communities are the fruiting bodies within that forest. Guided by the spirit of the mycelial network, I'm drawn to practices that grow from the ground up and carry a sense of life and vitality.</p>
         </div>
       </div>
-      <div class="hero-colors">
-        <h2 class="story-heading">Colors</h2>
+      <div class="hero-colors reveal-item" data-reveal="body">
+        <h2 class="story-heading"><span lang="zh">颜色</span> · Colors</h2>
         <div class="story-body">
           <p class="story-para" lang="zh">在初春到临之前，在清道的雨树下，我看到了世界上最耀眼的绿色。午后他们总说，「我们回香巴拉吧」，但我知道的香巴拉从来不在那里，香巴拉只在我的心中，在那棵雨树之下。那一刻我明白，我的生命中增加了另一种颜色——那棵雨树的绿色。锋利而冷峻的冰原蓝色，参天耀眼的绿色，冰河与雨树，是我生命的颜色。</p>
-          <p class="story-para story-para-en" lang="en">Just before early spring arrived, beneath the rain trees along the street, I saw the most dazzling green in the world. In the afternoons they would say, "Let's go back to Shambhala," yet the Shambhala I know has never been there. It lives within me, beneath that rain tree. In that moment, I realized my life had gained another color—the green of that rain tree. Sharp and austere glacial blue, towering and radiant green—glaciers and rain trees are the colors of my life.</p>
+          <p class="story-para story-para-en" lang="en">Just before early spring arrived, beneath a rain tree in Chiang Dao, I saw the most dazzling green in the world. In the afternoons they would say, "Let's go back to Shambhala," yet the Shambhala I know has never been there. It lives within me, beneath that rain tree. In that moment, I realized my life had gained another color—the green of that rain tree. The sharp, austere blue of ice fields and the dazzling green of towering rain trees—glacial rivers and rain trees are the colors of my life.</p>
         </div>
       </div>
     </section>
@@ -43,52 +43,31 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
 </BaseLayout>
 
 <script>
-  const heroContent = document.querySelector('.hero-content');
+  const heroContent = document.querySelector<HTMLElement>('.hero-content');
   if (heroContent) {
-    const threshold = 80;
+    let frame = 0;
+    let scrolled = false;
     const update = () => {
-      heroContent.classList.toggle('is-scrolled', window.scrollY > threshold);
+      frame = 0;
+      // Separate enter/leave thresholds prevent flicker near the boundary.
+      const next = window.scrollY > (scrolled ? 56 : 104);
+      if (next !== scrolled) {
+        scrolled = next;
+        heroContent.classList.toggle('is-scrolled', scrolled);
+      }
     };
     update();
-    window.addEventListener('scroll', update, { passive: true });
-
-    const playEnter = () => heroContent.classList.add('is-entered');
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      playEnter();
-    } else {
-      requestAnimationFrame(() => requestAnimationFrame(playEnter));
-    }
-    window.setTimeout(playEnter, 1200);
-  }
-  const storyColors = document.querySelectorAll('.hero-story, .hero-colors');
-  if (storyColors.length && 'IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in-view');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
-    );
-    document.documentElement.classList.add('js-story');
-    window.setTimeout(() => document.documentElement.classList.remove('js-story'), 2500);
-    storyColors.forEach((el) => {
-      const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight * 0.92 && rect.bottom > 0) {
-        el.classList.add('in-view');
-      } else {
-        observer.observe(el);
-      }
-    });
+    window.addEventListener('scroll', () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    }, { passive: true });
+    window.addEventListener('pageshow', update);
   }
 </script>
 
 <style>
   .hero {
     min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -96,6 +75,7 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
     padding-bottom: clamp(5rem, 18vw, 12rem);
   }
   .hero-content {
+    display: grid;
     position: relative;
     cursor: default;
     width: 100%;
@@ -114,34 +94,6 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
   }
   .hero-colors {
     max-width: 28rem;
-  }
-  .hero-story .story-heading,
-  .hero-story .story-body,
-  .hero-colors .story-heading,
-  .hero-colors .story-body {
-    opacity: 1;
-    transition: opacity 0.7s ease;
-  }
-  html.js-story .hero-story:not(.in-view) .story-heading,
-  html.js-story .hero-story:not(.in-view) .story-body,
-  html.js-story .hero-colors:not(.in-view) .story-heading,
-  html.js-story .hero-colors:not(.in-view) .story-body {
-    opacity: 0;
-  }
-  .hero-story.in-view .story-heading,
-  .hero-story.in-view .story-body,
-  .hero-colors.in-view .story-heading,
-  .hero-colors.in-view .story-body {
-    opacity: 1;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    html.js-story .hero-story:not(.in-view) .story-heading,
-    html.js-story .hero-story:not(.in-view) .story-body,
-    html.js-story .hero-colors:not(.in-view) .story-heading,
-    html.js-story .hero-colors:not(.in-view) .story-body {
-      opacity: 1;
-      transition: none;
-    }
   }
   .story-heading {
     font-size: clamp(1.75rem, 4vw, 2.25rem);
@@ -167,24 +119,28 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
     color: var(--color-text-soft);
   }
   .hero-default {
-    transition: opacity 0.65s ease;
+    grid-area: 1 / 1;
+    align-self: start;
+    transition: opacity 0.65s ease, transform 0.8s var(--ease-out);
   }
   .hero-content.is-scrolled .hero-default {
     opacity: 0;
+    transform: translateY(-8px);
   }
   .hero-hover {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+    grid-area: 1 / 1;
+    align-self: start;
+    min-width: 0;
     opacity: 0;
-    transition: opacity 0.65s ease;
+    transform: translateY(8px);
+    transition: opacity 0.65s ease, transform 0.8s var(--ease-out);
     pointer-events: none;
     max-width: 28rem;
     text-align: left;
   }
   .hero-content.is-scrolled .hero-hover {
     opacity: 1;
+    transform: translateY(0);
   }
   .hero-hover .hero-hover-zh {
     font-size: clamp(1.75rem, 4vw, 2.25rem);
@@ -224,25 +180,22 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
   .home-intro .intro-en {
     color: var(--color-text-soft);
   }
-  /* 首屏入场：名字 → 中文 → 英文，错开淡入上移，只播一次 */
-  html.js-reveal .hero-enter {
-    opacity: 0;
-    transform: translateY(0.7rem);
+  /* CSS entrance also works without JavaScript; never hide content on a timer. */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-enter {
+      animation: hero-enter 0.85s var(--ease-out) both;
+      animation-delay: var(--enter-delay, 0ms);
+    }
   }
-  html.js-reveal .hero-content.is-entered .hero-enter {
-    opacity: 1;
-    transform: translateY(0);
-    transition:
-      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-    transition-delay: var(--enter-delay, 0ms);
+  @keyframes hero-enter {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
   }
   @media (prefers-reduced-motion: reduce) {
-    html.js-reveal .hero-enter,
-    html.js-reveal .hero-content.is-entered .hero-enter {
-      opacity: 1;
-      transform: none;
+    .hero-content .hero-default, .hero-content .hero-hover,
+    .hero-content.is-scrolled .hero-default, .hero-content.is-scrolled .hero-hover {
       transition: none;
+      transform: none;
     }
   }
   .focus-heading {

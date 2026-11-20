@@ -53,11 +53,11 @@ const cards: CardItem[] = [
   mycelium="subtle"
 >
   <header class="writing-index-header container">
-    <h1>Writings</h1>
+    <h1 class="reveal-item" data-reveal="title">Writings</h1>
   </header>
   <div class="writing-cards container">
     {cards.map((card) => (
-      <a href={card.href} class="writing-card">
+      <a href={card.href} class="writing-card reveal-item" data-reveal="body">
         <div class="writing-card-text">
           <span class="writing-card-title">{card.title}</span>
           {card.subtitle && <span class="writing-card-subtitle">{card.subtitle}</span>}
@@ -102,9 +102,11 @@ const cards: CardItem[] = [
     overflow: hidden;
     text-decoration: none;
     color: inherit;
-    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    transition: opacity 0.7s var(--ease-out), transform 0.85s var(--ease-out),
+      box-shadow 0.25s ease, border-color 0.25s ease;
   }
-  .writing-card:hover {
+  .writing-card:hover,
+  .writing-card:focus-visible {
     border-color: var(--color-text-soft);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   }
@@ -153,7 +155,14 @@ const cards: CardItem[] = [
     height: 100%;
     display: block;
     object-fit: cover;
+    transition: transform 0.8s var(--ease-out);
     object-position: center;
+  }
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .writing-card:hover .writing-card-image { transform: scale(1.035); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .writing-card, .writing-card-image { transition: none; }
   }
   .writing-card-image-placeholder {
     width: 100%;

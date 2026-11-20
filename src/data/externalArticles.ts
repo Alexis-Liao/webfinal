@@ -44,7 +44,7 @@ export const externalArticles: ExternalArticle[] = [
   {
     slug: 'youth-utopias',
     title: '消失又重建的青年乌托邦',
-    titleEn: 'Youth Utopias: Disappearing and Rebuilding',
+    titleEn: 'Youth Utopias: Lost and Rebuilt',
     sourceLine: '《四开07：来社区偶遇吧！》 · SIKAI 07',
     publicationNoteZh: '已发表于《四开07：来社区偶遇吧！》。全文请见纸本刊物。',
     publicationNoteEn: 'Published in SIKAI 07, the community-themed issue. The full article is available in the print edition.',
@@ -84,7 +84,7 @@ export const externalArticles: ExternalArticle[] = [
   {
     slug: '706-coliving-report-2025',
     title: '2025共居生活洞察报告',
-    titleEn: '2025 China Coliving research report',
+    titleEn: '2025 China Coliving Research Report',
     url: '/706-coliving-report-2025.pdf',
     sourceLine: '706青年空间，2025',
     image: '/coliving-report-2025.png',

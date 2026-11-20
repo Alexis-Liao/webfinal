@@ -22,7 +22,7 @@ export const forthcomingArticles: ForthcomingArticle[] = [
   {
     slug: 'producing-community-atmosphere-coliving',
     titleZh: '生产共同体氛围——共居空间如何区分于合租',
-    titleEn: 'Producing a Sense of Community: How Co-living Spaces Differ from Shared Rentals',
+    titleEn: 'Producing an Atmosphere of Community: How Co-living Spaces Differ from Shared Rentals',
     status: '中国人民大学，2026 · Renmin University of China',
     placeholderBody: '本文暂未提供公开原文链接。',
     placeholderBodyEn: 'A public link to the full text is not yet available.',
@@ -31,9 +31,10 @@ export const forthcomingArticles: ForthcomingArticle[] = [
   {
     slug: 'consensus-community-reproduction-706',
     titleZh: '共识社区再生产——706青年空间的行动民族志',
-    titleEn: 'Reproducing Community by Consensus: An Action Ethnography of 706 Youth Space',
-    status: '南开大学，2025.',
+    titleEn: 'The Reproduction of a Consensus-Based Community: An Action Ethnography of 706 Youth Space',
+    status: '南开大学 · Nankai University, 2025',
     placeholderBody: '本文为毕业论文，暂时不对外发布和公开。文章正在修改撰写为书籍，如有兴趣后续请联系我阅读/修改。',
+    placeholderBodyEn: 'This thesis is not currently available to the public. I am revising it into a book. If you are interested in reading the draft or offering feedback, please get in touch.',
     image: '/706-ember-camp.png',
     imagePosition: 'top',
     articleImage: '/706-ember-camp.png',

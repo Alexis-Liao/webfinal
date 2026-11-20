@@ -70,6 +70,7 @@ const Content = contentRender?.Content ?? null;
   return (
     <WritingLayout
       title={article.title}
+      titleLang="zh"
       description={article.sourceLine}
     >
       <div class="container reading">
@@ -92,7 +93,10 @@ const Content = contentRender?.Content ?? null;
           </a>
         </p>
         ) : (
-          <p class="article-placeholder-body" lang="zh">内容整理中，敬请期待。欢迎通过页脚联系方式与我交流。</p>
+          <>
+            <p class="article-placeholder-body" lang="zh">内容整理中，敬请期待。欢迎通过页脚联系方式与我交流。</p>
+            <p class="article-placeholder-body" lang="en">This collection is being prepared. You are welcome to get in touch using the contact details in the footer.</p>
+          </>
         )}
         <p class="back-link">
           <a href="/writing">← Back to Writings</a>
@@ -115,22 +119,19 @@ const Content = contentRender?.Content ?? null;
   return (
     <WritingLayout
       title={article.titleZh}
+      titleLang="zh"
       description={article.titleEn}
     >
       <div class="container reading">
         <p class="article-meta">{article.status}</p>
-        <p>{article.titleEn}</p>
+        <p lang="en">{article.titleEn}</p>
         {article.articleImage && (
           <figure class="article-full-image">
             <img src={article.articleImage} alt="706 余烬派对 Ember Camp" />
           </figure>
         )}
-        {article.placeholderBody ? (
-          <p class="article-placeholder-body">{article.placeholderBody}</p>
-        ) : (
-          <p class="article-placeholder-body" lang="zh">本文待刊出，完整内容将在发表后提供。</p>
-        )}
-        {article.placeholderBodyEn && <p class="article-placeholder-body" lang="en">{article.placeholderBodyEn}</p>}
+        <p class="article-placeholder-body" lang="zh">{article.placeholderBody ?? '本文待刊出，完整内容将在发表后提供。'}</p>
+        <p class="article-placeholder-body" lang="en">{article.placeholderBodyEn ?? 'This article is forthcoming. The full text will be available after publication.'}</p>
         <p class="back-link">
           <a href="/writing">← Back to Writings</a>
         </p>

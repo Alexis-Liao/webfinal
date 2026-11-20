@@ -12,6 +12,7 @@
 }
 
 :root {
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --font-sans: 'FZ Qing Ke Ben Yue Song', serif;
   /* Primary: deep cyan, forest, cool blue-green */
   --color-deep-cyan: #2d5a5a;
@@ -80,6 +81,10 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
   max-width: 100%;
+}
+@media (prefers-color-scheme: dark) {
+  /* Blend the light texture into the dark surface so pale text stays readable. */
+  body { background-blend-mode: multiply; }
 }
 
 img { max-width: 100%; height: auto; display: block; }
@@ -244,36 +249,21 @@ html {
   }
 }
 
-/* 滚动渐显：仅在启用 JS 时隐藏；无 JS / 失败时保持可见，避免空页 */
+/* Reveal only after observation is ready. Offscreen content keeps its layout. */
 .reveal-item {
   opacity: 1;
   transform: none;
+  transition: opacity 0.7s var(--ease-out), transform 0.85s var(--ease-out);
 }
-html.js-reveal .reveal-item:not(.is-visible) {
+.reveal-item[data-reveal-pending]:not(.is-visible) {
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(16px);
 }
-html.js-reveal .reveal-item {
-  transition:
-    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-}
-html.js-reveal .reveal-item[data-reveal="title"] {
-  transition-delay: 0.02s;
-}
-html.js-reveal .reveal-item[data-reveal="body"] {
-  transition-delay: 0.08s;
-}
-html.js-reveal .reveal-item[data-reveal="supp"] {
-  transition-delay: 0.14s;
-}
-html.js-reveal .reveal-item.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+.reveal-item[data-reveal="body"] { transition-delay: 60ms; }
+.reveal-item[data-reveal="supp"] { transition-delay: 120ms; }
 @media (prefers-reduced-motion: reduce) {
-  html.js-reveal .reveal-item,
-  html.js-reveal .reveal-item:not(.is-visible) {
+  html { scroll-behavior: auto; }
+  .reveal-item, .reveal-item[data-reveal-pending]:not(.is-visible) {
     opacity: 1;
     transform: none;
     transition: none;
@@ -285,6 +275,10 @@ html.js-reveal .reveal-item.is-visible {
   position: relative;
   display: block;
   overflow: hidden;
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .img-hover-wrap img { transition: transform 0.8s var(--ease-out); }
+  .img-hover-wrap:hover img { transform: scale(1.025); }
 }
 .img-hover-wrap .img-hover-overlay {
   position: absolute;
@@ -305,10 +299,12 @@ html.js-reveal .reveal-item.is-visible {
   white-space: nowrap;
   pointer-events: none;
 }
-.img-hover-wrap:hover .img-hover-overlay {
+.img-hover-wrap:hover .img-hover-overlay,
+.img-hover-wrap:focus-visible .img-hover-overlay {
   opacity: 1;
 }
-.img-hover-wrap:hover .img-hover-caption {
+.img-hover-wrap:hover .img-hover-caption,
+.img-hover-wrap:focus-visible .img-hover-caption {
   opacity: 1;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -329,4 +325,13 @@ html.js-reveal .reveal-item.is-visible {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* Keep keyboard feedback visible alongside pointer feedback. */
+a:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 5px;
+}
+@media (hover: none), (pointer: coarse) {
+  body { background-attachment: scroll; }
 }

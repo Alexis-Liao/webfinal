@@ -26,12 +26,6 @@ const { title, description = 'Personal site — research, writing, projects.', m
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
     <title>{title}</title>
-    <script is:inline>
-      document.documentElement.classList.add('js-reveal');
-      window.setTimeout(function () {
-        document.documentElement.classList.remove('js-reveal');
-      }, 2500);
-    </script>
   </head>
   <body>
     <CursorFollow />
@@ -41,53 +35,51 @@ const { title, description = 'Personal site — research, writing, projects.', m
       <slot />
     </main>
     <SiteFooter />
-    <!-- 同步：立刻显示首屏内容，避免模块脚本加载前的空页 -->
-    <script is:inline>
-      (function () {
-        var items = document.querySelectorAll('.reveal-item');
-        if (!items.length) return;
-        var vh = window.innerHeight || document.documentElement.clientHeight;
-        for (var i = 0; i < items.length; i++) {
-          var r = items[i].getBoundingClientRect();
-          if (r.top < vh - 24 && r.bottom > 0) {
-            items[i].classList.add('is-visible');
-          }
-        }
-      })();
-    </script>
-  </body>
-  <script>
-    const revealItems = document.querySelectorAll('.reveal-item');
-    if (revealItems.length) {
-      const markVisible = (el: Element) => {
-        el.classList.add('is-visible');
+    <script>
+      const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const items = Array.from(document.querySelectorAll<HTMLElement>('.reveal-item'));
+      let observer: IntersectionObserver | undefined;
+      const showAll = () => {
+        observer?.disconnect();
+        items.forEach((item) => {
+          item.classList.add('is-visible');
+          item.removeAttribute('data-reveal-pending');
+        });
       };
 
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              markVisible(entry.target);
-              observer.unobserve(entry.target);
+      // Content stays readable if JS or observer setup fails. Only hide items
+      // below the viewport after an observer has successfully attached.
+      if (!motion.matches && 'IntersectionObserver' in window) {
+        try {
+          observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add('is-visible');
+              observer?.unobserve(entry.target);
+            });
+          }, { rootMargin: '0px 0px -24px 0px', threshold: 0 });
+          const viewport = window.innerHeight;
+          const positions = items.map((item) => item.getBoundingClientRect().top);
+          items.forEach((item, index) => {
+            if (positions[index] < viewport) {
+              item.classList.add('is-visible');
+            } else {
+              observer!.observe(item);
+              item.setAttribute('data-reveal-pending', '');
             }
           });
-        },
-        { rootMargin: '0px 0px -5% 0px', threshold: 0 }
-      );
-
-      revealItems.forEach((el) => {
-        if (el.classList.contains('is-visible')) return;
-        observer.observe(el);
-      });
-
-      // 兜底：避免 observer 异常时内容永久隐藏
-      window.setTimeout(() => {
-        revealItems.forEach((el) => {
-          if (!el.classList.contains('is-visible')) markVisible(el);
-        });
-      }, 1800);
-    }
-  </script>
+        } catch {
+          showAll();
+        }
+      }
+      motion.addEventListener('change', () => { if (motion.matches) showAll(); });
+      const updateVisibility = () => {
+        document.documentElement.classList.toggle('motion-paused', document.hidden);
+      };
+      updateVisibility();
+      document.addEventListener('visibilitychange', updateVisibility);
+    </script>
+  </body>
 </html>
 
 <style is:global>

@@ -3,11 +3,12 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
 
 interface Props {
   title: string;
+  titleLang?: string;
   description?: string;
   pubDate?: Date;
 }
 
-const { title, description, pubDate } = Astro.props;
+const { title, titleLang, description, pubDate } = Astro.props;
 ---
 
 <BaseLayout
@@ -17,7 +18,7 @@ const { title, description, pubDate } = Astro.props;
 >
   <article class="container reading">
     <header class="writing-header">
-      <h1>{title}</h1>
+      <h1 lang={titleLang}>{title}</h1>
       {pubDate && (
         <time class="pub-date" datetime={pubDate.toISOString()}>
           {pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
